@@ -6,8 +6,6 @@ import 'package:latexpert/infra/bloc/auth_bloc/email_login/login_bloc.dart';
 import 'package:latexpert/infra/bloc/profile_bloc/profile_bloc.dart';
 import 'package:latexpert/infra/bloc/profile_bloc/profile_state.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'presentation/bottom_navigation_bar/bottom_navigation_bar.dart';
 
 void main() async {

@@ -188,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.amber.shade300,
           image: AssetsSvgImage.createResume,
           onTap: () => context.push(context, target: const ResumeBuilderScreen()),
-          height: cardHeight,
+          // height: cardHeight,
         ),
         HomeScreenCard(
           title: yourTemplateTitle,
@@ -196,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.green.shade300,
           image: AssetsSvgImage.yourTemplate,
           onTap: () => context.push(context, target: const ProfileScreen()),
-          height: cardHeight,
+          // height: cardHeight,
         ),
       ],
     );
@@ -217,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
       color: Colors.lightBlue.shade200,
       image: AssetsSvgImage.resumeFolder,
       onTap: () {},
-      height: cardHeight,
+      // height: cardHeight,
     );
   }
 
