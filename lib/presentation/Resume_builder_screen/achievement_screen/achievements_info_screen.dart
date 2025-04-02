@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:latexpert/core/constant/strings.dart';
 import 'package:latexpert/domain/achievement_info_model/achievement_controller.dart';
+import 'package:latexpert/infra/services/achievement_service/achievemnet_service.dart';
 import 'package:latexpert/presentation/common_widgets/common_buttons/common_add_field_button.dart';
 import 'package:latexpert/presentation/common_widgets/common_buttons/common_reset_button.dart';
 import 'package:latexpert/presentation/common_widgets/common_buttons/common_save_button.dart';
@@ -11,7 +12,6 @@ import 'package:latexpert/presentation/common_widgets/common_popup/common_delete
 import 'package:latexpert/presentation/common_widgets/common_text/common_heading.dart';
 import '../../../infra/bloc/achievement_bloc/achievement_bloc_cubit.dart';
 import '../../../infra/bloc/achievement_bloc/achievement_state.dart';
-import '../../../infra/services/achievement_service/achievemnet_service.dart';
 import '../../common_widgets/common_appbar/custome_appbar.dart';
 import '../../common_widgets/common_textfields/comman_textformfield.dart';
 
@@ -38,7 +38,7 @@ class _AchievementInfoScreenState extends State<AchievementInfoScreen> {
     super.initState();
     final achievementService = AchievementService();
     final initialData = achievementService.initialize();
-    _cubit = AchievementCubit(achievementService);
+    // _cubit = AchievementCubit(achievementService);
     _cubit.emit(AchievementState.success(
       controllersList: initialData.controllersList,
       expansionStates: initialData.expansionStates,
