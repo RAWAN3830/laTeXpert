@@ -4,7 +4,6 @@ import 'package:latexpert/core/constant/strings.dart';
 import '../../../../infra/bloc/skills_set_bloc/skills_set_bloc_cubit.dart';
 import '../../../../infra/bloc/skills_set_bloc/skills_set_state.dart';
 
-
 class CategoryDropdown extends StatelessWidget {
   const CategoryDropdown({super.key});
 
@@ -12,14 +11,16 @@ class CategoryDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SkillsSetBlocCubit, SkillsSetState>(
       builder: (context, state) {
-        if (state is SkillsSetStateSuccess) {
-          return DropdownButtonFormField<String>(
-            value: state.selectedCategories,
+        return state.when(
+          initial: () => const SizedBox.shrink(),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          success: (categories, selectedCategories) => DropdownButtonFormField<String>(
+            value: selectedCategories,
             decoration: const InputDecoration(
               labelText: Strings.selectCategoryLabel,
               border: OutlineInputBorder(),
             ),
-            items: state.categories.keys
+            items: categories.keys
                 .map((category) => DropdownMenuItem(
               value: category,
               child: Text(category),
@@ -27,13 +28,12 @@ class CategoryDropdown extends StatelessWidget {
                 .toList(),
             onChanged: (value) {
               if (value != null) {
-                context.read<SkillsSetBlocCubit>().changeCategory(value);
+                context.read<SkillsSetBlocCubit>().updateSelectedCategory(value);
               }
             },
-          );
-        } else {
-          return const CircularProgressIndicator();
-        }
+          ),
+          failure: (_) => const SizedBox.shrink(),
+        );
       },
     );
   }

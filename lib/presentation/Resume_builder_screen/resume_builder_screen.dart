@@ -31,13 +31,12 @@ class _ResumeBuilderScreenState extends State<ResumeBuilderScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
+    // Responsive grid settings
     final crossAxisCount = screenWidth < 600
         ? 2 // Mobile
         : screenWidth < 900
         ? 3 // Tablet
         : 4; // Desktop
-    final crossAxisSpacing = screenWidth < 600 ? 10.0 : 15.0;
-    final mainAxisSpacing = screenWidth < 600 ? 10.0 : 15.0;
     final paddingValue = screenWidth < 600 ? 8.0 : 16.0;
 
     return Scaffold(
@@ -47,27 +46,23 @@ class _ResumeBuilderScreenState extends State<ResumeBuilderScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(paddingValue),
-          child: Column(
-            children: [
-              GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount,
-                  crossAxisSpacing: crossAxisSpacing,
-                  mainAxisSpacing: mainAxisSpacing,
-                  childAspectRatio: 0.9,
-                ),
-                itemCount: workSpaceModelList.length,
-                itemBuilder: (context, index) {
-                  return DetailsCard(
-                    workModel: workSpaceModelList[index],
-                    index: index,
-                    isLoading: isLoading,
-                  );
-                },
-              ),
-            ],
+          child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              crossAxisSpacing: paddingValue,
+              mainAxisSpacing: paddingValue,
+              childAspectRatio: screenWidth < 600 ? 0.85 : 0.9,
+            ),
+            itemCount: workSpaceModelList.length,
+            itemBuilder: (context, index) {
+              return DetailsCard(
+                workModel: workSpaceModelList[index],
+                index: index,
+                isLoading: isLoading,
+              );
+            },
           ),
         ),
       ),

@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class declarationControllers{
-  final TextEditingController declaration;
-  declarationControllers({ required this.declaration,});
+class DeclarationController {
+  final TextEditingController honorController;
+
+  DeclarationController({TextEditingController? honor})
+      : honorController = honor ?? TextEditingController();
 }

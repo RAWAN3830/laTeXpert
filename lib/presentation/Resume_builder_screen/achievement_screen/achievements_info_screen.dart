@@ -27,37 +27,26 @@ class AchievementInfoScreen extends StatefulWidget {
 }
 
 class _AchievementInfoScreenState extends State<AchievementInfoScreen> {
-  late AchievementCubit _cubit;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   final Dio dio = Dio();
   final String baseUrl = "${Strings.baseUrl}achievement_info";
 
-  @override
-  void initState() {
-    super.initState();
-    final achievementService = AchievementService();
-    final initialData = achievementService.initialize();
-    // _cubit = AchievementCubit(achievementService);
-    _cubit.emit(AchievementState.success(
-      controllersList: initialData.controllersList,
-      expansionStates: initialData.expansionStates,
-    ));
-  }
-
   final List<achivementControllers> _allControllers = [
     achivementControllers(
-        title: TextEditingController(),
-        link: TextEditingController(),
-        issuer: TextEditingController())
+      title: TextEditingController(),
+      link: TextEditingController(),
+      issuer: TextEditingController(),
+    )
   ];
 
   void _addField() {
     setState(() {
       _allControllers.add(achivementControllers(
-          title: TextEditingController(),
-          link: TextEditingController(),
-          issuer: TextEditingController()));
+        title: TextEditingController(),
+        link: TextEditingController(),
+        issuer: TextEditingController(),
+      ));
     });
   }
 
@@ -92,7 +81,7 @@ class _AchievementInfoScreenState extends State<AchievementInfoScreen> {
     }
 
     List<Map<String, dynamic>> achievementList =
-        _allControllers.map((controller) {
+    _allControllers.map((controller) {
       return {
         "title": controller.title.text,
         "link": controller.link.text,
@@ -136,8 +125,16 @@ class _AchievementInfoScreenState extends State<AchievementInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _cubit,
+    return BlocProvider(
+      create: (context) {
+        // final achievementService = AchievementService();
+        final initialData = AchievementService().initialize();
+        return AchievementCubit()
+          ..emit(AchievementState.success(
+            controllersList: initialData.controllersList,
+            expansionStates: initialData.expansionStates,
+          ));
+      },
       child: Scaffold(
         appBar: widget.showAppBar
             ? const CustomAppBar(title: Strings.achievements)
@@ -163,7 +160,7 @@ class _AchievementInfoScreenState extends State<AchievementInfoScreen> {
                                   ? '${Strings.achievementTitle} ${index + 1}'
                                   : _allControllers[index].title.text,
                               style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
+                              const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             if (_allControllers.length > 1)
                               IconButton(
@@ -171,10 +168,10 @@ class _AchievementInfoScreenState extends State<AchievementInfoScreen> {
                                     .showDeleteConfirmationDialog(
                                   context,
                                   index,
-                                  () => _deleteField(index),
+                                      () => _deleteField(index),
                                 ),
                                 icon:
-                                    const Icon(Icons.delete, color: Colors.red),
+                                const Icon(Icons.delete, color: Colors.red),
                               ),
                           ],
                         ),
@@ -182,7 +179,7 @@ class _AchievementInfoScreenState extends State<AchievementInfoScreen> {
                         children: [
                           CommonHeading(
                               title:
-                                  '${Strings.achievementTitle} (${index + 1})'),
+                              '${Strings.achievementTitle} (${index + 1})'),
                           CommonTextformfield(
                             controller: _allControllers[index].title,
                             labelText: Strings.enterAchievementTitle,

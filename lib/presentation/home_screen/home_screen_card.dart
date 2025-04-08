@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:latexpert/core/constant/extension.dart';
 
 class HomeScreenCard extends StatelessWidget {
   final String title;

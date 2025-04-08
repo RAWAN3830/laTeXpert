@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../infra/bloc/skills_set_bloc/skills_set_bloc_cubit.dart';
 import '../../../../infra/bloc/skills_set_bloc/skills_set_state.dart';
 import 'skill_category_tile.dart';
@@ -12,12 +11,14 @@ class SkillCategoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SkillsSetBlocCubit, SkillsSetState>(
       builder: (context, state) {
-        if (state is SkillsSetStateSuccess) {
-          return ListView.builder(
-            itemCount: state.categories.length,
+        return state.when(
+          initial: () => const SizedBox.shrink(),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          success: (categories, selectedCategories) => ListView.builder(
+            itemCount: categories.length,
             itemBuilder: (context, index) {
-              final category = state.categories.keys.elementAt(index);
-              final skills = state.categories[category]!;
+              final category = categories.keys.elementAt(index);
+              final skills = categories[category]!;
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
@@ -30,10 +31,9 @@ class SkillCategoryList extends StatelessWidget {
                 ),
               );
             },
-          );
-        } else {
-          return const CircularProgressIndicator();
-        }
+          ),
+          failure: (errorMessage) => Center(child: Text('Error: $errorMessage')),
+        );
       },
     );
   }

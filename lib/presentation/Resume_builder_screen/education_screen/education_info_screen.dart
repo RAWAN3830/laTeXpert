@@ -104,7 +104,7 @@ class _EducationInfoScreenState extends State<EducationInfoScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          EducationCubit(EducationService(FireStoreCollectionService())),
+          EducationCubit(),
       child: Scaffold(
         appBar: widget.showAppBar
             ? const CustomAppBar(title: Strings.education)
@@ -236,3 +236,4 @@ class _EducationInfoScreenState extends State<EducationInfoScreen> {
     );
   }
 }
+

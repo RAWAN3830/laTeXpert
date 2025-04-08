@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:latexpert/core/constant/extension.dart';
 import '../../core/constant/theme_colors.dart';
 
 class HomeScreenCard2 extends StatelessWidget {

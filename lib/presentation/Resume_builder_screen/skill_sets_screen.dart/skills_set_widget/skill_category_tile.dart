@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latexpert/core/constant/strings.dart';
 import 'package:latexpert/core/constant/theme_colors.dart';
-import '../../../../infra/bloc/skills_set_bloc/skills_set_bloc_cubit.dart';
 
 class SkillCategoryTile extends StatefulWidget {
   final String category;
@@ -31,10 +29,10 @@ class _SkillCategoryTileState extends State<SkillCategoryTile> {
 
   void _addSkill(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
-      context.read<SkillsSetBlocCubit>().addSkill(
-        widget.category,
-        _skillController.text.trim(),
-      );
+      // context.read<SkillsSetBlocCubit>().addSkill(
+        // widget.category,
+        // _skillController.text.trim(),
+      // );
       _skillController.clear();
     }
   }
@@ -145,10 +143,10 @@ class _SkillCategoryTileState extends State<SkillCategoryTile> {
                       ThemeColors.mainGreenColor.withOpacity(0.1),
                       deleteIcon: const Icon(Icons.close),
                       onDeleted: () {
-                        context.read<SkillsSetBlocCubit>().removeSkill(
-                          widget.category,
-                          skill,
-                        );
+                        // context.read<SkillsSetBlocCubit>().removeSkill(
+                          // widget.category,
+                          // skill,
+                        // );
                       },
                     ),
                   )

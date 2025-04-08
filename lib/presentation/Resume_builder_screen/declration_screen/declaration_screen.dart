@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latexpert/core/constant/extension.dart';
 import 'package:latexpert/core/constant/strings.dart';
-import 'package:latexpert/domain/declaration_model/declaration_controller.dart';
 import 'package:latexpert/infra/bloc/declaration_bloc/declaration_bloc.dart';
 import 'package:latexpert/infra/bloc/declaration_bloc/declaration_state.dart';
-import 'package:latexpert/presentation/common_widgets/common_appbar/custome_appbar.dart';
-import 'package:latexpert/presentation/common_widgets/common_buttons/common_add_field_button.dart';
 import 'package:latexpert/presentation/common_widgets/common_buttons/common_reset_button.dart';
-import 'package:latexpert/presentation/common_widgets/common_buttons/common_save_button.dart';
 import 'package:latexpert/presentation/common_widgets/common_popup/common_delete_popup.dart';
 import 'package:latexpert/presentation/common_widgets/common_text/common_heading.dart';
-import 'package:latexpert/presentation/common_widgets/common_textfields/comman_textformfield.dart';
+import '../../common_widgets/common_appbar/custome_appbar.dart';
+import '../../common_widgets/common_buttons/common_add_field_button.dart';
+import '../../common_widgets/common_buttons/common_save_button.dart';
+import '../../common_widgets/common_textfields/comman_textformfield.dart';
 
 class DeclarationScreen extends StatefulWidget {
   final bool showAppBar;
@@ -26,10 +25,6 @@ class DeclarationScreen extends StatefulWidget {
 
 class _DeclarationScreenState extends State<DeclarationScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final List<declarationControllers> _allControllers = [
-    declarationControllers(
-     declaration:  TextEditingController(),)
-  ];
   late DeclarationCubit _declarationCubit;
 
   @override
@@ -38,30 +33,6 @@ class _DeclarationScreenState extends State<DeclarationScreen> {
     _declarationCubit = DeclarationCubit();
     _declarationCubit.initialize(); // Initialize with one field
   }
-
-  void _addField() {
-    setState(() {
-      _allControllers.add(
-          declarationControllers(declaration: TextEditingController())
-      );
-    });
-  }
-
-  void _deleteField(int index) {
-    setState(() {
-      _allControllers.removeAt(index);
-    });
-  }
-
-  void _resetFields() {
-    setState(() {
-      _allControllers.clear();
-      _allControllers.add(
-        declarationControllers(declaration: TextEditingController())
-      );
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +62,7 @@ class _DeclarationScreenState extends State<DeclarationScreen> {
                                       children: [
                                         CommonHeading(title: '${Strings.honorAward} ${index + 1}'),
                                         CommonTextformfield(
-                                          controller: _allControllers[index].declaration,
+                                          controller: controllersList[index],
                                           labelText: 'Won X Hackathon at X Institute',
                                           errorText: Strings.validTitleError,
                                         ),
@@ -105,12 +76,7 @@ class _DeclarationScreenState extends State<DeclarationScreen> {
                                         onPressed: () => CommonDeletePopup().showDeleteConfirmationDialog(
                                           context,
                                           index,
-                                              () {
-                                                setState(() {
-                                                  _deleteField(index);
-                                                });
-                                              },
-                                              // () => context.read<DeclarationCubit>().deleteDeclarationField(index),
+                                              () => context.read<DeclarationCubit>().deleteDeclarationField(index),
                                         ),
                                         icon: const Icon(CupertinoIcons.delete),
                                       ),
@@ -124,16 +90,21 @@ class _DeclarationScreenState extends State<DeclarationScreen> {
                       );
                     },
                   ),
-
-                    CommonAddFieldButton(
-                      onTap: (){
-                        setState(() {
-                          _addField();
-                        });
-                      },
-                            // onTap: () => context.read<DeclarationCubit>().addDeclarationField(),
+                  BlocBuilder<DeclarationCubit, DeclarationState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        success: (controllersList) {
+                          return controllersList.length < 4
+                              ? CommonAddFieldButton(
+                            onTap: () => context.read<DeclarationCubit>().addDeclarationField(),
                             name: Strings.addHonorAward,
-                          ),
+                          )
+                              : Container();
+                        },
+                        orElse: () => Container(),
+                      );
+                    },
+                  ),
                   SizedBox(height: context.height(context) * 0.02),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -142,10 +113,7 @@ class _DeclarationScreenState extends State<DeclarationScreen> {
                         formKey: formKey,
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            for (var controller in _allControllers) {
-                              print(controller.declaration.text);
-                            }
-                            // context.read<DeclarationCubit>().saveDeclaration();
+                            context.read<DeclarationCubit>().saveDeclaration();
                             widget.onNext?.call(); // Move to next step
                           }
                         },
@@ -154,8 +122,7 @@ class _DeclarationScreenState extends State<DeclarationScreen> {
                       CommonResetButton(
                         formKey: formKey,
                         onTap: () {
-                          _resetFields();
-                          // context.read<DeclarationCubit>().resetDeclarationFields();
+                          context.read<DeclarationCubit>().resetDeclarationFields();
                         },
                       ),
                     ],
