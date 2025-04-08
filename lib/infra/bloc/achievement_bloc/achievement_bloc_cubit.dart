@@ -4,9 +4,9 @@ import '../../services/achievement_service/achievemnet_service.dart';
 import 'achievement_state.dart';
 
 class AchievementCubit extends Cubit<AchievementState> {
-  final AchievementService _achievementService;
+  final AchievementService _achievementService = AchievementService();
 
-  AchievementCubit(this._achievementService) : super(const AchievementState.initial());
+  AchievementCubit() : super(const AchievementState.initial());
 
   void addAchievementField() {
     state.maybeWhen(

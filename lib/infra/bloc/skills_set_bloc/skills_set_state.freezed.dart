@@ -23,7 +23,7 @@ mixin _$SkillsSetState {
     required TResult Function(
             Map<String, List<String>> categories, String selectedCategories)
         success,
-    required TResult Function(String? errorMessage) failure,
+    required TResult Function(String errorMessage) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,7 +33,7 @@ mixin _$SkillsSetState {
     TResult? Function(
             Map<String, List<String>> categories, String selectedCategories)?
         success,
-    TResult? Function(String? errorMessage)? failure,
+    TResult? Function(String errorMessage)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,7 +43,7 @@ mixin _$SkillsSetState {
     TResult Function(
             Map<String, List<String>> categories, String selectedCategories)?
         success,
-    TResult Function(String? errorMessage)? failure,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -137,7 +137,7 @@ class _$SkillsSetStateInitialImpl implements SkillsSetStateInitial {
     required TResult Function(
             Map<String, List<String>> categories, String selectedCategories)
         success,
-    required TResult Function(String? errorMessage) failure,
+    required TResult Function(String errorMessage) failure,
   }) {
     return initial();
   }
@@ -150,7 +150,7 @@ class _$SkillsSetStateInitialImpl implements SkillsSetStateInitial {
     TResult? Function(
             Map<String, List<String>> categories, String selectedCategories)?
         success,
-    TResult? Function(String? errorMessage)? failure,
+    TResult? Function(String errorMessage)? failure,
   }) {
     return initial?.call();
   }
@@ -163,7 +163,7 @@ class _$SkillsSetStateInitialImpl implements SkillsSetStateInitial {
     TResult Function(
             Map<String, List<String>> categories, String selectedCategories)?
         success,
-    TResult Function(String? errorMessage)? failure,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -259,7 +259,7 @@ class _$SkillsSetStateLoadingImpl implements SkillsSetStateLoading {
     required TResult Function(
             Map<String, List<String>> categories, String selectedCategories)
         success,
-    required TResult Function(String? errorMessage) failure,
+    required TResult Function(String errorMessage) failure,
   }) {
     return loading();
   }
@@ -272,7 +272,7 @@ class _$SkillsSetStateLoadingImpl implements SkillsSetStateLoading {
     TResult? Function(
             Map<String, List<String>> categories, String selectedCategories)?
         success,
-    TResult? Function(String? errorMessage)? failure,
+    TResult? Function(String errorMessage)? failure,
   }) {
     return loading?.call();
   }
@@ -285,7 +285,7 @@ class _$SkillsSetStateLoadingImpl implements SkillsSetStateLoading {
     TResult Function(
             Map<String, List<String>> categories, String selectedCategories)?
         success,
-    TResult Function(String? errorMessage)? failure,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -427,7 +427,7 @@ class _$SkillsSetStateSuccessImpl implements SkillsSetStateSuccess {
     required TResult Function(
             Map<String, List<String>> categories, String selectedCategories)
         success,
-    required TResult Function(String? errorMessage) failure,
+    required TResult Function(String errorMessage) failure,
   }) {
     return success(categories, selectedCategories);
   }
@@ -440,7 +440,7 @@ class _$SkillsSetStateSuccessImpl implements SkillsSetStateSuccess {
     TResult? Function(
             Map<String, List<String>> categories, String selectedCategories)?
         success,
-    TResult? Function(String? errorMessage)? failure,
+    TResult? Function(String errorMessage)? failure,
   }) {
     return success?.call(categories, selectedCategories);
   }
@@ -453,7 +453,7 @@ class _$SkillsSetStateSuccessImpl implements SkillsSetStateSuccess {
     TResult Function(
             Map<String, List<String>> categories, String selectedCategories)?
         success,
-    TResult Function(String? errorMessage)? failure,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -519,7 +519,7 @@ abstract class _$$SkillsSetStateFailureImplCopyWith<$Res> {
           $Res Function(_$SkillsSetStateFailureImpl) then) =
       __$$SkillsSetStateFailureImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? errorMessage});
+  $Res call({String errorMessage});
 }
 
 /// @nodoc
@@ -533,13 +533,13 @@ class __$$SkillsSetStateFailureImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? errorMessage = freezed,
+    Object? errorMessage = null,
   }) {
     return _then(_$SkillsSetStateFailureImpl(
-      errorMessage: freezed == errorMessage
+      errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -547,10 +547,10 @@ class __$$SkillsSetStateFailureImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SkillsSetStateFailureImpl implements SkillsSetStateFailure {
-  const _$SkillsSetStateFailureImpl({this.errorMessage});
+  const _$SkillsSetStateFailureImpl({required this.errorMessage});
 
   @override
-  final String? errorMessage;
+  final String errorMessage;
 
   @override
   String toString() {
@@ -584,7 +584,7 @@ class _$SkillsSetStateFailureImpl implements SkillsSetStateFailure {
     required TResult Function(
             Map<String, List<String>> categories, String selectedCategories)
         success,
-    required TResult Function(String? errorMessage) failure,
+    required TResult Function(String errorMessage) failure,
   }) {
     return failure(errorMessage);
   }
@@ -597,7 +597,7 @@ class _$SkillsSetStateFailureImpl implements SkillsSetStateFailure {
     TResult? Function(
             Map<String, List<String>> categories, String selectedCategories)?
         success,
-    TResult? Function(String? errorMessage)? failure,
+    TResult? Function(String errorMessage)? failure,
   }) {
     return failure?.call(errorMessage);
   }
@@ -610,7 +610,7 @@ class _$SkillsSetStateFailureImpl implements SkillsSetStateFailure {
     TResult Function(
             Map<String, List<String>> categories, String selectedCategories)?
         success,
-    TResult Function(String? errorMessage)? failure,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -658,10 +658,10 @@ class _$SkillsSetStateFailureImpl implements SkillsSetStateFailure {
 }
 
 abstract class SkillsSetStateFailure implements SkillsSetState {
-  const factory SkillsSetStateFailure({final String? errorMessage}) =
+  const factory SkillsSetStateFailure({required final String errorMessage}) =
       _$SkillsSetStateFailureImpl;
 
-  String? get errorMessage;
+  String get errorMessage;
   @JsonKey(ignore: true)
   _$$SkillsSetStateFailureImplCopyWith<_$SkillsSetStateFailureImpl>
       get copyWith => throw _privateConstructorUsedError;

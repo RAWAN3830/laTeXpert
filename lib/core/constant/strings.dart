@@ -1,6 +1,6 @@
 class Strings {
   //base url
-  static const String baseUrl = 'http://192.168.143.67:8000/api/';
+  static const String baseUrl = 'http://192.168.198.67:8000/api/';
 
   //Fonts
   static const String uberFont = 'UberFont';
@@ -87,7 +87,7 @@ class Strings {
   static const String profilePictureTag = 'profile-picture';
   static const String profilePicture = 'assets/profile_picture.png';
   static const String name = 'Ved Patel';
-  static const String jobTitle = 'Flutter Developer';
+  static const String jobTitle = 'Job Title';
   static const String resumesCreated = '5';
   static const String resumesCreatedText = 'Resumes Created';
   static const String lastUpdated = 'Jan 9, 2025';

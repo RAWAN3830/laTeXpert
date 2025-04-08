@@ -19,38 +19,50 @@ mixin _$EducationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() inProgress,
     required TResult Function(List<EducationModel> educationList) success,
+    required TResult Function(String? errorMessage) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? inProgress,
     TResult? Function(List<EducationModel> educationList)? success,
+    TResult? Function(String? errorMessage)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? inProgress,
     TResult Function(List<EducationModel> educationList)? success,
+    TResult Function(String? errorMessage)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EducationStateInitial value) initial,
+    required TResult Function(_EducationStateInProgress value) inProgress,
     required TResult Function(_EducationStateSuccess value) success,
+    required TResult Function(_EducationStateFailure value) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EducationStateInitial value)? initial,
+    TResult? Function(_EducationStateInProgress value)? inProgress,
     TResult? Function(_EducationStateSuccess value)? success,
+    TResult? Function(_EducationStateFailure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EducationStateInitial value)? initial,
+    TResult Function(_EducationStateInProgress value)? inProgress,
     TResult Function(_EducationStateSuccess value)? success,
+    TResult Function(_EducationStateFailure value)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -115,7 +127,9 @@ class _$EducationStateInitialImpl implements _EducationStateInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() inProgress,
     required TResult Function(List<EducationModel> educationList) success,
+    required TResult Function(String? errorMessage) failure,
   }) {
     return initial();
   }
@@ -124,7 +138,9 @@ class _$EducationStateInitialImpl implements _EducationStateInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? inProgress,
     TResult? Function(List<EducationModel> educationList)? success,
+    TResult? Function(String? errorMessage)? failure,
   }) {
     return initial?.call();
   }
@@ -133,7 +149,9 @@ class _$EducationStateInitialImpl implements _EducationStateInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? inProgress,
     TResult Function(List<EducationModel> educationList)? success,
+    TResult Function(String? errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -146,7 +164,9 @@ class _$EducationStateInitialImpl implements _EducationStateInitial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EducationStateInitial value) initial,
+    required TResult Function(_EducationStateInProgress value) inProgress,
     required TResult Function(_EducationStateSuccess value) success,
+    required TResult Function(_EducationStateFailure value) failure,
   }) {
     return initial(this);
   }
@@ -155,7 +175,9 @@ class _$EducationStateInitialImpl implements _EducationStateInitial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EducationStateInitial value)? initial,
+    TResult? Function(_EducationStateInProgress value)? inProgress,
     TResult? Function(_EducationStateSuccess value)? success,
+    TResult? Function(_EducationStateFailure value)? failure,
   }) {
     return initial?.call(this);
   }
@@ -164,7 +186,9 @@ class _$EducationStateInitialImpl implements _EducationStateInitial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EducationStateInitial value)? initial,
+    TResult Function(_EducationStateInProgress value)? inProgress,
     TResult Function(_EducationStateSuccess value)? success,
+    TResult Function(_EducationStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -176,6 +200,123 @@ class _$EducationStateInitialImpl implements _EducationStateInitial {
 
 abstract class _EducationStateInitial implements EducationState {
   const factory _EducationStateInitial() = _$EducationStateInitialImpl;
+}
+
+/// @nodoc
+abstract class _$$EducationStateInProgressImplCopyWith<$Res> {
+  factory _$$EducationStateInProgressImplCopyWith(
+          _$EducationStateInProgressImpl value,
+          $Res Function(_$EducationStateInProgressImpl) then) =
+      __$$EducationStateInProgressImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$EducationStateInProgressImplCopyWithImpl<$Res>
+    extends _$EducationStateCopyWithImpl<$Res, _$EducationStateInProgressImpl>
+    implements _$$EducationStateInProgressImplCopyWith<$Res> {
+  __$$EducationStateInProgressImplCopyWithImpl(
+      _$EducationStateInProgressImpl _value,
+      $Res Function(_$EducationStateInProgressImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$EducationStateInProgressImpl implements _EducationStateInProgress {
+  const _$EducationStateInProgressImpl();
+
+  @override
+  String toString() {
+    return 'EducationState.inProgress()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EducationStateInProgressImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() inProgress,
+    required TResult Function(List<EducationModel> educationList) success,
+    required TResult Function(String? errorMessage) failure,
+  }) {
+    return inProgress();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? inProgress,
+    TResult? Function(List<EducationModel> educationList)? success,
+    TResult? Function(String? errorMessage)? failure,
+  }) {
+    return inProgress?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? inProgress,
+    TResult Function(List<EducationModel> educationList)? success,
+    TResult Function(String? errorMessage)? failure,
+    required TResult orElse(),
+  }) {
+    if (inProgress != null) {
+      return inProgress();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_EducationStateInitial value) initial,
+    required TResult Function(_EducationStateInProgress value) inProgress,
+    required TResult Function(_EducationStateSuccess value) success,
+    required TResult Function(_EducationStateFailure value) failure,
+  }) {
+    return inProgress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_EducationStateInitial value)? initial,
+    TResult? Function(_EducationStateInProgress value)? inProgress,
+    TResult? Function(_EducationStateSuccess value)? success,
+    TResult? Function(_EducationStateFailure value)? failure,
+  }) {
+    return inProgress?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_EducationStateInitial value)? initial,
+    TResult Function(_EducationStateInProgress value)? inProgress,
+    TResult Function(_EducationStateSuccess value)? success,
+    TResult Function(_EducationStateFailure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (inProgress != null) {
+      return inProgress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EducationStateInProgress implements EducationState {
+  const factory _EducationStateInProgress() = _$EducationStateInProgressImpl;
 }
 
 /// @nodoc
@@ -254,7 +395,9 @@ class _$EducationStateSuccessImpl implements _EducationStateSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() inProgress,
     required TResult Function(List<EducationModel> educationList) success,
+    required TResult Function(String? errorMessage) failure,
   }) {
     return success(educationList);
   }
@@ -263,7 +406,9 @@ class _$EducationStateSuccessImpl implements _EducationStateSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? inProgress,
     TResult? Function(List<EducationModel> educationList)? success,
+    TResult? Function(String? errorMessage)? failure,
   }) {
     return success?.call(educationList);
   }
@@ -272,7 +417,9 @@ class _$EducationStateSuccessImpl implements _EducationStateSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? inProgress,
     TResult Function(List<EducationModel> educationList)? success,
+    TResult Function(String? errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -285,7 +432,9 @@ class _$EducationStateSuccessImpl implements _EducationStateSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EducationStateInitial value) initial,
+    required TResult Function(_EducationStateInProgress value) inProgress,
     required TResult Function(_EducationStateSuccess value) success,
+    required TResult Function(_EducationStateFailure value) failure,
   }) {
     return success(this);
   }
@@ -294,7 +443,9 @@ class _$EducationStateSuccessImpl implements _EducationStateSuccess {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EducationStateInitial value)? initial,
+    TResult? Function(_EducationStateInProgress value)? inProgress,
     TResult? Function(_EducationStateSuccess value)? success,
+    TResult? Function(_EducationStateFailure value)? failure,
   }) {
     return success?.call(this);
   }
@@ -303,7 +454,9 @@ class _$EducationStateSuccessImpl implements _EducationStateSuccess {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EducationStateInitial value)? initial,
+    TResult Function(_EducationStateInProgress value)? inProgress,
     TResult Function(_EducationStateSuccess value)? success,
+    TResult Function(_EducationStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -321,5 +474,154 @@ abstract class _EducationStateSuccess implements EducationState {
   List<EducationModel> get educationList;
   @JsonKey(ignore: true)
   _$$EducationStateSuccessImplCopyWith<_$EducationStateSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EducationStateFailureImplCopyWith<$Res> {
+  factory _$$EducationStateFailureImplCopyWith(
+          _$EducationStateFailureImpl value,
+          $Res Function(_$EducationStateFailureImpl) then) =
+      __$$EducationStateFailureImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? errorMessage});
+}
+
+/// @nodoc
+class __$$EducationStateFailureImplCopyWithImpl<$Res>
+    extends _$EducationStateCopyWithImpl<$Res, _$EducationStateFailureImpl>
+    implements _$$EducationStateFailureImplCopyWith<$Res> {
+  __$$EducationStateFailureImplCopyWithImpl(_$EducationStateFailureImpl _value,
+      $Res Function(_$EducationStateFailureImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorMessage = freezed,
+  }) {
+    return _then(_$EducationStateFailureImpl(
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$EducationStateFailureImpl implements _EducationStateFailure {
+  const _$EducationStateFailureImpl({this.errorMessage});
+
+  @override
+  final String? errorMessage;
+
+  @override
+  String toString() {
+    return 'EducationState.failure(errorMessage: $errorMessage)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EducationStateFailureImpl &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorMessage);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EducationStateFailureImplCopyWith<_$EducationStateFailureImpl>
+      get copyWith => __$$EducationStateFailureImplCopyWithImpl<
+          _$EducationStateFailureImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() inProgress,
+    required TResult Function(List<EducationModel> educationList) success,
+    required TResult Function(String? errorMessage) failure,
+  }) {
+    return failure(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? inProgress,
+    TResult? Function(List<EducationModel> educationList)? success,
+    TResult? Function(String? errorMessage)? failure,
+  }) {
+    return failure?.call(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? inProgress,
+    TResult Function(List<EducationModel> educationList)? success,
+    TResult Function(String? errorMessage)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(errorMessage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_EducationStateInitial value) initial,
+    required TResult Function(_EducationStateInProgress value) inProgress,
+    required TResult Function(_EducationStateSuccess value) success,
+    required TResult Function(_EducationStateFailure value) failure,
+  }) {
+    return failure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_EducationStateInitial value)? initial,
+    TResult? Function(_EducationStateInProgress value)? inProgress,
+    TResult? Function(_EducationStateSuccess value)? success,
+    TResult? Function(_EducationStateFailure value)? failure,
+  }) {
+    return failure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_EducationStateInitial value)? initial,
+    TResult Function(_EducationStateInProgress value)? inProgress,
+    TResult Function(_EducationStateSuccess value)? success,
+    TResult Function(_EducationStateFailure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EducationStateFailure implements EducationState {
+  const factory _EducationStateFailure({final String? errorMessage}) =
+      _$EducationStateFailureImpl;
+
+  String? get errorMessage;
+  @JsonKey(ignore: true)
+  _$$EducationStateFailureImplCopyWith<_$EducationStateFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-
-import '../../services/education_service/education_service.dart';
+import 'package:latexpert/infra/services/education_service/education_service.dart';
 import 'education_state.dart';
 
 class EducationCubit extends Cubit<EducationState> {
-  final EducationService _educationService;
+  final EducationService _educationService = EducationService();
 
-  EducationCubit(this._educationService) : super(const EducationState.initial()) {
+  EducationCubit()
+      : super(const EducationState.initial()) {
     addEducationField();
   }
 
@@ -26,9 +26,20 @@ class EducationCubit extends Cubit<EducationState> {
     _emitSuccessState();
   }
 
+  Future<void> registerEducation() async {
+    emit(const EducationState.inProgress());
+    try {
+      await _educationService.registerEducation();
+      emit(EducationState.success(
+          educationList: _educationService.getEducationList()));
+    } catch (e) {
+      emit(EducationState.failure(errorMessage: e.toString()));
+    }
+  }
 
   void _emitSuccessState() {
-    emit(EducationState.success(educationList: _educationService.getEducationList()));
+    emit(EducationState.success(
+        educationList: _educationService.getEducationList()));
   }
 
   @override
@@ -41,8 +52,8 @@ class EducationCubit extends Cubit<EducationState> {
     return super.close();
   }
 
-  List<Map<String, TextEditingController>> get controllersList => _educationService.controllersList;
+  List<Map<String, TextEditingController>> get controllersList =>
+      _educationService.controllersList;
 
   List<bool> get expansionStates => _educationService.expansionStates;
 }
-

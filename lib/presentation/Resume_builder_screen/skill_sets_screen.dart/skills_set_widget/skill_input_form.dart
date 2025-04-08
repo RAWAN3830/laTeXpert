@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latexpert/core/constant/strings.dart';
-
 import '../../../../infra/bloc/skills_set_bloc/skills_set_bloc_cubit.dart';
 import '../../../../infra/bloc/skills_set_bloc/skills_set_state.dart';
 import 'category_drop_down.dart';
@@ -23,15 +22,16 @@ class _SkillInputFormState extends State<SkillInputForm> {
     super.dispose();
   }
 
-  void _handleAddSkill(BuildContext context, SkillsSetState state) {
+  void _handleAddSkill(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
-      if (state is SkillsSetStateSuccess) {
-        context.read<SkillsSetBlocCubit>().addSkill(
-          state.selectedCategories,
-          _skillController.text.trim(),
-        );
-        _skillController.clear();
-      }
+      context.read<SkillsSetBlocCubit>().addSkill(
+        context.read<SkillsSetBlocCubit>().state.maybeWhen(
+          success: (_, selectedCategories) => selectedCategories,
+          orElse: () => '',
+        ),
+        _skillController.text.trim(),
+      );
+      _skillController.clear();
     }
   }
 
@@ -39,7 +39,9 @@ class _SkillInputFormState extends State<SkillInputForm> {
   Widget build(BuildContext context) {
     return BlocConsumer<SkillsSetBlocCubit, SkillsSetState>(
       listener: (context, state) {
-        state.whenOrNull(
+        state.when(
+          initial: () {},
+          loading: () {},
           success: (categories, selectedCategory) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text(Strings.skillAdded)),
@@ -68,12 +70,16 @@ class _SkillInputFormState extends State<SkillInputForm> {
                         labelText: Strings.addSkillLabel,
                         border: OutlineInputBorder(),
                       ),
-                      validator: (value) => _validateSkill(value, state),
+                      validator: (value) => state.maybeWhen(
+                        success: (categories, selectedCategories) =>
+                            _validateSkill(value, categories, selectedCategories),
+                        orElse: () => null,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 10),
                   ElevatedButton(
-                    onPressed: () => _handleAddSkill(context, state),
+                    onPressed: () => _handleAddSkill(context),
                     child: const Text(Strings.addButtonLabel),
                   ),
                 ],
@@ -85,11 +91,11 @@ class _SkillInputFormState extends State<SkillInputForm> {
     );
   }
 
-  String? _validateSkill(String? value, SkillsSetState state) {
+  String? _validateSkill(String? value, Map<String, List<String>> categories, String selectedCategories) {
     if (value == null || value.trim().isEmpty) {
       return Strings.pleaseEnterSkill;
     }
-    if (state is SkillsSetStateSuccess && state.categories[state.selectedCategories]!.contains(value.trim())) {
+    if (categories[selectedCategories]?.contains(value.trim()) ?? false) {
       return Strings.skillExists;
     }
     return null;
