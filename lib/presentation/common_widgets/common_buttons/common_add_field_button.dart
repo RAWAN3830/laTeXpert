@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class CommonAddFieldButton extends StatelessWidget {
   final Function onTap;
@@ -21,7 +22,7 @@ class CommonAddFieldButton extends StatelessWidget {
                   border: Border.all(color: CupertinoColors.black,width: 1)
               ),
               child: Center(
-                child: Text(' + $name',style:const TextStyle(fontSize: 20,fontWeight: FontWeight.w600)),
+                child: Text(' + $name',style:Theme.of(context).textTheme.bodyLarge),
               ))),
     );
   }

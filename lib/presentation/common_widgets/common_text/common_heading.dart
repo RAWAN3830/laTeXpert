@@ -16,14 +16,14 @@ class CommonHeading extends StatelessWidget {
         text: TextSpan(
           style: Theme.of(context)
               .textTheme
-              .titleMedium
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.w500),
           children: <TextSpan>[
             TextSpan(text: title),
             TextSpan(
               text: Strings.dot,
-              style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontWeight: FontWeight.w500,
+              style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  fontWeight: FontWeight.w400,
                   color: ThemeColors.mainGreenColor),
             ),
           ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'breakpoint_enum.dart';
 
 class AppTextTheme {
-  static const _fontFamily = 'Inter';
+  static const _fontFamily = 'UberFont';
   static const _baseHeadlineStyle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
