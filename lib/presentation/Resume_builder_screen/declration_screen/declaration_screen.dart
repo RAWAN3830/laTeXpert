@@ -31,8 +31,9 @@ class _DeclarationScreenState extends State<DeclarationScreen> {
   void initState() {
     super.initState();
     _declarationCubit = DeclarationCubit();
-    _declarationCubit.initialize(); // Initialize with one field
+    _declarationCubit.initialize();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +115,7 @@ class _DeclarationScreenState extends State<DeclarationScreen> {
                         onTap: () {
                           if (formKey.currentState!.validate()) {
                             context.read<DeclarationCubit>().saveDeclaration();
-                            widget.onNext?.call(); // Move to next step
+                            // widget.onNext?.call(); // Move to next step
                           }
                         },
                         name: Strings.saveContinue,

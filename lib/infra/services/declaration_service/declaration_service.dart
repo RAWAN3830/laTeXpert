@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:latexpert/core/constant/strings.dart';
-import 'package:latexpert/infra/services/firestore_collection_service/fire_store_collection_service.dart';
-
 import '../../bloc/declaration_bloc/declaration_state.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class DeclarationService {
+
+  final Dio dio = Dio();
+  final String baseUrl = "${Strings.baseUrl}declaration_info";
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
   DeclarationState initialize() {
     return DeclarationState.success(honorAwardControllers: [TextEditingController()]);
@@ -30,19 +34,40 @@ class DeclarationService {
     return DeclarationState.success(honorAwardControllers: controllersList);
   }
 
-  // Save declarations to Firestore
+  // Save declarations to the backend via HTTP request (using Dio)
   Future<DeclarationState> saveDeclaration(List<TextEditingController> controllersList) async {
     List<String> honorAwards = controllersList.map((controller) => controller.text).toList();
 
+    // Prepare the data in a format your backend expects
+    final Map<String, dynamic> declarationData = {
+      'declarationList': honorAwards,
+    };
+
     try {
-      await FireStoreCollectionService().fireStoreCollection(
-        collection: Strings.declaration,
-        docId: 'declaration1',
-        data: {'dataList': honorAwards},
+      final token = await secureStorage.read(key: 'jwt_token');
+      if (token == null) {
+        return const DeclarationState.failure(errorMessage: 'Token not found. Please log in again.');
+      }
+
+      // Make the POST request to your backend API
+      final response = await dio.post(
+        baseUrl,
+        data: declarationData,
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+            'Content-Type': 'application/json',
+          },
+        ),
       );
-      return DeclarationState.success(honorAwardControllers: controllersList);
+
+      if (response.statusCode == 201) {
+        return DeclarationState.success(honorAwardControllers: controllersList);
+      } else {
+        return DeclarationState.failure(errorMessage: 'Failed to save declaration: ${response.data}');
+      }
     } catch (e) {
-      return DeclarationState.failure(errorMessage: e.toString());
+      return DeclarationState.failure(errorMessage: 'Error: $e');
     }
   }
 

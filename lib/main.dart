@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: AppTheme.getTheme(breakpoint, isDark: isDark),
-              home: const ResumeBuilderScreen(),
+              home: const RegistrationScreen(),
             );
           },
         ),
