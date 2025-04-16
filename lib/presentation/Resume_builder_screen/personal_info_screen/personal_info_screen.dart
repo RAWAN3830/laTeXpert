@@ -373,69 +373,12 @@ TextEditingController phoneController = TextEditingController();
 TextEditingController jobTitleController = TextEditingController();
 TextEditingController addressController = TextEditingController();
 final formKey = GlobalKey<FormState>();
-List<Map<String, TextEditingController>> fieldControllers = [];
 // const String baseUrl = "http://192.168.113.67:8000/api/personal-info";
 // const String baseUrl = "http://192.168.113.67:8000/api/auth/add_personal_info";
 const String baseUrl = "${Strings.baseUrl}personal_info";
 
 
 class _PersonalInfoState extends State<PersonalInfo> {
-  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
-
-  Future<void> registerUser() async {
-    final String firstname = firstNameController.text;
-    final String lastname = lastNameController.text;
-    final String email = emailController.text;
-    final String phone = phoneController.text;
-    final String jobTitle = jobTitleController.text;
-    final String address = addressController.text;
-
-    if (firstname.isEmpty || lastname.isEmpty || email.isEmpty || phone.isEmpty || jobTitle.isEmpty || address.isEmpty) {
-      CommonMessage.showError(context, 'All fields are required');
-      return;
-    }
-
-    List<Map<String, String>> links = fieldControllers.map((field) {
-      return {
-        'name': field['name']?.text ?? '',
-        'link': field['link']?.text ?? '',
-      };
-    }).toList();
-
-    try {
-      final token = await secureStorage.read(key: 'jwt_token');
-      if (token == null) {
-        CommonMessage.showError(context, 'Token not found. Please log in again.');
-        return;
-      }
-
-      final dio = Dio();
-      final response = await dio.post(
-        baseUrl,
-        options: Options(headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token', // Add token here
-        }),
-        data: {
-          'firstname': firstname,
-          'lastname': lastname,
-          'email': email,
-          'phone': phone,
-          'jobTitle': jobTitle,
-          'address': address,
-          'links': links,
-        },
-      );
-
-      if (response.statusCode == 201) {
-        CommonMessage.showSuccess(context, 'User registered successfully');
-      } else {
-        CommonMessage.showError(context, 'Failed to register user: ${response.data}');
-      }
-    } catch (e) {
-      CommonMessage.showError(context, 'Error: $e');
-    }
-  }
 
   @override
   void initState() {
@@ -453,21 +396,6 @@ class _PersonalInfoState extends State<PersonalInfo> {
       jobTitleController.text = jobTitle ?? '';
       addressController.text = address ?? '';
     }
-  }
-
-  void addFields() {
-    setState(() {
-      fieldControllers.add({
-        'link': TextEditingController(),
-        'name': TextEditingController(),
-      });
-    });
-  }
-
-  void removeFields(int index) {
-    setState(() {
-      fieldControllers.removeAt(index);
-    });
   }
 
   @override
@@ -550,98 +478,102 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           hintText: Strings.address,
                           errorText: Strings.enterAddress),
                       const CommonHeading(title: Strings.links),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        // Allows ListView to be rendered inside a scrollable parent
-                        physics: const NeverScrollableScrollPhysics(),
-                        // Prevents ListView from scrolling separately
-                        itemCount: fieldControllers.length,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Link ${index + 1}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                          fontWeight: FontWeight.bold)),
-                                  IconButton(
-                                    icon: const Icon(Icons.delete,
-                                        color: Colors.red),
-                                    onPressed: () => removeFields(index),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: CommonTextformfield(
-                                      labelText: Strings.link,
-                                      controller: fieldControllers[index]
-                                      ['link'] as TextEditingController,
-                                      errorText: Strings.enterValidLink,
+                      BlocBuilder<PersonalInfoBlocCubit, PersonalInfoState>(
+                        builder: (context, state) {
+                          if (state is PersonalInfoUpdated) {
+                            final links = state.linkFields;
+
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: links.length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Link ${index + 1}',
+                                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                                fontWeight: FontWeight.bold)),
+                                        IconButton(
+                                          icon: Icon(Icons.delete, color: Colors.red),
+                                          onPressed: () =>   context.read<PersonalInfoBlocCubit>().removeLinkField(index),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  SizedBox(
-                                      width: context.width(context) * 0.03),
-                                  Expanded(
-                                    child: CommonTextformfield(
-                                      labelText: Strings.linkName,
-                                      controller: fieldControllers[index]
-                                      ['name'] as TextEditingController,
-                                      errorText: Strings.enterValidName,
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: CommonTextformfield(
+                                            labelText: Strings.link,
+                                            controller: links[index].linkController,
+                                            errorText: Strings.enterValidLink,
+                                          ),
+                                        ),
+                                        SizedBox(width: context.width(context) * 0.03),
+                                        Expanded(
+                                          child: CommonTextformfield(
+                                            labelText: Strings.linkName,
+                                            controller: links[index].nameController,
+                                            errorText: Strings.enterValidName,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          );
+                                  ],
+                                );
+                              },
+                            );
+                          }
+
+                          return SizedBox(); // fallback UI
                         },
                       ),
                       SizedBox(
                         height: height,
                       ),
                       CommonAddFieldButton(
-                        onTap: addFields,
+                        onTap:  (){ context.read<PersonalInfoBlocCubit>().addLinkField();},
                         name: Strings.addField,
                       ),
                       SizedBox(height: height),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          BlocConsumer<PersonalInfoCubit, PersonalInfoState>(
+                          BlocConsumer<PersonalInfoBlocCubit, PersonalInfoState>(
                             listener: (context, state) {
-                              state.when(
-                                initial: () {},
-                                inProgress: () {
-                                  // Optional: You can show a loading indicator if needed
-                                },
-                                success: (personalInfoModel) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content:
-                                        Text(Strings.personalInfoSuccess)),
-                                  );
-                                },
-                                failure: (error) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content:
-                                        Text('${Strings.error}: $error')),
-                                  );
-                                },
-                              );
+                              if (state is PersonalInfoSuccess) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(state.message)),
+                                );
+                              } else if (state is PersonalInfoFailure) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(state.error)),
+                                );
+                              }
                             },
                             builder: (context, state) {
+                              final cubit = context.read<PersonalInfoBlocCubit>();
+
                               return CommonSaveButton(
                                 formKey: formKey,
                                 onTap: () {
-                                  registerUser();
+                                  if (formKey.currentState!.validate()) {
+                                    cubit.personalInfoAdd(
+                                      firstname: firstNameController.text,
+                                      lastname: lastNameController.text,
+                                      email: emailController.text,
+                                      phone: phoneController.text,
+                                      jobTitle: jobTitleController.text,
+                                      address: addressController.text,
+                                      links: cubit.linkFields.map((field) => {
+                                        'name': field.nameController.text,
+                                        'link': field.linkController.text,
+                                      }).toList(),
+                                    );
+                                  }
                                 },
                                 name: Strings.saveContinue,
                               );

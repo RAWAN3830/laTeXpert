@@ -28,7 +28,7 @@ class CategoryDropdown extends StatelessWidget {
                 .toList(),
             onChanged: (value) {
               if (value != null) {
-                context.read<SkillsSetBlocCubit>().updateSelectedCategory(value);
+                context.read<SkillsSetBlocCubit>().updateSelectedCategory(context,value.toString());
               }
             },
           ),

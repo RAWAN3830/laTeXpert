@@ -6,11 +6,12 @@ import 'package:latexpert/core/constant/assets_svg_image.dart';
 import 'package:latexpert/core/constant/extension.dart';
 import 'package:latexpert/core/constant/strings.dart';
 import 'package:latexpert/core/constant/theme_colors.dart';
-import 'package:latexpert/infra/bloc/auth_bloc/email_auth/email_auth_bloc.dart';
-import 'package:latexpert/infra/bloc/auth_bloc/email_auth/email_auth_state.dart';
+
 import 'package:latexpert/presentation/auth_screen/login_screen.dart';
 import 'package:latexpert/presentation/common_widgets/common_buttons/common_save_button.dart';
 import 'package:latexpert/presentation/common_widgets/common_buttons/sign_up_button.dart';
+import '../../infra/bloc/auth_bloc/email_auth/registration_user/registration_bloc_cubit.dart';
+import '../../infra/bloc/auth_bloc/email_auth/registration_user/registration_state.dart';
 import '../common_widgets/common_text/common_richtext.dart';
 import '../common_widgets/common_textfields/comman_textformfield.dart';
 import '../home_screen/home_screen.dart';
@@ -31,57 +32,6 @@ const String baseUrl = "${Strings.baseUrl}auth/register";
 
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  Future<void> registerUser() async {
-    final String name = nameController.text;
-    final String email = emailController.text;
-    final String password = passwordController.text;
-    final String phone = phoneController.text;
-
-    if (name.isEmpty || email.isEmpty || password.isEmpty || phone.isEmpty) {
-      showError('All fields are required');
-      return;
-    }
-
-    try {
-      final dio = Dio();
-      final response = await dio.post(
-        baseUrl,
-        options: Options(headers: {
-          'Content-Type': 'application/json',
-        }),
-        data: {
-          'user_name': name,
-          'email': email,
-          'password': password,
-          'phone': phone,
-        },
-      );
-
-      if (response.statusCode == 201) {
-        showSuccess('User registered successfully');
-      } else {
-        showError('Failed to register user: ${response.data}');
-      }
-    } catch (e) {
-      showError('Error: $e');
-    }
-  }
-
-  void showError(String message) {
-    print(message);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text(message, style: const TextStyle(color: Colors.red))),
-    );
-  }
-
-  void showSuccess(String message) {
-    print(message);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text(message, style: const TextStyle(color: Colors.green))),
-    );
-  }
 
   @override
   void initState() {
@@ -93,7 +43,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     var varHeight = context.height(context) * 0.02;
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: BlocConsumer<RegistrationBloc, RegistrationState>(
+      body: BlocConsumer<RegistrationCubit, RegistrationState>(
         listener: (context, state) {
           if (state is RegistrationSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -237,26 +187,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       child: CommonSaveButton(
                         formKey: formKey,
                         onTap: () async {
-                          // if (formKey.currentState!.validate()) {
-                          //   formKey.currentState!.save();
-                          //   if (formKey.currentState?.validate() ?? false) {
-                          //     context.read<RegistrationBloc>().add(
-                          //       RegisterUserEvent(
-                          //         email: emailController.text,
-                          //         password: passwordController.text,
-                          //         name: nameController.text,
-                          //       ),
-                          //     );
-                          //     registerUser();
-                          //   }
-                          //   var snackBar = const SnackBar(
-                          //       content: Text(Strings.submittedSuccessfully));
-                          //   ScaffoldMessenger.of(context)
-                          //       .showSnackBar(snackBar);
-                          // }
-                          setState(() {
-                            registerUser();
-                          });
+                          if (formKey.currentState!.validate()) {
+                            formKey.currentState!.save();
+
+                            context.read<RegistrationCubit>().registerUser(
+                              name: nameController.text,
+                              email: emailController.text,
+                              password: passwordController.text,
+                              phone: phoneController.text,
+                            );
+                          }
                         },
                         name: Strings.saveContinue,
                       ),

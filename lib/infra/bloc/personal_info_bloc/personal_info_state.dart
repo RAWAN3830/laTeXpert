@@ -1,19 +1,27 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:latexpert/domain/personal_info_model/personal_info_model.dart';
+// Abstract State class
+import '../../../domain/personal_info_model/link_controller.dart';
+import '../../../domain/personal_info_model/personal_info_model.dart';
 
-part 'personal_info_state.freezed.dart';
+abstract class PersonalInfoState {}
 
-@freezed
-class PersonalInfoState with _$PersonalInfoState {
-  const factory PersonalInfoState.initial() = _PersonalInfoStateInitial;
+// Initial state
+class PersonalInfoInitial extends PersonalInfoState {}
 
-  const factory PersonalInfoState.inProgress() = _PersonalInfoStateInProgress;
+// Loading state
+class PersonalInfoLoading extends PersonalInfoState {}
+class PersonalInfoUpdated  extends PersonalInfoState {
+ final List<LinkController> linkFields;
+ PersonalInfoUpdated(this.linkFields);
+}
 
-  const factory PersonalInfoState.success({
-    required PersonalInfoModel personalInfoModel,
-  }) = _PersonalInfoStateSuccess;
+// Success state
+class PersonalInfoSuccess extends PersonalInfoState {
+  final String message;
+  PersonalInfoSuccess(this.message);
+}
 
-  const factory PersonalInfoState.failure({
-    String? errorMessage,
-  }) = _PersonalInfoStateFailure;
+// Failure state
+class PersonalInfoFailure extends PersonalInfoState {
+  final String error;
+  PersonalInfoFailure(this.error);
 }

@@ -1,22 +1,16 @@
-
-abstract class RegistrationState {
-  const RegistrationState();
-
-}
+// registration_state.dart
+abstract class RegistrationState {}
 
 class RegistrationInitial extends RegistrationState {}
 
 class RegistrationLoading extends RegistrationState {}
 
 class RegistrationSuccess extends RegistrationState {
-  final String userId;
-  const RegistrationSuccess(this.userId);
-
+  final String message;
+  RegistrationSuccess(this.message);
 }
 
 class RegistrationFailure extends RegistrationState {
   final String error;
-
-  const RegistrationFailure(this.error);
-
+  RegistrationFailure(this.error);
 }

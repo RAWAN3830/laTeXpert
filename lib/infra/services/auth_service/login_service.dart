@@ -1,0 +1,61 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../../../core/constant/strings.dart';
+
+class LoginService {
+  final Dio dio = Dio();
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+  final String loginUrl = '${Strings.baseUrl}auth/login'; // Replace this with your real URL
+
+  Future<String> loginUser({
+    required String email,
+    required String password,
+  }) async {
+    if (email.isEmpty || password.isEmpty) {
+      throw Exception('All fields are required');
+    }
+
+    final response = await dio.post(
+      loginUrl,
+      options: Options(headers: {
+        'Content-Type': 'application/json',
+      }),
+      data: {
+        'email': email,
+        'password': password,
+      },
+    );
+
+    if (response.statusCode == 200 && response.data['success'] == true) {
+      final token = response.data['token'];
+      await secureStorage.write(key: 'jwt_token', value: token);
+      return token;
+    } else {
+      throw Exception(response.data['msg'] ?? 'Login failed');
+    }
+  }
+
+  Future<void> logout() async {
+    await secureStorage.delete(key: 'jwt_token');
+  }
+
+  Future<String> fetchProtectedData(String apiUrl) async {
+    final token = await secureStorage.read(key: 'jwt_token');
+    if (token == null) throw Exception('No token found. Please log in again.');
+
+    final response = await dio.get(
+      apiUrl,
+      options: Options(headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return response.data.toString();
+    } else {
+      throw Exception('Failed to fetch data: ${response.data}');
+    }
+  }
+}

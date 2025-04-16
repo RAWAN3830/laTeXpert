@@ -1,20 +1,63 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:latexpert/domain/personal_info_model/link_controller.dart';
 import 'package:latexpert/domain/personal_info_model/personal_info_model.dart';
-import '../../services/contact_info_service/set_personal_info_to_firebase.dart';
+import 'package:latexpert/infra/services/personal_info_service/personal_info_service.dart';
 import 'personal_info_state.dart';
 
-class PersonalInfoCubit extends Cubit<PersonalInfoState> {
-  final PersonalInfoRepository _repository = PersonalInfoRepository();
+class PersonalInfoBlocCubit extends Cubit<PersonalInfoState> {
+  final PersonalInfoService personalInfoService = PersonalInfoService();
 
-  PersonalInfoCubit() : super(const PersonalInfoState.initial());
+  PersonalInfoBlocCubit() : super(PersonalInfoInitial());
 
-  Future<void> addPersonalInfo(
-      PersonalInfoModel personalInfo, context) async {
-    emit(const PersonalInfoState.inProgress());
+  // Method to register a user
+  Future<void> personalInfoAdd({
+    required String firstname,
+    required String lastname,
+    required String email,
+    required String phone,
+    required String jobTitle,
+    required String address,
+    required List<Map<String, String>> links,
+  }) async {
+    emit(PersonalInfoLoading()); // Emit loading state when the process starts
+
     try {
-      emit(PersonalInfoState.success(personalInfoModel: personalInfo));
+      // Call the service to register the user
+      await personalInfoService.registerUser(
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        phone: phone,
+        jobTitle: jobTitle,
+        address: address,
+        links: links,
+      );
+
+      emit(PersonalInfoSuccess('User registered successfully'));
     } catch (e) {
-      emit(const PersonalInfoState.failure());
+      emit(PersonalInfoFailure('Error: $e')); // Emit failure state if error occurs
+    }
+  }
+
+  // Method to add a new field
+  List<LinkController> linkFields = [];
+
+ void addLinkField() {
+   linkFields.add(
+     LinkController(
+       linkController: TextEditingController(),
+       nameController: TextEditingController(),
+     ),
+   );
+   emit(PersonalInfoUpdated(linkFields.cast<LinkController>()));
+ }
+
+
+  void removeLinkField(int index)  {
+    if (index >= 0 && index < linkFields.length) {
+      linkFields.removeAt(index);
+      emit(PersonalInfoUpdated(linkFields.cast<LinkController>()));
     }
   }
 }
