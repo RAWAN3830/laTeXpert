@@ -88,12 +88,12 @@ class EducationService {
   List<EducationModel> convertControllersToEducationModel() {
     return controllersList.map((controllers) {
       return EducationModel(
-        institution: controllers.institution?.text ?? '',
-        location: controllers.location?.text ?? '',
-        degreeType: controllers.degreeType?.text ?? '',
-        fieldOfStudy: controllers.fieldOfStudy?.text ?? '',
-        startDate: controllers.startDate?.text ?? '',
-        endDate: controllers.endDate?.text ?? '',
+        institution: controllers.institution.text ?? '',
+        location: controllers.location.text ?? '',
+        degreeType: controllers.degreeType.text ?? '',
+        fieldOfStudy: controllers.fieldOfStudy.text ?? '',
+        startDate: controllers.startDate.text ?? '',
+        endDate: controllers.endDate.text ?? '',
       );
     }).toList();
   }
