@@ -29,10 +29,10 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Details Form'),
+        title: const Text('User Details Form'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             _buildTextField(fullNameController, "Full Name"),
@@ -51,10 +51,10 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
             _buildTextField(hobbiesController, "Hobbies (Separate by commas)"),
             _buildTextField(imageUrlController, "Profile Image URL"),
             _buildTextField(backgroundImageUrlController, "Background Image URL"),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _submitDetails,
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ],
         ),
@@ -74,7 +74,7 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
         maxLines: maxLines,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );
@@ -121,7 +121,7 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Details Submitted!')),
+      const SnackBar(content: Text('Details Submitted!')),
     );
   }
 }

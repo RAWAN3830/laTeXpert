@@ -332,7 +332,6 @@
 //   }
 // }
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latexpert/core/constant/extension.dart';
@@ -343,11 +342,9 @@ import 'package:latexpert/presentation/common_widgets/common_appbar/custome_appb
 import 'package:latexpert/presentation/common_widgets/common_buttons/common_add_field_button.dart';
 import 'package:latexpert/presentation/common_widgets/common_buttons/common_reset_button.dart';
 import 'package:latexpert/presentation/common_widgets/common_buttons/common_save_button.dart';
-import 'package:latexpert/presentation/common_widgets/common_erro_success_message/common_error_success_message.dart';
 import 'package:latexpert/presentation/common_widgets/common_text/common_heading.dart';
 import 'package:latexpert/presentation/common_widgets/common_textfields/comman_textformfield.dart';
 import 'package:latexpert/presentation/common_widgets/common_textfields/common_longlinetextfield.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 String? firstname;
 String? lastname;

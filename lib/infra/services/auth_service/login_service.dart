@@ -1,11 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import '../../../core/constant/strings.dart';
 
 class LoginService {
   final Dio dio = Dio();
-  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   final String loginUrl = '${Strings.baseUrl}auth/login'; // Replace this with your real URL
 
   Future<String> loginUser({
@@ -29,7 +26,7 @@ class LoginService {
 
     if (response.statusCode == 200 && response.data['success'] == true) {
       final token = response.data['token'];
-      await secureStorage.write(key: 'jwt_token', value: token);
+      await Strings.secureStorage.write(key: 'jwt_token', value: token);
       return token;
     } else {
       throw Exception(response.data['msg'] ?? 'Login failed');
@@ -37,11 +34,11 @@ class LoginService {
   }
 
   Future<void> logout() async {
-    await secureStorage.delete(key: 'jwt_token');
+    await Strings.secureStorage.delete(key: 'jwt_token');
   }
 
   Future<String> fetchProtectedData(String apiUrl) async {
-    final token = await secureStorage.read(key: 'jwt_token');
+    final token = await Strings.secureStorage.read(key: 'jwt_token');
     if (token == null) throw Exception('No token found. Please log in again.');
 
     final response = await dio.get(

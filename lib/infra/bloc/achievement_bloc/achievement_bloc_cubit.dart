@@ -1,62 +1,61 @@
-// achievement_cubit.dart
 import 'package:bloc/bloc.dart';
-import '../../services/achievement_service/achievemnet_service.dart';
-import 'achievement_state.dart';
+import 'package:flutter/material.dart';
+import 'package:latexpert/domain/achievement_info_model/achievement_controller.dart';
+import 'package:latexpert/domain/achievement_info_model/achievement_info_model.dart';
+import 'package:latexpert/infra/bloc/achievement_bloc/achievement_state.dart';
+import 'package:latexpert/infra/services/achievement_service/achievemnet_service.dart';
 
 class AchievementCubit extends Cubit<AchievementState> {
   final AchievementService _achievementService = AchievementService();
 
-  AchievementCubit() : super(const AchievementState.initial());
+  // State starts with initial, then immediately we add the default field
+  AchievementCubit() : super(const AchievementState.initial()) {
+    addAchievementField();
+  }
 
+  // Add new achievement field
   void addAchievementField() {
-    state.maybeWhen(
-      success: (controllersList, expansionStates) {
-        final updatedControllers = _achievementService.addAchievementField(controllersList);
-        final updatedExpansions = _achievementService.addExpansionState(expansionStates);
-        emit(AchievementState.success(
-          controllersList: updatedControllers,
-          expansionStates: updatedExpansions,
-        ));
-      },
-      orElse: () {},
-    );
+    _achievementService.addAchievementField();
+    _emitSuccessState();
   }
 
+  // Delete achievement field
   void deleteAchievementField(int index) {
-    state.maybeWhen(
-      success: (controllersList, expansionStates) {
-        final updatedControllers = _achievementService.deleteAchievementField(controllersList, index);
-        final updatedExpansions = _achievementService.deleteExpansionState(expansionStates, index);
-        emit(AchievementState.success(
-          controllersList: updatedControllers,
-          expansionStates: updatedExpansions,
-        ));
-      },
-      orElse: () {},
-    );
+    _achievementService.deleteAchievementField(index);
+    _emitSuccessState();
   }
 
-  void updateAchievementExpansionState(int index, bool isExpanded) {
-    state.maybeWhen(
-      success: (controllersList, expansionStates) {
-        final updatedExpansions = _achievementService.updateExpansionState(expansionStates, index, isExpanded);
-        emit(AchievementState.success(
-          controllersList: controllersList,
-          expansionStates: updatedExpansions,
-        ));
-      },
-      orElse: () {},
-    );
+  // Register achievements via API
+  Future<void> registerAchievements(BuildContext context,List<AchievementInfoModel> achievementList) async {
+    emit(const AchievementState.loading());
+    try {
+      await _achievementService.registerAchievements(achievementList);
+      emit(AchievementState.success(achievementList: achievementList));
+    } catch (e) {
+      emit(AchievementState.failure(errorMessage: e.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+    }
   }
 
+  // Dispose all controllers on close
   @override
   Future<void> close() {
-    state.maybeWhen(
-      success: (controllersList, _) {
-        _achievementService.disposeControllers(controllersList);
-      },
-      orElse: () {},
-    );
+    _achievementService.disposeControllers(_achievementService.controllersList);
     return super.close();
   }
+
+  void _emitSuccessState() {
+    // Convert controllers to projectModel before emitting success state
+    final achievementList = _achievementService.convertControllersToAchievementModel();
+    emit(AchievementState.success(achievementList: achievementList));
+  }
+
+
+  // Getters to access controller & expansion state (if needed in UI)
+  List<AchievementControllers> get controllersList =>
+      _achievementService.controllersList;
+
+  List<bool> get expansionStates => _achievementService.expansionStates;
 }

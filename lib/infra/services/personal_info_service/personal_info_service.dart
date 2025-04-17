@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:latexpert/core/constant/strings.dart';
 
 class PersonalInfoService {
-  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   final List<Map<String, TextEditingController>> fieldControllers = [];
 
   Future<bool> registerUser({
@@ -17,7 +15,7 @@ class PersonalInfoService {
     required List<Map<String, String>> links,
   }) async {
     try {
-      final token = await secureStorage.read(key: 'jwt_token');
+      final token = await Strings.secureStorage.read(key: 'jwt_token');
       if (token == null) {
         return false; // Return false to indicate failure
       }

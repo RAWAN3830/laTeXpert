@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:latexpert/domain/experience_model/experience_model.dart';
 
-import '../../../domain/experience_model/experience_controller.dart';
 
 part 'experiences_state.freezed.dart';
 
