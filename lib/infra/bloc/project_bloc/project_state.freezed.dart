@@ -18,43 +18,51 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProjectState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(
-            ProjectMasterModel projectData, int? expandedIndex)
-        success,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ProjectInfoModel> projectList) success,
+    required TResult Function(String errorMessage) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(ProjectMasterModel projectData, int? expandedIndex)?
-        success,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ProjectInfoModel> projectList)? success,
+    TResult? Function(String errorMessage)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(ProjectMasterModel projectData, int? expandedIndex)?
-        success,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ProjectInfoModel> projectList)? success,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InitState value) init,
-    required TResult Function(SuccessState value) success,
+    required TResult Function(ProjectStateInitial value) initial,
+    required TResult Function(ProjectStateLoading value) loading,
+    required TResult Function(ProjectStateSuccess value) success,
+    required TResult Function(ProjectStateError value) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(InitState value)? init,
-    TResult? Function(SuccessState value)? success,
+    TResult? Function(ProjectStateInitial value)? initial,
+    TResult? Function(ProjectStateLoading value)? loading,
+    TResult? Function(ProjectStateSuccess value)? success,
+    TResult? Function(ProjectStateError value)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitState value)? init,
-    TResult Function(SuccessState value)? success,
+    TResult Function(ProjectStateInitial value)? initial,
+    TResult Function(ProjectStateLoading value)? loading,
+    TResult Function(ProjectStateSuccess value)? success,
+    TResult Function(ProjectStateError value)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -82,18 +90,18 @@ class _$ProjectStateCopyWithImpl<$Res, $Val extends ProjectState>
 }
 
 /// @nodoc
-abstract class _$$InitStateImplCopyWith<$Res> {
-  factory _$$InitStateImplCopyWith(
-          _$InitStateImpl value, $Res Function(_$InitStateImpl) then) =
-      __$$InitStateImplCopyWithImpl<$Res>;
+abstract class _$$ProjectStateInitialImplCopyWith<$Res> {
+  factory _$$ProjectStateInitialImplCopyWith(_$ProjectStateInitialImpl value,
+          $Res Function(_$ProjectStateInitialImpl) then) =
+      __$$ProjectStateInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitStateImplCopyWithImpl<$Res>
-    extends _$ProjectStateCopyWithImpl<$Res, _$InitStateImpl>
-    implements _$$InitStateImplCopyWith<$Res> {
-  __$$InitStateImplCopyWithImpl(
-      _$InitStateImpl _value, $Res Function(_$InitStateImpl) _then)
+class __$$ProjectStateInitialImplCopyWithImpl<$Res>
+    extends _$ProjectStateCopyWithImpl<$Res, _$ProjectStateInitialImpl>
+    implements _$$ProjectStateInitialImplCopyWith<$Res> {
+  __$$ProjectStateInitialImplCopyWithImpl(_$ProjectStateInitialImpl _value,
+      $Res Function(_$ProjectStateInitialImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ProjectState
@@ -102,18 +110,19 @@ class __$$InitStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitStateImpl implements InitState {
-  const _$InitStateImpl();
+class _$ProjectStateInitialImpl implements ProjectStateInitial {
+  const _$ProjectStateInitialImpl();
 
   @override
   String toString() {
-    return 'ProjectState.init()';
+    return 'ProjectState.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitStateImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ProjectStateInitialImpl);
   }
 
   @override
@@ -122,34 +131,36 @@ class _$InitStateImpl implements InitState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(
-            ProjectMasterModel projectData, int? expandedIndex)
-        success,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ProjectInfoModel> projectList) success,
+    required TResult Function(String errorMessage) failure,
   }) {
-    return init();
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(ProjectMasterModel projectData, int? expandedIndex)?
-        success,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ProjectInfoModel> projectList)? success,
+    TResult? Function(String errorMessage)? failure,
   }) {
-    return init?.call();
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(ProjectMasterModel projectData, int? expandedIndex)?
-        success,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ProjectInfoModel> projectList)? success,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) {
-    if (init != null) {
-      return init();
+    if (initial != null) {
+      return initial();
     }
     return orElse();
   }
@@ -157,56 +168,178 @@ class _$InitStateImpl implements InitState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InitState value) init,
-    required TResult Function(SuccessState value) success,
+    required TResult Function(ProjectStateInitial value) initial,
+    required TResult Function(ProjectStateLoading value) loading,
+    required TResult Function(ProjectStateSuccess value) success,
+    required TResult Function(ProjectStateError value) failure,
   }) {
-    return init(this);
+    return initial(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(InitState value)? init,
-    TResult? Function(SuccessState value)? success,
+    TResult? Function(ProjectStateInitial value)? initial,
+    TResult? Function(ProjectStateLoading value)? loading,
+    TResult? Function(ProjectStateSuccess value)? success,
+    TResult? Function(ProjectStateError value)? failure,
   }) {
-    return init?.call(this);
+    return initial?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitState value)? init,
-    TResult Function(SuccessState value)? success,
+    TResult Function(ProjectStateInitial value)? initial,
+    TResult Function(ProjectStateLoading value)? loading,
+    TResult Function(ProjectStateSuccess value)? success,
+    TResult Function(ProjectStateError value)? failure,
     required TResult orElse(),
   }) {
-    if (init != null) {
-      return init(this);
+    if (initial != null) {
+      return initial(this);
     }
     return orElse();
   }
 }
 
-abstract class InitState implements ProjectState {
-  const factory InitState() = _$InitStateImpl;
+abstract class ProjectStateInitial implements ProjectState {
+  const factory ProjectStateInitial() = _$ProjectStateInitialImpl;
 }
 
 /// @nodoc
-abstract class _$$SuccessStateImplCopyWith<$Res> {
-  factory _$$SuccessStateImplCopyWith(
-          _$SuccessStateImpl value, $Res Function(_$SuccessStateImpl) then) =
-      __$$SuccessStateImplCopyWithImpl<$Res>;
+abstract class _$$ProjectStateLoadingImplCopyWith<$Res> {
+  factory _$$ProjectStateLoadingImplCopyWith(_$ProjectStateLoadingImpl value,
+          $Res Function(_$ProjectStateLoadingImpl) then) =
+      __$$ProjectStateLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ProjectStateLoadingImplCopyWithImpl<$Res>
+    extends _$ProjectStateCopyWithImpl<$Res, _$ProjectStateLoadingImpl>
+    implements _$$ProjectStateLoadingImplCopyWith<$Res> {
+  __$$ProjectStateLoadingImplCopyWithImpl(_$ProjectStateLoadingImpl _value,
+      $Res Function(_$ProjectStateLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProjectState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ProjectStateLoadingImpl implements ProjectStateLoading {
+  const _$ProjectStateLoadingImpl();
+
+  @override
+  String toString() {
+    return 'ProjectState.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProjectStateLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ProjectInfoModel> projectList) success,
+    required TResult Function(String errorMessage) failure,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ProjectInfoModel> projectList)? success,
+    TResult? Function(String errorMessage)? failure,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ProjectInfoModel> projectList)? success,
+    TResult Function(String errorMessage)? failure,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProjectStateInitial value) initial,
+    required TResult Function(ProjectStateLoading value) loading,
+    required TResult Function(ProjectStateSuccess value) success,
+    required TResult Function(ProjectStateError value) failure,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProjectStateInitial value)? initial,
+    TResult? Function(ProjectStateLoading value)? loading,
+    TResult? Function(ProjectStateSuccess value)? success,
+    TResult? Function(ProjectStateError value)? failure,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProjectStateInitial value)? initial,
+    TResult Function(ProjectStateLoading value)? loading,
+    TResult Function(ProjectStateSuccess value)? success,
+    TResult Function(ProjectStateError value)? failure,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProjectStateLoading implements ProjectState {
+  const factory ProjectStateLoading() = _$ProjectStateLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$ProjectStateSuccessImplCopyWith<$Res> {
+  factory _$$ProjectStateSuccessImplCopyWith(_$ProjectStateSuccessImpl value,
+          $Res Function(_$ProjectStateSuccessImpl) then) =
+      __$$ProjectStateSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ProjectMasterModel projectData, int? expandedIndex});
-
-  $ProjectMasterModelCopyWith<$Res> get projectData;
+  $Res call({List<ProjectInfoModel> projectList});
 }
 
 /// @nodoc
-class __$$SuccessStateImplCopyWithImpl<$Res>
-    extends _$ProjectStateCopyWithImpl<$Res, _$SuccessStateImpl>
-    implements _$$SuccessStateImplCopyWith<$Res> {
-  __$$SuccessStateImplCopyWithImpl(
-      _$SuccessStateImpl _value, $Res Function(_$SuccessStateImpl) _then)
+class __$$ProjectStateSuccessImplCopyWithImpl<$Res>
+    extends _$ProjectStateCopyWithImpl<$Res, _$ProjectStateSuccessImpl>
+    implements _$$ProjectStateSuccessImplCopyWith<$Res> {
+  __$$ProjectStateSuccessImplCopyWithImpl(_$ProjectStateSuccessImpl _value,
+      $Res Function(_$ProjectStateSuccessImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ProjectState
@@ -214,101 +347,92 @@ class __$$SuccessStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? projectData = null,
-    Object? expandedIndex = freezed,
+    Object? projectList = null,
   }) {
-    return _then(_$SuccessStateImpl(
-      projectData: null == projectData
-          ? _value.projectData
-          : projectData // ignore: cast_nullable_to_non_nullable
-              as ProjectMasterModel,
-      expandedIndex: freezed == expandedIndex
-          ? _value.expandedIndex
-          : expandedIndex // ignore: cast_nullable_to_non_nullable
-              as int?,
+    return _then(_$ProjectStateSuccessImpl(
+      projectList: null == projectList
+          ? _value._projectList
+          : projectList // ignore: cast_nullable_to_non_nullable
+              as List<ProjectInfoModel>,
     ));
-  }
-
-  /// Create a copy of ProjectState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ProjectMasterModelCopyWith<$Res> get projectData {
-    return $ProjectMasterModelCopyWith<$Res>(_value.projectData, (value) {
-      return _then(_value.copyWith(projectData: value));
-    });
   }
 }
 
 /// @nodoc
 
-class _$SuccessStateImpl implements SuccessState {
-  const _$SuccessStateImpl(
-      {required this.projectData, required this.expandedIndex});
+class _$ProjectStateSuccessImpl implements ProjectStateSuccess {
+  const _$ProjectStateSuccessImpl(
+      {required final List<ProjectInfoModel> projectList})
+      : _projectList = projectList;
 
+  final List<ProjectInfoModel> _projectList;
   @override
-  final ProjectMasterModel projectData;
-  @override
-  final int? expandedIndex;
+  List<ProjectInfoModel> get projectList {
+    if (_projectList is EqualUnmodifiableListView) return _projectList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_projectList);
+  }
 
   @override
   String toString() {
-    return 'ProjectState.success(projectData: $projectData, expandedIndex: $expandedIndex)';
+    return 'ProjectState.success(projectList: $projectList)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SuccessStateImpl &&
-            (identical(other.projectData, projectData) ||
-                other.projectData == projectData) &&
-            (identical(other.expandedIndex, expandedIndex) ||
-                other.expandedIndex == expandedIndex));
+            other is _$ProjectStateSuccessImpl &&
+            const DeepCollectionEquality()
+                .equals(other._projectList, _projectList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, projectData, expandedIndex);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_projectList));
 
   /// Create a copy of ProjectState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SuccessStateImplCopyWith<_$SuccessStateImpl> get copyWith =>
-      __$$SuccessStateImplCopyWithImpl<_$SuccessStateImpl>(this, _$identity);
+  _$$ProjectStateSuccessImplCopyWith<_$ProjectStateSuccessImpl> get copyWith =>
+      __$$ProjectStateSuccessImplCopyWithImpl<_$ProjectStateSuccessImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(
-            ProjectMasterModel projectData, int? expandedIndex)
-        success,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ProjectInfoModel> projectList) success,
+    required TResult Function(String errorMessage) failure,
   }) {
-    return success(projectData, expandedIndex);
+    return success(projectList);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(ProjectMasterModel projectData, int? expandedIndex)?
-        success,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ProjectInfoModel> projectList)? success,
+    TResult? Function(String errorMessage)? failure,
   }) {
-    return success?.call(projectData, expandedIndex);
+    return success?.call(projectList);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(ProjectMasterModel projectData, int? expandedIndex)?
-        success,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ProjectInfoModel> projectList)? success,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(projectData, expandedIndex);
+      return success(projectList);
     }
     return orElse();
   }
@@ -316,8 +440,10 @@ class _$SuccessStateImpl implements SuccessState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InitState value) init,
-    required TResult Function(SuccessState value) success,
+    required TResult Function(ProjectStateInitial value) initial,
+    required TResult Function(ProjectStateLoading value) loading,
+    required TResult Function(ProjectStateSuccess value) success,
+    required TResult Function(ProjectStateError value) failure,
   }) {
     return success(this);
   }
@@ -325,8 +451,10 @@ class _$SuccessStateImpl implements SuccessState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(InitState value)? init,
-    TResult? Function(SuccessState value)? success,
+    TResult? Function(ProjectStateInitial value)? initial,
+    TResult? Function(ProjectStateLoading value)? loading,
+    TResult? Function(ProjectStateSuccess value)? success,
+    TResult? Function(ProjectStateError value)? failure,
   }) {
     return success?.call(this);
   }
@@ -334,8 +462,10 @@ class _$SuccessStateImpl implements SuccessState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitState value)? init,
-    TResult Function(SuccessState value)? success,
+    TResult Function(ProjectStateInitial value)? initial,
+    TResult Function(ProjectStateLoading value)? loading,
+    TResult Function(ProjectStateSuccess value)? success,
+    TResult Function(ProjectStateError value)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -345,17 +475,171 @@ class _$SuccessStateImpl implements SuccessState {
   }
 }
 
-abstract class SuccessState implements ProjectState {
-  const factory SuccessState(
-      {required final ProjectMasterModel projectData,
-      required final int? expandedIndex}) = _$SuccessStateImpl;
+abstract class ProjectStateSuccess implements ProjectState {
+  const factory ProjectStateSuccess(
+          {required final List<ProjectInfoModel> projectList}) =
+      _$ProjectStateSuccessImpl;
 
-  ProjectMasterModel get projectData;
-  int? get expandedIndex;
+  List<ProjectInfoModel> get projectList;
 
   /// Create a copy of ProjectState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SuccessStateImplCopyWith<_$SuccessStateImpl> get copyWith =>
+  _$$ProjectStateSuccessImplCopyWith<_$ProjectStateSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ProjectStateErrorImplCopyWith<$Res> {
+  factory _$$ProjectStateErrorImplCopyWith(_$ProjectStateErrorImpl value,
+          $Res Function(_$ProjectStateErrorImpl) then) =
+      __$$ProjectStateErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String errorMessage});
+}
+
+/// @nodoc
+class __$$ProjectStateErrorImplCopyWithImpl<$Res>
+    extends _$ProjectStateCopyWithImpl<$Res, _$ProjectStateErrorImpl>
+    implements _$$ProjectStateErrorImplCopyWith<$Res> {
+  __$$ProjectStateErrorImplCopyWithImpl(_$ProjectStateErrorImpl _value,
+      $Res Function(_$ProjectStateErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProjectState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorMessage = null,
+  }) {
+    return _then(_$ProjectStateErrorImpl(
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ProjectStateErrorImpl implements ProjectStateError {
+  const _$ProjectStateErrorImpl({required this.errorMessage});
+
+  @override
+  final String errorMessage;
+
+  @override
+  String toString() {
+    return 'ProjectState.failure(errorMessage: $errorMessage)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProjectStateErrorImpl &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorMessage);
+
+  /// Create a copy of ProjectState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProjectStateErrorImplCopyWith<_$ProjectStateErrorImpl> get copyWith =>
+      __$$ProjectStateErrorImplCopyWithImpl<_$ProjectStateErrorImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ProjectInfoModel> projectList) success,
+    required TResult Function(String errorMessage) failure,
+  }) {
+    return failure(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ProjectInfoModel> projectList)? success,
+    TResult? Function(String errorMessage)? failure,
+  }) {
+    return failure?.call(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ProjectInfoModel> projectList)? success,
+    TResult Function(String errorMessage)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(errorMessage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProjectStateInitial value) initial,
+    required TResult Function(ProjectStateLoading value) loading,
+    required TResult Function(ProjectStateSuccess value) success,
+    required TResult Function(ProjectStateError value) failure,
+  }) {
+    return failure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProjectStateInitial value)? initial,
+    TResult? Function(ProjectStateLoading value)? loading,
+    TResult? Function(ProjectStateSuccess value)? success,
+    TResult? Function(ProjectStateError value)? failure,
+  }) {
+    return failure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProjectStateInitial value)? initial,
+    TResult Function(ProjectStateLoading value)? loading,
+    TResult Function(ProjectStateSuccess value)? success,
+    TResult Function(ProjectStateError value)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProjectStateError implements ProjectState {
+  const factory ProjectStateError({required final String errorMessage}) =
+      _$ProjectStateErrorImpl;
+
+  String get errorMessage;
+
+  /// Create a copy of ProjectState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProjectStateErrorImplCopyWith<_$ProjectStateErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,44 +1,41 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:latexpert/domain/education_model/education_controllers.dart';
-import 'package:latexpert/domain/education_model/education_model.dart';
 import 'package:latexpert/domain/experience_model/experience_controller.dart';
 import 'package:latexpert/domain/experience_model/experience_model.dart';
 import 'package:latexpert/infra/bloc/experiences_bloc/experiences_state.dart';
-import 'package:latexpert/infra/services/education_service/education_service.dart';
 import 'package:latexpert/infra/services/experience_service/experience_service.dart';
 
 class ExperiencesBlocCubit extends Cubit<ExperienceState> {
     final ExperienceService experienceService = ExperienceService();
 
   ExperiencesBlocCubit() : super(const ExperienceState.initial()) {
-    addExperienceField(); // Initialize with a default education field
+    addExperienceField(); // Initialize with a default experience field
   }
 
-  // Add a new education field
+  // Add a new experience field
   void addExperienceField() {
     experienceService.addExperienceField();
     _emitSuccessState();
   }
 
-  // Delete an existing education field by index
+  // Delete an existing experience field by index
   void deleteExperienceField(int index) {
     experienceService.deleteExperienceField(index);
     _emitSuccessState();
   }
 
-  // Update the expansion state of an education field by index
+  // Update the expansion state of an experience field by index
   void updateExpansionState(int index, bool isExpanded) {
     experienceService.updateExpansionState(index, isExpanded);
     _emitSuccessState();
   }
 
-  // Register education details with API call
+  // Register experience details with API call
   Future<void> registerExperience(BuildContext context, List<ExperienceModel> experienceList) async {
     emit(const ExperienceState.loading()); // Emit loading state
 
     try {
-      await experienceService.registerExperience(experienceList); // Call the service to register education
+      await experienceService.registerExperience(experienceList); // Call the service to register experience
       emit(ExperienceState.success(experienceList: experienceList)); // Emit success state
     } catch (e) {
       emit(ExperienceState.failure(errorMessage: e.toString())); // Emit failure state
@@ -48,11 +45,11 @@ class ExperiencesBlocCubit extends Cubit<ExperienceState> {
     }
   }
 
-  // Helper method to emit success state with updated education list
+  // Helper method to emit success state with updated experience list
   void _emitSuccessState() {
-    // Convert controllers to EducationModel before emitting success state
-    final educationList = experienceService.convertControllersToExperienceModel();
-    emit(ExperienceState.success(experienceList: educationList));
+    // Convert controllers to experienceModel before emitting success state
+    final experienceList = experienceService.convertControllersToExperienceModel();
+    emit(ExperienceState.success(experienceList: experienceList));
   }
 
   // Clean up resources when cubit is closed

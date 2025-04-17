@@ -23,100 +23,26 @@ class ProjectInfo extends StatefulWidget {
   const ProjectInfo({super.key, this.showAppBar = true, this.onNext});
 
   @override
-  _ProjectInfoState createState() => _ProjectInfoState();
+  State<ProjectInfo> createState() => _ProjectInfoState();
 }
 
 class _ProjectInfoState extends State<ProjectInfo> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final String baseUrl = "${Strings.baseUrl}project_info";
-  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
-  final List<ProjectControllers> _allControllers = [
-    ProjectControllers(
-        project_title: TextEditingController(),
-        technologies: TextEditingController(),
-        link: TextEditingController(),
-        description: TextEditingController())
-  ];
-
-  void _addField() {
-    setState(() {
-      _allControllers.add(ProjectControllers(
-          project_title: TextEditingController(),
-          technologies: TextEditingController(),
-          link: TextEditingController(),
-          description: TextEditingController()));
-    });
-  }
-
-  Future<void> registerProjectInfo() async {
-    if (!formKey.currentState!.validate()) return;
-
-    final token = await getToken();
-    if (token == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Token not found. Please log in again.')),
-      );
-      return;
-    }
-
-    List<Map<String, dynamic>> projectList = _allControllers.map((controller) {
-      return {
-        "projectTitle": controller.project_title.text,
-        "technologiesUsed": controller.technologies.text,
-        "projectLink": controller.link.text,
-        "projectDescription": controller.description.text,
-      };
-    }).toList();
-
-    final Map<String, dynamic> projectData = {
-      "projectList": projectList,
-    };
-
-    try {
-      final response = await Dio().post(
-        baseUrl, // Replace with your actual endpoint
-        options: Options(headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        }),
-        data: projectData,
-      );
-
-      if (response.statusCode == 201) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Project details saved successfully.')),
-        );
-        widget.onNext?.call();
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to save project details: ${response.data}')),
-        );
-      }
-    } catch (e) {
-      print("Error: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
-      );
-    }
-  }
-
-  Future<String?> getToken() async {
-    // Implement your method to get the JWT token
-    return secureStorage.read(key: 'jwt_token'); // Replace with the actual token retrieval logic
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.showAppBar ? const CustomAppBar(title: Strings.projects,) : null,
+      appBar: widget.showAppBar ? const CustomAppBar(title: Strings.projects) : null,
       body: BlocProvider(
-        create: (context) => ProjectCubit(ProjectService()),
-        child: BlocBuilder<ProjectCubit, ProjectState>(
+        create: (context) => ProjectBlocCubit(),
+        child: BlocBuilder<ProjectBlocCubit, ProjectState>(
           builder: (context, state) {
-            final cubit = context.read<ProjectCubit>();
+            final cubit = context.read<ProjectBlocCubit>();
+            final controllersList = cubit.controllersList;
+            final expansionStates = cubit.expansionStates;
 
             return state.maybeWhen(
-              success: (projectData, expandedIndex) {
+              success: (projectList) {
                 return SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -127,12 +53,17 @@ class _ProjectInfoState extends State<ProjectInfo> {
                           ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemCount: _allControllers.length,
+                            itemCount: controllersList.length,
                             itemBuilder: (context, index) {
-                              final allcontroller = _allControllers[index];
+                              final controller = controllersList[index];
+                              final isExpanded = expansionStates[index];
 
                               return ExpansionTile(
                                 key: Key(index.toString()),
+                                initiallyExpanded: isExpanded,
+                                onExpansionChanged: (expanded) {
+                                  cubit.updateExpansionState(index, expanded);
+                                },
                                 title: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
@@ -142,39 +73,35 @@ class _ProjectInfoState extends State<ProjectInfo> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    if (projectData.projectMasterModel.length > 1)
+                                    if (controllersList.length > 1)
                                       IconButton(
-                                        onPressed: () => cubit.removeProjectFieldSet(index),
+                                        onPressed: () => cubit.deleteProjectField(index),
                                         icon: const Icon(Icons.delete, color: Colors.red),
                                       ),
                                   ],
                                 ),
-                                initiallyExpanded: expandedIndex == index,
-                                onExpansionChanged: (isExpanded) {
-                                  cubit.toggleExpansion(index, isExpanded);
-                                },
                                 children: [
                                   const CommonHeading(title: Strings.projectTitle),
                                   CommonTextformfield(
-                                    controller: allcontroller.project_title,
+                                    controller: controller.projectTitle,
                                     labelText: Strings.projectTitle,
                                     errorText: Strings.enterProjectTitle,
                                   ),
                                   const CommonHeading(title: Strings.technologiesUsed),
                                   CommonTextformfield(
-                                    controller: allcontroller.technologies,
+                                    controller: controller.technologies,
                                     labelText: 'Javascript, Firebase',
                                     errorText: Strings.enterTechnologies,
                                   ),
                                   const CommonHeading(title: Strings.projectLink),
                                   CommonTextformfield(
-                                    controller: allcontroller.link,
+                                    controller: controller.link,
                                     labelText: 'github.com/your-username/repo',
                                     errorText: Strings.enterLink,
                                   ),
                                   const CommonHeading(title: Strings.projectDescription),
                                   CommonLongLineTextField(
-                                    controller: allcontroller.description,
+                                    controller: controller.description,
                                     hintText: Strings.projectDescription,
                                     errorText: Strings.enterDescription,
                                   ),
@@ -184,7 +111,7 @@ class _ProjectInfoState extends State<ProjectInfo> {
                             },
                           ),
                           CommonAddFieldButton(
-                            onTap: _addField,
+                            onTap: cubit.addProjectField,
                             name: Strings.addProject,
                           ),
                           Row(
@@ -192,15 +119,28 @@ class _ProjectInfoState extends State<ProjectInfo> {
                             children: [
                               CommonSaveButton(
                                 formKey: formKey,
-                                onTap: registerProjectInfo,
+                                onTap: () {
+                                  if (formKey.currentState!.validate()) {
+                                    final projectList = context
+                                        .read<ProjectBlocCubit>()
+                                        .controllersList
+                                        .map((controllers) {
+                                      return controllers.toModel(); // clean conversion
+                                    }).toList();
+
+                                    context
+                                        .read<ProjectBlocCubit>()
+                                        .registerProject(context, projectList);
+                                  }
+                                },
                                 name: Strings.saveContinue,
                               ),
                               CommonResetButton(
                                 formKey: formKey,
                                 onTap: () {
                                   setState(() {
-                                    _allControllers.clear();
-                                    _addField();
+                                    cubit.controllersList.clear();
+                                    cubit.addProjectField();
                                   });
                                 },
                               ),
@@ -212,7 +152,8 @@ class _ProjectInfoState extends State<ProjectInfo> {
                   ),
                 );
               },
-              orElse: () => const Center(child: CircularProgressIndicator()),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              orElse: () => const SizedBox(),
             );
           },
         ),
