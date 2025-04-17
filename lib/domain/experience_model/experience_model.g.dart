@@ -26,8 +26,8 @@ _$ExperienceModelImpl _$$ExperienceModelImplFromJson(
       employer: json['employer'] as String,
       jobTitle: json['jobTitle'] as String,
       location: json['location'] as String,
-      startDate: DateTime.parse(json['startDate'] as String),
-      endDate: DateTime.parse(json['endDate'] as String),
+      startDate: json['startDate'] as String,
+      endDate: json['endDate'] as String,
       description: json['description'] as String,
     );
 
@@ -37,7 +37,7 @@ Map<String, dynamic> _$$ExperienceModelImplToJson(
       'employer': instance.employer,
       'jobTitle': instance.jobTitle,
       'location': instance.location,
-      'startDate': instance.startDate.toIso8601String(),
-      'endDate': instance.endDate.toIso8601String(),
+      'startDate': instance.startDate,
+      'endDate': instance.endDate,
       'description': instance.description,
     };

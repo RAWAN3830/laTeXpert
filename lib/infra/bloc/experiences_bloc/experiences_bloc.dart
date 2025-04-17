@@ -1,170 +1,74 @@
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:resume/domain/experience_model/experience_model.dart';
-// import 'package:resume/infra/bloc/experiences_bloc/experiences_state.dart';
-// import 'package:resume/infra/services/experience_service/experience_service.dart';
-// import 'package:flutter/material.dart';
-//
-//
-// class ExperienceCubit extends Cubit<ExperienceState> {
-//   final ExperienceService _experienceService = ExperienceService();
-//
-//   ExperienceCubit() : super(const ExperienceState.initial());
-//   List<Map<String, TextEditingController>> getControllersList() => _controllersList;
-//   List<bool> getExpansionStates() => _expansionStates;
-//
-//   List<Map<String, TextEditingController>> _controllersList = [];
-//   List<bool> _expansionStates = [];
-//
-//   void initialize() {
-//     _controllersList = [];
-//     _expansionStates = [];
-//
-//     emit(const ExperienceState.success(
-//       experienceMasterModel: ExperienceMasterModel(experiences: []),
-//     ));
-//   }
-//
-//   void addExperienceField() {
-//     _controllersList = _experienceService.addExperienceField(_controllersList);
-//     _expansionStates = _experienceService.addExpansionState(_expansionStates);
-//
-//     _updateState();
-//   }
-//
-//   void deleteExperienceField(int index) {
-//     _controllersList = _experienceService.deleteExperienceField(_controllersList, index);
-//     _expansionStates = _experienceService.deleteExpansionState(_expansionStates, index);
-//
-//     _updateState();
-//   }
-//
-//   Future<void> saveExperience() async {
-//     final experienceMasterModel = await _experienceService.saveExperience(_controllersList);
-//       emit(ExperienceState.success(experienceMasterModel: experienceMasterModel));
-//   }
-//
-//   void updateExpansionState(int index, bool isExpanded) {
-//     _expansionStates = _experienceService.updateExpansionState(_expansionStates, index, isExpanded);
-//     _updateState();
-//   }
-//
-//   void _updateState() {
-//     final experiences = _controllersList.map((controllers) {
-//       return ExperienceModel(
-//         employer: controllers['employer']!.text,
-//         jobTitle: controllers['jobTitle']!.text,
-//         location: controllers['location']!.text,
-//         startDate: controllers['startDate']!.text.isNotEmpty
-//             ? DateTime.tryParse(controllers['startDate']!.text) ?? DateTime.now()
-//             : DateTime.now(),
-//         endDate: controllers['endDate']!.text.isNotEmpty
-//             ? DateTime.tryParse(controllers['endDate']!.text) ?? DateTime.now()
-//             : DateTime.now(),
-//         description: controllers['description']!.text,
-//       );
-//     }).toList();
-//
-//     emit(ExperienceState.success(
-//       experienceMasterModel: ExperienceMasterModel(experiences: experiences),
-//     ));
-//   }
-//
-//
-//
-//   @override
-//   Future<void> close() {
-//     _experienceService.disposeControllers(_controllersList);
-//     return super.close();
-//   }
-// }
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:latexpert/domain/education_model/education_controllers.dart';
+import 'package:latexpert/domain/education_model/education_model.dart';
+import 'package:latexpert/domain/experience_model/experience_controller.dart';
 import 'package:latexpert/domain/experience_model/experience_model.dart';
 import 'package:latexpert/infra/bloc/experiences_bloc/experiences_state.dart';
+import 'package:latexpert/infra/services/education_service/education_service.dart';
 import 'package:latexpert/infra/services/experience_service/experience_service.dart';
-import 'package:flutter/material.dart';
-import 'package:latexpert/domain/experience_model/experience_controller.dart';
 
-class ExperienceCubit extends Cubit<ExperienceState> {
-  final ExperienceService _experienceService = ExperienceService();
+class ExperiencesBlocCubit extends Cubit<ExperienceState> {
+    final ExperienceService experienceService = ExperienceService();
 
-  ExperienceCubit() : super(const ExperienceState.initial());
-  List<ExperienceControllers> getControllersList() => _controllersList;
-  List<bool> getExpansionStates() => _expansionStates;
-
-  List<ExperienceControllers> _controllersList = [];
-  List<bool> _expansionStates = [];
-
-  void initialize() {
-    _controllersList = [];
-    _expansionStates = [];
-
-    emit(const ExperienceState.success(
-      experienceMasterModel: ExperienceMasterModel(experiences: []),
-    ));
+  ExperiencesBlocCubit() : super(const ExperienceState.initial()) {
+    addExperienceField(); // Initialize with a default education field
   }
 
+  // Add a new education field
   void addExperienceField() {
-    _controllersList.add(
-      ExperienceControllers(
-        employer: TextEditingController(),
-        jobTitle: TextEditingController(),
-        location: TextEditingController(),
-        startDate: TextEditingController(),
-        endDate: TextEditingController(),
-        description: TextEditingController(),
-      ),
-    );
-    _expansionStates.add(false);
-    _updateState();
+    experienceService.addExperienceField();
+    _emitSuccessState();
   }
 
+  // Delete an existing education field by index
   void deleteExperienceField(int index) {
-    _controllersList.removeAt(index);
-    _expansionStates.removeAt(index);
-    _updateState();
+    experienceService.deleteExperienceField(index);
+    _emitSuccessState();
   }
 
-  // Future<void> saveExperience() async {
-  //   final experienceMasterModel = await _experienceService.saveExperience(_controllersList);
-  //   emit(ExperienceState.success(experienceMasterModel: experienceMasterModel));
-  // }
-
+  // Update the expansion state of an education field by index
   void updateExpansionState(int index, bool isExpanded) {
-    _expansionStates[index] = isExpanded;
-    _updateState();
+    experienceService.updateExpansionState(index, isExpanded);
+    _emitSuccessState();
   }
 
-  void _updateState() {
-    final experiences = _controllersList.map((controllers) {
-      return ExperienceModel(
-        employer: controllers.employer.text,
-        jobTitle: controllers.jobTitle.text,
-        location: controllers.location.text,
-        startDate: controllers.startDate.text.isNotEmpty
-            ? DateTime.tryParse(controllers.startDate.text) ?? DateTime.now()
-            : DateTime.now(),
-        endDate: controllers.endDate.text.isNotEmpty
-            ? DateTime.tryParse(controllers.endDate.text) ?? DateTime.now()
-            : DateTime.now(),
-        description: controllers.description.text,
+  // Register education details with API call
+  Future<void> registerExperience(BuildContext context, List<ExperienceModel> experienceList) async {
+    emit(const ExperienceState.loading()); // Emit loading state
+
+    try {
+      await experienceService.registerExperience(experienceList); // Call the service to register education
+      emit(ExperienceState.success(experienceList: experienceList)); // Emit success state
+    } catch (e) {
+      emit(ExperienceState.failure(errorMessage: e.toString())); // Emit failure state
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
       );
-    }).toList();
-
-    emit(ExperienceState.success(
-      experienceMasterModel: ExperienceMasterModel(experiences: experiences),
-    ));
+    }
   }
 
+  // Helper method to emit success state with updated education list
+  void _emitSuccessState() {
+    // Convert controllers to EducationModel before emitting success state
+    final educationList = experienceService.convertControllersToExperienceModel();
+    emit(ExperienceState.success(experienceList: educationList));
+  }
+
+  // Clean up resources when cubit is closed
   @override
   Future<void> close() {
-    for (var controllers in _controllersList) {
-      controllers.employer.dispose();
-      controllers.jobTitle.dispose();
-      controllers.location.dispose();
-      controllers.startDate.dispose();
-      controllers.endDate.dispose();
-      controllers.description.dispose();
+    // Dispose of all controllers when the cubit is closed to avoid memory leaks
+    for (var controllers in experienceService.controllersList) {
+      for (var controller in controllers.getControllers()) {
+        controller.dispose();
+      }
     }
     return super.close();
   }
+
+  // Getters to access the controllers and expansion states
+  List<ExperienceController> get controllersList => experienceService.controllersList;
+
+  List<bool> get expansionStates => experienceService.expansionStates;
 }
