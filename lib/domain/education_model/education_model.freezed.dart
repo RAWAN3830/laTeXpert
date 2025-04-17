@@ -22,8 +22,12 @@ EducationMasterModel _$EducationMasterModelFromJson(Map<String, dynamic> json) {
 mixin _$EducationMasterModel {
   List<EducationModel> get education_info => throw _privateConstructorUsedError;
 
+  /// Serializes this EducationMasterModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EducationMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EducationMasterModelCopyWith<EducationMasterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$EducationMasterModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EducationMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +87,8 @@ class __$$EducationMasterModelImplCopyWithImpl<$Res>
       $Res Function(_$EducationMasterModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EducationMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,12 +135,14 @@ class _$EducationMasterModelImpl implements _EducationMasterModel {
                 .equals(other._education_info, _education_info));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_education_info));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EducationMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EducationMasterModelImplCopyWith<_$EducationMasterModelImpl>
@@ -158,8 +168,11 @@ abstract class _EducationMasterModel implements EducationMasterModel {
 
   @override
   List<EducationModel> get education_info;
+
+  /// Create a copy of EducationMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EducationMasterModelImplCopyWith<_$EducationMasterModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -177,8 +190,12 @@ mixin _$EducationModel {
   String get startDate => throw _privateConstructorUsedError; // Store as String
   String get endDate => throw _privateConstructorUsedError;
 
+  /// Serializes this EducationModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EducationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EducationModelCopyWith<EducationModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -208,6 +225,8 @@ class _$EducationModelCopyWithImpl<$Res, $Val extends EducationModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EducationModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -272,6 +291,8 @@ class __$$EducationModelImplCopyWithImpl<$Res>
       _$EducationModelImpl _value, $Res Function(_$EducationModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EducationModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -362,12 +383,14 @@ class _$EducationModelImpl implements _EducationModel {
             (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, institution, location,
       degreeType, fieldOfStudy, startDate, endDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EducationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EducationModelImplCopyWith<_$EducationModelImpl> get copyWith =>
@@ -403,11 +426,14 @@ abstract class _EducationModel implements EducationModel {
   @override
   String get fieldOfStudy;
   @override
-  String get startDate;
-  @override // Store as String
-  String get endDate;
+  String get startDate; // Store as String
   @override
-  @JsonKey(ignore: true)
+  String get endDate;
+
+  /// Create a copy of EducationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EducationModelImplCopyWith<_$EducationModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

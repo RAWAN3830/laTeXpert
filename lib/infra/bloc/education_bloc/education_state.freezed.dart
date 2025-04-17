@@ -84,6 +84,9 @@ class _$EducationStateCopyWithImpl<$Res, $Val extends EducationState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of EducationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -101,6 +104,9 @@ class __$$EducationStateInitialImplCopyWithImpl<$Res>
   __$$EducationStateInitialImplCopyWithImpl(_$EducationStateInitialImpl _value,
       $Res Function(_$EducationStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EducationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -218,6 +224,9 @@ class __$$EducationStateInProgressImplCopyWithImpl<$Res>
       _$EducationStateInProgressImpl _value,
       $Res Function(_$EducationStateInProgressImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EducationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -337,6 +346,8 @@ class __$$EducationStateSuccessImplCopyWithImpl<$Res>
       $Res Function(_$EducationStateSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EducationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -384,7 +395,9 @@ class _$EducationStateSuccessImpl implements _EducationStateSuccess {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_educationList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EducationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EducationStateSuccessImplCopyWith<_$EducationStateSuccessImpl>
@@ -472,7 +485,10 @@ abstract class _EducationStateSuccess implements EducationState {
       _$EducationStateSuccessImpl;
 
   List<EducationModel> get educationList;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EducationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EducationStateSuccessImplCopyWith<_$EducationStateSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -495,6 +511,8 @@ class __$$EducationStateFailureImplCopyWithImpl<$Res>
       $Res Function(_$EducationStateFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EducationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -534,7 +552,9 @@ class _$EducationStateFailureImpl implements _EducationStateFailure {
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EducationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EducationStateFailureImplCopyWith<_$EducationStateFailureImpl>
@@ -621,7 +641,10 @@ abstract class _EducationStateFailure implements EducationState {
       _$EducationStateFailureImpl;
 
   String? get errorMessage;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EducationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EducationStateFailureImplCopyWith<_$EducationStateFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

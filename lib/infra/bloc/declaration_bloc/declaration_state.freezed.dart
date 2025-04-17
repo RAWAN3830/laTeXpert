@@ -87,6 +87,9 @@ class _$DeclarationStateCopyWithImpl<$Res, $Val extends DeclarationState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of DeclarationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -105,6 +108,9 @@ class __$$DeclarationStateInitialImplCopyWithImpl<$Res>
       _$DeclarationStateInitialImpl _value,
       $Res Function(_$DeclarationStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DeclarationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -225,6 +231,9 @@ class __$$DeclarationStateLoadingImplCopyWithImpl<$Res>
       _$DeclarationStateLoadingImpl _value,
       $Res Function(_$DeclarationStateLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DeclarationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -348,6 +357,8 @@ class __$$DeclarationStateSuccessImplCopyWithImpl<$Res>
       $Res Function(_$DeclarationStateSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeclarationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -396,7 +407,9 @@ class _$DeclarationStateSuccessImpl implements _DeclarationStateSuccess {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_honorAwardControllers));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeclarationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeclarationStateSuccessImplCopyWith<_$DeclarationStateSuccessImpl>
@@ -487,7 +500,10 @@ abstract class _DeclarationStateSuccess implements DeclarationState {
       _$DeclarationStateSuccessImpl;
 
   List<TextEditingController> get honorAwardControllers;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeclarationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeclarationStateSuccessImplCopyWith<_$DeclarationStateSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -511,6 +527,8 @@ class __$$DeclarationStateFailureImplCopyWithImpl<$Res>
       $Res Function(_$DeclarationStateFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeclarationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -550,7 +568,9 @@ class _$DeclarationStateFailureImpl implements _DeclarationStateFailure {
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeclarationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeclarationStateFailureImplCopyWith<_$DeclarationStateFailureImpl>
@@ -640,7 +660,10 @@ abstract class _DeclarationStateFailure implements DeclarationState {
       _$DeclarationStateFailureImpl;
 
   String? get errorMessage;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeclarationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeclarationStateFailureImplCopyWith<_$DeclarationStateFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

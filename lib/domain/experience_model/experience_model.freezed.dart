@@ -23,8 +23,12 @@ ExperienceMasterModel _$ExperienceMasterModelFromJson(
 mixin _$ExperienceMasterModel {
   List<ExperienceModel> get experiences => throw _privateConstructorUsedError;
 
+  /// Serializes this ExperienceMasterModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ExperienceMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ExperienceMasterModelCopyWith<ExperienceMasterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$ExperienceMasterModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ExperienceMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -84,6 +90,8 @@ class __$$ExperienceMasterModelImplCopyWithImpl<$Res>
       $Res Function(_$ExperienceMasterModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ExperienceMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,12 +138,14 @@ class _$ExperienceMasterModelImpl implements _ExperienceMasterModel {
                 .equals(other._experiences, _experiences));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_experiences));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ExperienceMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ExperienceMasterModelImplCopyWith<_$ExperienceMasterModelImpl>
@@ -160,8 +170,11 @@ abstract class _ExperienceMasterModel implements ExperienceMasterModel {
 
   @override
   List<ExperienceModel> get experiences;
+
+  /// Create a copy of ExperienceMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ExperienceMasterModelImplCopyWith<_$ExperienceMasterModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -179,8 +192,12 @@ mixin _$ExperienceModel {
   DateTime get endDate => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
+  /// Serializes this ExperienceModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ExperienceModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ExperienceModelCopyWith<ExperienceModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -210,6 +227,8 @@ class _$ExperienceModelCopyWithImpl<$Res, $Val extends ExperienceModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ExperienceModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -274,6 +293,8 @@ class __$$ExperienceModelImplCopyWithImpl<$Res>
       _$ExperienceModelImpl _value, $Res Function(_$ExperienceModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ExperienceModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -363,12 +384,14 @@ class _$ExperienceModelImpl implements _ExperienceModel {
                 other.description == description));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, employer, jobTitle, location,
       startDate, endDate, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ExperienceModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ExperienceModelImplCopyWith<_$ExperienceModelImpl> get copyWith =>
@@ -407,8 +430,11 @@ abstract class _ExperienceModel implements ExperienceModel {
   DateTime get endDate;
   @override
   String get description;
+
+  /// Create a copy of ExperienceModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ExperienceModelImplCopyWith<_$ExperienceModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

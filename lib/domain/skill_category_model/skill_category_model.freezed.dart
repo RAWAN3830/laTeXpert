@@ -24,8 +24,12 @@ mixin _$SkillCategoryMasterModel {
   List<SkillCategoryModel> get skillCategories =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this SkillCategoryMasterModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SkillCategoryMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SkillCategoryMasterModelCopyWith<SkillCategoryMasterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$SkillCategoryMasterModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SkillCategoryMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$SkillCategoryMasterModelImplCopyWithImpl<$Res>
       $Res Function(_$SkillCategoryMasterModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SkillCategoryMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,12 +140,14 @@ class _$SkillCategoryMasterModelImpl implements _SkillCategoryMasterModel {
                 .equals(other._skillCategories, _skillCategories));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_skillCategories));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SkillCategoryMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SkillCategoryMasterModelImplCopyWith<_$SkillCategoryMasterModelImpl>
@@ -162,8 +172,11 @@ abstract class _SkillCategoryMasterModel implements SkillCategoryMasterModel {
 
   @override
   List<SkillCategoryModel> get skillCategories;
+
+  /// Create a copy of SkillCategoryMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SkillCategoryMasterModelImplCopyWith<_$SkillCategoryMasterModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -177,8 +190,12 @@ mixin _$SkillCategoryModel {
   String get name => throw _privateConstructorUsedError;
   List<String> get skills => throw _privateConstructorUsedError;
 
+  /// Serializes this SkillCategoryModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SkillCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SkillCategoryModelCopyWith<SkillCategoryModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -202,6 +219,8 @@ class _$SkillCategoryModelCopyWithImpl<$Res, $Val extends SkillCategoryModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SkillCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -240,6 +259,8 @@ class __$$SkillCategoryModelImplCopyWithImpl<$Res>
       $Res Function(_$SkillCategoryModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SkillCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -293,12 +314,14 @@ class _$SkillCategoryModelImpl implements _SkillCategoryModel {
             const DeepCollectionEquality().equals(other._skills, _skills));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, name, const DeepCollectionEquality().hash(_skills));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SkillCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SkillCategoryModelImplCopyWith<_$SkillCategoryModelImpl> get copyWith =>
@@ -325,8 +348,11 @@ abstract class _SkillCategoryModel implements SkillCategoryModel {
   String get name;
   @override
   List<String> get skills;
+
+  /// Create a copy of SkillCategoryModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SkillCategoryModelImplCopyWith<_$SkillCategoryModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

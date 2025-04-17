@@ -29,8 +29,12 @@ mixin _$FinalResumeModelClass {
   ProjectMasterModel get projects => throw _privateConstructorUsedError;
   SkillCategoryMasterModel get skills => throw _privateConstructorUsedError;
 
+  /// Serializes this FinalResumeModelClass to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FinalResumeModelClassCopyWith<FinalResumeModelClass> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -70,6 +74,8 @@ class _$FinalResumeModelClassCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,6 +119,8 @@ class _$FinalResumeModelClassCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AchievementMasterModelCopyWith<$Res> get achievements {
@@ -121,6 +129,8 @@ class _$FinalResumeModelClassCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DeclarationMasterModelCopyWith<$Res> get declarations {
@@ -129,6 +139,8 @@ class _$FinalResumeModelClassCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $EducationMasterModelCopyWith<$Res> get education {
@@ -137,6 +149,8 @@ class _$FinalResumeModelClassCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ExperienceMasterModelCopyWith<$Res> get experience {
@@ -145,6 +159,8 @@ class _$FinalResumeModelClassCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PersonalInfoModelCopyWith<$Res> get personalInfo {
@@ -153,6 +169,8 @@ class _$FinalResumeModelClassCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProjectMasterModelCopyWith<$Res> get projects {
@@ -161,6 +179,8 @@ class _$FinalResumeModelClassCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SkillCategoryMasterModelCopyWith<$Res> get skills {
@@ -213,6 +233,8 @@ class __$$FinalResumeModelClassImplCopyWithImpl<$Res>
       $Res Function(_$FinalResumeModelClassImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -312,12 +334,14 @@ class _$FinalResumeModelClassImpl implements _FinalResumeModelClass {
             (identical(other.skills, skills) || other.skills == skills));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, achievements, declarations,
       education, experience, personalInfo, projects, skills);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FinalResumeModelClassImplCopyWith<_$FinalResumeModelClassImpl>
@@ -360,8 +384,11 @@ abstract class _FinalResumeModelClass implements FinalResumeModelClass {
   ProjectMasterModel get projects;
   @override
   SkillCategoryMasterModel get skills;
+
+  /// Create a copy of FinalResumeModelClass
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FinalResumeModelClassImplCopyWith<_$FinalResumeModelClassImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

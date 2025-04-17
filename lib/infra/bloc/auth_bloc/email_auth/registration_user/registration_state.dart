@@ -1,16 +1,11 @@
-// registration_state.dart
-abstract class RegistrationState {}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class RegistrationInitial extends RegistrationState {}
+part 'registration_state.freezed.dart';
 
-class RegistrationLoading extends RegistrationState {}
-
-class RegistrationSuccess extends RegistrationState {
-  final String message;
-  RegistrationSuccess(this.message);
-}
-
-class RegistrationFailure extends RegistrationState {
-  final String error;
-  RegistrationFailure(this.error);
+@freezed
+class RegistrationState with _$RegistrationState {
+  const factory RegistrationState.initial() = RegistrationInitial;
+  const factory RegistrationState.loading() = RegistrationLoading;
+  const factory RegistrationState.success(String message) = RegistrationSuccess;
+  const factory RegistrationState.failure(String error) = RegistrationFailure;
 }

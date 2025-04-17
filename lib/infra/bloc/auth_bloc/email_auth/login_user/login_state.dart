@@ -1,15 +1,11 @@
-abstract class LoginState {}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LoginInitial extends LoginState {}
+part 'login_state.freezed.dart';
 
-class LoginLoading extends LoginState {}
-
-class LoginSuccess extends LoginState {
-  final String token;
-  LoginSuccess(this.token);
-}
-
-class LoginFailure extends LoginState {
-  final String error;
-  LoginFailure(this.error);
+@freezed
+class LoginState with _$LoginState {
+  const factory LoginState.initial() = LoginInitial;
+  const factory LoginState.loading() = LoginLoading;
+  const factory LoginState.success(String token) = LoginSuccess;
+  const factory LoginState.failure(String error) = LoginFailure;
 }

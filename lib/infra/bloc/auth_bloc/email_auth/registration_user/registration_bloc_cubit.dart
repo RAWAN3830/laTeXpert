@@ -1,12 +1,11 @@
-// registration_bloc_cubit.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latexpert/infra/bloc/auth_bloc/email_auth/registration_user/registration_state.dart';
 import '../../../../services/auth_service/registration_service.dart';
 
-class RegistrationCubit extends Cubit<RegistrationState> {
+class RegistrationBlocCubit extends Cubit<RegistrationState> {
   final RegistrationService registrationService = RegistrationService();
 
-  RegistrationCubit() : super(RegistrationInitial());
+  RegistrationBlocCubit() : super(const RegistrationState.initial());
 
   Future<void> registerUser({
     required String name,
@@ -15,11 +14,11 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     required String phone,
   }) async {
     if ([name, email, password, phone].any((e) => e.isEmpty)) {
-      emit(RegistrationFailure('All fields are required'));
+      emit(const RegistrationState.failure('All fields are required'));
       return;
     }
 
-    emit(RegistrationLoading());
+    emit(const RegistrationState.loading());
 
     try {
       final message = await registrationService.registerUser(
@@ -28,9 +27,9 @@ class RegistrationCubit extends Cubit<RegistrationState> {
         password: password,
         phone: phone,
       );
-      emit(RegistrationSuccess(message));
+      emit(RegistrationState.success(message));
     } catch (e) {
-      emit(RegistrationFailure(e.toString()));
+      emit(RegistrationState.failure(e.toString()));
     }
   }
 }

@@ -18,7 +18,6 @@ import 'package:latexpert/presentation/auth_screen/registration_screen.dart';
 import 'package:latexpert/presentation/flutter_resume_screen/dynamic_resume_form.dart';
 import 'package:latexpert/presentation/home_screen/home_screen.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
 import 'infra/bloc/auth_bloc/email_auth/login_user/login_bloc_cubit.dart';
 import 'infra/bloc/auth_bloc/email_auth/registration_user/registration_bloc_cubit.dart';
 
@@ -35,10 +34,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => RegistrationCubit(),
+          create: (context) => RegistrationBlocCubit(),
         ),
         BlocProvider(
-          create: (context) => LoginCubit(),
+          create: (context) => LoginBlocCubit(),
         ),
         BlocProvider(
           create: (context) => AuthBloc(),
@@ -76,9 +75,9 @@ class MyApp extends StatelessWidget {
             );
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: AppTheme.getTheme(breakpoint, isDark: isDark),
-              home: const LoginScreen(),
-              //home: const HomeScreen(),
+                 theme: AppTheme.getTheme(breakpoint, isDark: isDark),
+                 home: const LoginScreen(),
+                //home: const HomeScreen(),
               // home:  const DynamicResumeForm(),
             );
           },

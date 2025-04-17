@@ -348,6 +348,7 @@ import 'package:latexpert/presentation/common_widgets/common_text/common_heading
 import 'package:latexpert/presentation/common_widgets/common_textfields/comman_textformfield.dart';
 import 'package:latexpert/presentation/common_widgets/common_textfields/common_longlinetextfield.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 String? firstname;
 String? lastname;
 String? email;
@@ -375,11 +376,8 @@ TextEditingController addressController = TextEditingController();
 final formKey = GlobalKey<FormState>();
 // const String baseUrl = "http://192.168.113.67:8000/api/personal-info";
 // const String baseUrl = "http://192.168.113.67:8000/api/auth/add_personal_info";
-const String baseUrl = "${Strings.baseUrl}personal_info";
-
 
 class _PersonalInfoState extends State<PersonalInfo> {
-
   @override
   void initState() {
     super.initState();
@@ -410,8 +408,8 @@ class _PersonalInfoState extends State<PersonalInfo> {
       child: Scaffold(
         appBar: widget.showAppBar
             ? const CustomAppBar(
-          title: Strings.contactInfo,
-        )
+                title: Strings.contactInfo,
+              )
             : null,
         body: SingleChildScrollView(
           child: Column(
@@ -480,26 +478,32 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       const CommonHeading(title: Strings.links),
                       BlocBuilder<PersonalInfoBlocCubit, PersonalInfoState>(
                         builder: (context, state) {
-                          if (state is PersonalInfoUpdated) {
-                            final links = state.linkFields;
-
-                            return ListView.builder(
+                          return state.maybeWhen(
+                            updated: (links) => ListView.builder(
                               shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: links.length,
                               itemBuilder: (context, index) {
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text('Link ${index + 1}',
-                                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                                fontWeight: FontWeight.bold)),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                    fontWeight:
+                                                        FontWeight.bold)),
                                         IconButton(
-                                          icon: Icon(Icons.delete, color: Colors.red),
-                                          onPressed: () =>   context.read<PersonalInfoBlocCubit>().removeLinkField(index),
+                                          icon: const Icon(Icons.delete,
+                                              color: Colors.red),
+                                          onPressed: () => context
+                                              .read<PersonalInfoBlocCubit>()
+                                              .removeLinkField(index),
                                         ),
                                       ],
                                     ),
@@ -508,15 +512,19 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                         Expanded(
                                           child: CommonTextformfield(
                                             labelText: Strings.link,
-                                            controller: links[index].linkController,
+                                            controller:
+                                                links[index].linkController,
                                             errorText: Strings.enterValidLink,
                                           ),
                                         ),
-                                        SizedBox(width: context.width(context) * 0.03),
+                                        SizedBox(
+                                            width:
+                                                context.width(context) * 0.03),
                                         Expanded(
                                           child: CommonTextformfield(
                                             labelText: Strings.linkName,
-                                            controller: links[index].nameController,
+                                            controller:
+                                                links[index].nameController,
                                             errorText: Strings.enterValidName,
                                           ),
                                         ),
@@ -525,37 +533,44 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                   ],
                                 );
                               },
-                            );
-                          }
-
-                          return SizedBox(); // fallback UI
+                            ),
+                            orElse: () => const SizedBox(),
+                          );
                         },
                       ),
                       SizedBox(
                         height: height,
                       ),
                       CommonAddFieldButton(
-                        onTap:  (){ context.read<PersonalInfoBlocCubit>().addLinkField();},
+                        onTap: () {
+                          context.read<PersonalInfoBlocCubit>().addLinkField();
+                        },
                         name: Strings.addField,
                       ),
                       SizedBox(height: height),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          BlocConsumer<PersonalInfoBlocCubit, PersonalInfoState>(
+                          BlocConsumer<PersonalInfoBlocCubit,
+                              PersonalInfoState>(
                             listener: (context, state) {
-                              if (state is PersonalInfoSuccess) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(state.message)),
-                                );
-                              } else if (state is PersonalInfoFailure) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(state.error)),
-                                );
-                              }
+                              state.maybeWhen(
+                                success: (message) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(message)),
+                                  );
+                                },
+                                failure: (error) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(error)),
+                                  );
+                                },
+                                orElse: () {},
+                              );
                             },
                             builder: (context, state) {
-                              final cubit = context.read<PersonalInfoBlocCubit>();
+                              final cubit =
+                                  context.read<PersonalInfoBlocCubit>();
 
                               return CommonSaveButton(
                                 formKey: formKey,
@@ -568,10 +583,14 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                       phone: phoneController.text,
                                       jobTitle: jobTitleController.text,
                                       address: addressController.text,
-                                      links: cubit.linkFields.map((field) => {
-                                        'name': field.nameController.text,
-                                        'link': field.linkController.text,
-                                      }).toList(),
+                                      links: cubit.linkFields
+                                          .map((field) => {
+                                                'name':
+                                                    field.nameController.text,
+                                                'link':
+                                                    field.linkController.text,
+                                              })
+                                          .toList(),
                                     );
                                   }
                                 },

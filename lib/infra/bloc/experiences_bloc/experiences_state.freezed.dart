@@ -73,6 +73,9 @@ class _$ExperienceStateCopyWithImpl<$Res, $Val extends ExperienceState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ExperienceState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -91,6 +94,9 @@ class __$$ExperienceStateInitialImplCopyWithImpl<$Res>
       _$ExperienceStateInitialImpl _value,
       $Res Function(_$ExperienceStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ExperienceState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -202,6 +208,8 @@ class __$$ExperienceStateSuccessImplCopyWithImpl<$Res>
       $Res Function(_$ExperienceStateSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ExperienceState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -215,6 +223,8 @@ class __$$ExperienceStateSuccessImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of ExperienceState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ExperienceMasterModelCopyWith<$Res> get experienceMasterModel {
@@ -250,7 +260,9 @@ class _$ExperienceStateSuccessImpl implements ExperienceStateSuccess {
   @override
   int get hashCode => Object.hash(runtimeType, experienceMasterModel);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ExperienceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ExperienceStateSuccessImplCopyWith<_$ExperienceStateSuccessImpl>
@@ -327,7 +339,10 @@ abstract class ExperienceStateSuccess implements ExperienceState {
       _$ExperienceStateSuccessImpl;
 
   ExperienceMasterModel get experienceMasterModel;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ExperienceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ExperienceStateSuccessImplCopyWith<_$ExperienceStateSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

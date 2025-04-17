@@ -1,37 +1,36 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../services/auth_service/login_service.dart';
+import 'package:latexpert/infra/services/auth_service/login_service.dart';
 import 'login_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
+class LoginBlocCubit extends Cubit<LoginState> {
   final LoginService loginService = LoginService();
 
-  LoginCubit() : super(LoginInitial());
-
+  LoginBlocCubit() : super(const LoginState.initial());
 
   Future<void> loginUser({
     required String email,
     required String password,
   }) async {
     if (email.isEmpty || password.isEmpty) {
-      emit(LoginFailure("All fields are required"));
+      emit(const LoginState.failure("All fields are required"));
       return;
     }
 
-    emit(LoginLoading());
+    emit(const LoginState.loading());
 
     try {
       final token = await loginService.loginUser(
         email: email,
         password: password,
       );
-      emit(LoginSuccess(token));
+      emit(LoginState.success(token));
     } catch (e) {
-      emit(LoginFailure(e.toString()));
+      emit(LoginState.failure(e.toString()));
     }
   }
 
   Future<void> logout() async {
     await loginService.logout();
-    emit(LoginInitial());
+    emit(const LoginState.initial());
   }
 }

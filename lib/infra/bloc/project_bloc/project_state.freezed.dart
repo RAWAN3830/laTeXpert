@@ -76,6 +76,9 @@ class _$ProjectStateCopyWithImpl<$Res, $Val extends ProjectState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ProjectState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -92,6 +95,9 @@ class __$$InitStateImplCopyWithImpl<$Res>
   __$$InitStateImplCopyWithImpl(
       _$InitStateImpl _value, $Res Function(_$InitStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ProjectState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -203,6 +209,8 @@ class __$$SuccessStateImplCopyWithImpl<$Res>
       _$SuccessStateImpl _value, $Res Function(_$SuccessStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProjectState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -221,6 +229,8 @@ class __$$SuccessStateImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of ProjectState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProjectMasterModelCopyWith<$Res> get projectData {
@@ -260,7 +270,9 @@ class _$SuccessStateImpl implements SuccessState {
   @override
   int get hashCode => Object.hash(runtimeType, projectData, expandedIndex);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProjectState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SuccessStateImplCopyWith<_$SuccessStateImpl> get copyWith =>
@@ -340,7 +352,10 @@ abstract class SuccessState implements ProjectState {
 
   ProjectMasterModel get projectData;
   int? get expandedIndex;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProjectState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessStateImplCopyWith<_$SuccessStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

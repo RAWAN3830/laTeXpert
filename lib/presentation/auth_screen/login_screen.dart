@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:dio/dio.dart';
 import 'package:latexpert/core/constant/assets_svg_image.dart';
 import 'package:latexpert/core/constant/extension.dart';
 import 'package:latexpert/core/constant/strings.dart';
@@ -41,18 +39,19 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Padding(
             padding: EdgeInsets.all(context.height(context) * 0.02)
                 .copyWith(top: context.height(context) * 0.085),
-            child: BlocConsumer<LoginCubit, LoginState>(
+            child: BlocConsumer<LoginBlocCubit, LoginState>(
               builder: (context, state) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (state is LoginLoading)
-                      const Center(child: CircularProgressIndicator()),
-                    if (state is LoginFailure)
-                      Text(
-                        "${Strings.errorPrefix} ${state.error}",
+                    state.maybeMap(
+                      orElse: () => SizedBox.shrink(),
+                      loading: (_) => const Center(child: CircularProgressIndicator()),
+                      failure: (failure) => Text(
+                        "${Strings.errorPrefix} ${failure.error}",
                         style: const TextStyle(color: Colors.red),
                       ),
+                    ),
                     SizedBox(height: varHeight),
                     Center(
                       child: Padding(
@@ -125,8 +124,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: () {
                           if (formKey.currentState?.validate() ?? false) {
                             final email = emailController.text.trim();
-                            final password = passwordController.text.trim();                            // Trigger login using Cubit
-                            context.read<LoginCubit>().loginUser(
+                            final password = passwordController.text.trim();
+                            // Trigger login using Cubit
+                            context.read<LoginBlocCubit>().loginUser(
                               email: email,
                               password: password,
                             );
@@ -134,33 +134,44 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         name: Strings.loginButton,
                       ),
-
                     ),
                     SizedBox(height: varHeight),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(Strings.noAccountPrompt, style: Theme.of(context).textTheme.bodyLarge),
-                        GestureDetector(onTap:(){
-                          context.push(context, target: const RegistrationScreen());
-                        },child: Text(Strings.registerHere, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500,color: ThemeColors.mainGreenColor),))
+                        GestureDetector(
+                          onTap: () {
+                            context.push(context, target: const RegistrationScreen());
+                          },
+                          child: Text(
+                            Strings.registerHere,
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: ThemeColors.mainGreenColor,
+                            ),
+                          ),
+                        )
                       ],
-                    )
+                    ),
                   ],
                 );
               },
               listener: (context, state) {
-                if (state is LoginSuccess) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text(Strings.successMessage)),
-                  );
-                  context.pushAndRemoveUntil(context,
-                      target: const HomeScreen());
-                } else if (state is LoginFailure) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${Strings.errorPrefix} ${state.error}')),
-                  );
-                }
+                state.maybeWhen(
+                  orElse: () {},
+                  success: (_) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text(Strings.successMessage)),
+                    );
+                    context.pushAndRemoveUntil(context, target: const HomeScreen());
+                  },
+                  failure: (failure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('${Strings.errorPrefix} $failure')),
+                    );
+                  },
+                );
               },
             ),
           ),
@@ -169,4 +180,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
