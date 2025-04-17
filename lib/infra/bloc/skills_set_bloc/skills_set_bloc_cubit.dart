@@ -9,9 +9,7 @@ class SkillsSetBlocCubit extends Cubit<SkillsSetState> {
 
   SkillsSetBlocCubit({SkillsService? skillsService})
       : _skillsService = skillsService ?? SkillsService(),
-        super(const SkillsSetState.initial()) {
-    // Note: We'll need context to be passed in methods instead of here
-  }
+        super(const SkillsSetState.initial());
 
   Future<void> loadSkills(BuildContext context) async {
     emit(const SkillsSetState.loading());
@@ -19,21 +17,21 @@ class SkillsSetBlocCubit extends Cubit<SkillsSetState> {
       final data = await _skillsService.fetchSkills(context);
       final categories = (data['categories'] as Map<String, dynamic>)
           .map((key, value) => MapEntry(key, List<String>.from(value)));
-      final selectedCategories = data['selectedCategories'] as String;
+      final selectedCategory = data['selectedCategory'] as String;
       emit(SkillsSetState.success(
         categories: categories,
-        selectedCategories: selectedCategories,
+        selectedCategories: selectedCategory,
       ));
     } catch (e) {
       emit(SkillsSetState.failure(errorMessage: e.toString()));
     }
   }
 
-  void addSkill(BuildContext context, String category, String skill) async {
-    state.when(
-      success: (categories, selectedCategories) async {
+  void addSkill(String category, String skill,BuildContext context) async {
+    state.maybeWhen(
+      success: (categories, selectedCategory) async {
         try {
-          await _skillsService.addSkill(context, category, skill);
+          await _skillsService.addSkill(context,category, skill);
           final updatedCategories = Map<String, List<String>>.from(categories);
           if (updatedCategories[category] != null) {
             updatedCategories[category] = [...updatedCategories[category]!, skill];
@@ -42,46 +40,42 @@ class SkillsSetBlocCubit extends Cubit<SkillsSetState> {
           }
           emit(SkillsSetState.success(
             categories: updatedCategories,
-            selectedCategories: selectedCategories,
+            selectedCategories: selectedCategory,
           ));
         } catch (e) {
           emit(SkillsSetState.failure(errorMessage: e.toString()));
         }
       },
-      initial: () {},
-      loading: () {},
-      failure: (_) {},
+      orElse: () {},
     );
   }
 
-  void removeSkill(BuildContext context, String category, String skill) async {
-    state.when(
-      success: (categories, selectedCategories) async {
+  void removeSkill(String category, String skill,BuildContext context) async {
+    state.maybeWhen(
+      success: (categories, selectedCategory) async {
         try {
-          await _skillsService.removeSkill(context, category, skill);
+          await _skillsService.removeSkill(context,category, skill);
           final updatedCategories = Map<String, List<String>>.from(categories);
           updatedCategories[category] = updatedCategories[category]!
               .where((s) => s != skill)
               .toList();
           emit(SkillsSetState.success(
             categories: updatedCategories,
-            selectedCategories: selectedCategories,
+            selectedCategories: selectedCategory,
           ));
         } catch (e) {
           emit(SkillsSetState.failure(errorMessage: e.toString()));
         }
       },
-      initial: () {},
-      loading: () {},
-      failure: (_) {},
+      orElse: () {},
     );
   }
 
-  void updateSelectedCategory(BuildContext context, String category) async {
-    state.when(
+  void updateSelectedCategory(BuildContext context,String category) async {
+    state.maybeWhen(
       success: (categories, _) async {
         try {
-          await _skillsService.updateSelectedCategory(context, category);
+          await _skillsService.updateSelectedCategory(context,category);
           emit(SkillsSetState.success(
             categories: categories,
             selectedCategories: category,
@@ -90,9 +84,7 @@ class SkillsSetBlocCubit extends Cubit<SkillsSetState> {
           emit(SkillsSetState.failure(errorMessage: e.toString()));
         }
       },
-      initial: () {},
-      loading: () {},
-      failure: (_) {},
+      orElse: () {},
     );
   }
 }

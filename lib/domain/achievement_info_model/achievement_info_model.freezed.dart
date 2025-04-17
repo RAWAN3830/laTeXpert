@@ -24,8 +24,12 @@ mixin _$AchievementMasterModel {
   List<AchievementInfoModel> get achievements =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this AchievementMasterModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AchievementMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AchievementMasterModelCopyWith<AchievementMasterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$AchievementMasterModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AchievementMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$AchievementMasterModelImplCopyWithImpl<$Res>
       $Res Function(_$AchievementMasterModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AchievementMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,12 +140,14 @@ class _$AchievementMasterModelImpl implements _AchievementMasterModel {
                 .equals(other._achievements, _achievements));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_achievements));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AchievementMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AchievementMasterModelImplCopyWith<_$AchievementMasterModelImpl>
@@ -162,8 +172,11 @@ abstract class _AchievementMasterModel implements AchievementMasterModel {
 
   @override
   List<AchievementInfoModel> get achievements;
+
+  /// Create a copy of AchievementMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AchievementMasterModelImplCopyWith<_$AchievementMasterModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -178,8 +191,12 @@ mixin _$AchievementInfoModel {
   String get link => throw _privateConstructorUsedError;
   String get issuer => throw _privateConstructorUsedError;
 
+  /// Serializes this AchievementInfoModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AchievementInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AchievementInfoModelCopyWith<AchievementInfoModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -204,6 +221,8 @@ class _$AchievementInfoModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AchievementInfoModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -247,6 +266,8 @@ class __$$AchievementInfoModelImplCopyWithImpl<$Res>
       $Res Function(_$AchievementInfoModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AchievementInfoModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -302,11 +323,13 @@ class _$AchievementInfoModelImpl implements _AchievementInfoModel {
             (identical(other.issuer, issuer) || other.issuer == issuer));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, title, link, issuer);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AchievementInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AchievementInfoModelImplCopyWith<_$AchievementInfoModelImpl>
@@ -337,8 +360,11 @@ abstract class _AchievementInfoModel implements AchievementInfoModel {
   String get link;
   @override
   String get issuer;
+
+  /// Create a copy of AchievementInfoModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AchievementInfoModelImplCopyWith<_$AchievementInfoModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -79,6 +79,9 @@ class _$AchievementStateCopyWithImpl<$Res, $Val extends AchievementState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AchievementState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -97,6 +100,9 @@ class __$$AchievementStateInitialImplCopyWithImpl<$Res>
       _$AchievementStateInitialImpl _value,
       $Res Function(_$AchievementStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AchievementState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -214,6 +220,8 @@ class __$$AchievementStateSuccessImplCopyWithImpl<$Res>
       $Res Function(_$AchievementStateSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AchievementState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -280,7 +288,9 @@ class _$AchievementStateSuccessImpl implements _AchievementStateSuccess {
       const DeepCollectionEquality().hash(_controllersList),
       const DeepCollectionEquality().hash(_expansionStates));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AchievementState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AchievementStateSuccessImplCopyWith<_$AchievementStateSuccessImpl>
@@ -365,7 +375,10 @@ abstract class _AchievementStateSuccess implements AchievementState {
 
   List<Map<String, TextEditingController>> get controllersList;
   List<bool> get expansionStates;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AchievementState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AchievementStateSuccessImplCopyWith<_$AchievementStateSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

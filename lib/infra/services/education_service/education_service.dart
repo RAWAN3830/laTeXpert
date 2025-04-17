@@ -1,90 +1,100 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:dio/dio.dart';
-import '../../../domain/education_model/education_model.dart';
+import 'package:latexpert/core/constant/strings.dart';
+import 'package:latexpert/domain/education_model/education_controllers.dart';
+import 'package:latexpert/domain/education_model/education_model.dart';
 
 class EducationService {
-  final List<Map<String, TextEditingController>> controllersList = [
-    {
-      'institution': TextEditingController(),
-      'location': TextEditingController(),
-      'degreeType': TextEditingController(),
-      'fieldOfStudy': TextEditingController(),
-      'startDate': TextEditingController(),
-      'endDate': TextEditingController(),
-    }
-  ];
+  final Dio dio = Dio();
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+  final String baseUrl = "${Strings.baseUrl}education_info";  // Change this URL as needed
 
-  final List<bool> expansionStates = [false];
+  List<EducationModel> _educationList = [];
 
-  void addEducationField() {
-    controllersList.add({
-      'institution': TextEditingController(),
-      'location': TextEditingController(),
-      'degreeType': TextEditingController(),
-      'fieldOfStudy': TextEditingController(),
-      'startDate': TextEditingController(),
-      'endDate': TextEditingController(),
-    });
-    expansionStates.add(false);
-  }
+  // A list of controllers for each education field (used to handle form inputs)
+  List<EducationControllers> controllersList = [];
 
-  void deleteEducationField(int index) {
-    controllersList.removeAt(index);
-    expansionStates.removeAt(index);
-  }
+  // A list to manage the expansion state of each education field (for UI purposes)
+  List<bool> expansionStates = [];
 
-  void updateExpansionState(int index, bool isExpanded) {
-    expansionStates[index] = isExpanded;
-  }
-
-  List<EducationModel> getEducationList() {
-    return controllersList.map((map) {
-      return EducationModel(
-        institution: map['institution']!.text,
-        location: map['location']!.text,
-        degreeType: map['degreeType']!.text,
-        fieldOfStudy: map['fieldOfStudy']!.text,
-        startDate: map['startDate']!.text,
-        endDate: map['endDate']!.text,
-      );
-    }).toList();
-  }
-
-  Future<void> registerEducation() async {
-    const FlutterSecureStorage secureStorage = FlutterSecureStorage();
-    final Dio dio = Dio();
-    const String baseUrl = "https://latexpert.in/api/education_info";
-
+  // Register education details
+  Future<void> registerEducation(List<EducationModel> educationList) async {
     final token = await secureStorage.read(key: 'jwt_token');
-    if (token == null) throw Exception("Token not found");
+    if (token == null) {
+      throw Exception('Token not found. Please log in again.');
+    }
 
-    final educationList = getEducationList()
-        .map((e) => {
-      "institution": e.institution,
-      "location": e.location,
-      "degreeType": e.degreeType,
-      "fieldOfStudy": e.fieldOfStudy,
-      "startDate": e.startDate,
-      "endDate": e.endDate,
-    })
-        .toList();
+    final Map<String, dynamic> educationData = {
+      "educationList": educationList,
+    };
 
-    final data = {"educationList": educationList};
-
-    final response = await dio.post(
-      baseUrl,
-      options: Options(
-        headers: {
+    try {
+      final response = await dio.post(
+        baseUrl,
+        options: Options(headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
-        },
-      ),
-      data: data,
+        }),
+        data: educationData,
+      );
+
+      if (response.statusCode != 201) {
+        throw Exception('Failed to save education details: ${response.data}');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
+  // Method to add a new education field
+  void addEducationField() {
+    final controllers = EducationControllers(
+      institution: TextEditingController(),
+      location: TextEditingController(),
+      degreeType: TextEditingController(),
+      fieldOfStudy: TextEditingController(),
+      startDate: TextEditingController(),
+      endDate: TextEditingController(),
     );
 
-    if (response.statusCode != 201) {
-      throw Exception("Failed to register education: ${response.data}");
+    controllersList.add(controllers);
+    expansionStates.add(false);  // Initially, the education field will not be expanded
+  }
+
+  // Method to delete an existing education field by index
+  void deleteEducationField(int index) {
+    if (index >= 0 && index < controllersList.length) {
+      controllersList[index].dispose();
+      controllersList.removeAt(index);
+      expansionStates.removeAt(index);
+      _educationList.removeAt(index); // Also remove from the education list
     }
+  }
+
+  // Method to update the expansion state of an education field by index
+  void updateExpansionState(int index, bool isExpanded) {
+    if (index >= 0 && index < expansionStates.length) {
+      expansionStates[index] = isExpanded;
+    }
+  }
+
+  // Method to get the current list of education fields
+  List<EducationModel> getEducationList() {
+    return _educationList;
+  }
+
+  // Helper method to convert controllers to EducationModel (for easy use in UI)
+  List<EducationModel> convertControllersToEducationModel() {
+    return controllersList.map((controllers) {
+      return EducationModel(
+        institution: controllers.institution?.text ?? '',
+        location: controllers.location?.text ?? '',
+        degreeType: controllers.degreeType?.text ?? '',
+        fieldOfStudy: controllers.fieldOfStudy?.text ?? '',
+        startDate: controllers.startDate?.text ?? '',
+        endDate: controllers.endDate?.text ?? '',
+      );
+    }).toList();
   }
 }

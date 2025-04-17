@@ -90,6 +90,9 @@ class _$SkillsSetStateCopyWithImpl<$Res, $Val extends SkillsSetState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SkillsSetState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -107,6 +110,9 @@ class __$$SkillsSetStateInitialImplCopyWithImpl<$Res>
   __$$SkillsSetStateInitialImplCopyWithImpl(_$SkillsSetStateInitialImpl _value,
       $Res Function(_$SkillsSetStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SkillsSetState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -229,6 +235,9 @@ class __$$SkillsSetStateLoadingImplCopyWithImpl<$Res>
   __$$SkillsSetStateLoadingImplCopyWithImpl(_$SkillsSetStateLoadingImpl _value,
       $Res Function(_$SkillsSetStateLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SkillsSetState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -354,6 +363,8 @@ class __$$SkillsSetStateSuccessImplCopyWithImpl<$Res>
       $Res Function(_$SkillsSetStateSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SkillsSetState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -412,7 +423,9 @@ class _$SkillsSetStateSuccessImpl implements SkillsSetStateSuccess {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_categories), selectedCategories);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SkillsSetState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SkillsSetStateSuccessImplCopyWith<_$SkillsSetStateSuccessImpl>
@@ -507,7 +520,10 @@ abstract class SkillsSetStateSuccess implements SkillsSetState {
 
   Map<String, List<String>> get categories;
   String get selectedCategories;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SkillsSetState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SkillsSetStateSuccessImplCopyWith<_$SkillsSetStateSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -530,6 +546,8 @@ class __$$SkillsSetStateFailureImplCopyWithImpl<$Res>
       $Res Function(_$SkillsSetStateFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SkillsSetState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -569,7 +587,9 @@ class _$SkillsSetStateFailureImpl implements SkillsSetStateFailure {
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SkillsSetState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SkillsSetStateFailureImplCopyWith<_$SkillsSetStateFailureImpl>
@@ -662,7 +682,10 @@ abstract class SkillsSetStateFailure implements SkillsSetState {
       _$SkillsSetStateFailureImpl;
 
   String get errorMessage;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SkillsSetState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SkillsSetStateFailureImplCopyWith<_$SkillsSetStateFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

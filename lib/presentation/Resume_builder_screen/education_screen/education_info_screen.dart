@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:latexpert/core/constant/extension.dart';
 import 'package:latexpert/core/constant/strings.dart';
+import 'package:latexpert/domain/education_model/education_model.dart';
 import 'package:latexpert/infra/bloc/education_bloc/education_bloc_cubit.dart';
 import 'package:latexpert/infra/bloc/education_bloc/education_state.dart';
 import 'package:latexpert/presentation/common_widgets/common_appbar/custome_appbar.dart';
@@ -33,78 +34,10 @@ class _EducationInfoScreenState extends State<EducationInfoScreen> {
   final Dio dio = Dio();
   final String baseUrl = "${Strings.baseUrl}education_info";
 
-  final List<EducationControllers> _allControllers = [
-    EducationControllers(
-        institution: TextEditingController(),
-        location: TextEditingController(),
-        degreeType: TextEditingController(),
-        fieldOfStudy: TextEditingController(),
-        startDate: TextEditingController(),
-        endDate: TextEditingController()),
-  ];
-
-  Future<void> registerEducation() async {
-    if (!formKey.currentState!.validate()) return;
-
-    final token = await secureStorage.read(key: 'jwt_token');
-    if (token == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Token not found. Please log in again.')),
-      );
-      return;
-    }
-
-
-    List<Map<String, dynamic>> educationList = _allControllers.map((controller) {
-      return {
-        "institution": controller.institution.text,
-        "location": controller.location.text,
-        "degreeType": controller.degreeType.text,
-        "fieldOfStudy": controller.fieldOfStudy.text,
-        "startDate": controller.startDate.text,
-        "endDate": controller.endDate.text,
-      };
-    }).toList();
-
-    // Correct JSON format
-    final Map<String, dynamic> educationData = {
-      "educationList": educationList,
-    };
-
-    try {
-      final response = await dio.post(
-        baseUrl,
-        options: Options(headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        }),
-        data: educationData,
-      );
-
-
-      if (response.statusCode == 201) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Education details saved successfully.')),
-        );
-        widget.onNext?.call();
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to save education details: ${response.data}')),
-        );
-      }
-    } catch (e) {
-      print("Error: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          EducationCubit(),
+      create: (context) => EducationCubit(),
       child: Scaffold(
         appBar: widget.showAppBar
             ? const CustomAppBar(title: Strings.education)
@@ -118,89 +51,88 @@ class _EducationInfoScreenState extends State<EducationInfoScreen> {
                   key: formKey,
                   child: Column(
                     children: [
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: _allControllers.length,
-                        itemBuilder: (context, index) {
-                          var controllers = _allControllers[index];
-                          return ExpansionTile(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  controllers.institution.text.isEmpty
-                                      ? '${Strings.educationDetails} ${index + 1}'
-                                      : controllers.institution.text,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
+                      state.maybeWhen(
+                        inProgress: () {
+                          return const Center(child: CircularProgressIndicator());
+                        },
+                        success: (educationList) {
+                          var controllersList = context.read<EducationCubit>().controllersList;
+
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: educationList.length,
+                            itemBuilder: (context, index) {
+                              var controllers = controllersList[index];
+
+                              return ExpansionTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      controllers.institution.text.isEmpty
+                                          ? '${Strings.educationDetails} ${index + 1}'
+                                          : controllers.institution.text,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        context.read<EducationCubit>().deleteEducationField(index);
+                                      },
+                                      icon: const Icon(Icons.delete, color: Colors.red),
+                                    ),
+                                  ],
                                 ),
-                                IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _allControllers.removeAt(index);
-                                    });
-                                  },
-                                  icon: const Icon(Icons.delete,
-                                      color: Colors.red),
-                                ),
-                              ],
-                            ),
-                            children: [
-                              CommonHeading(
-                                  title:
-                                  '${Strings.institutionLabel} (${index + 1})'),
-                              CommonTextformfield(
-                                controller: controllers.institution,
-                                labelText: 'xyz University',
-                                errorText: Strings.institutionError,
-                              ),
-                              CommonHeading(
-                                  title:
-                                  '${Strings.locationLabel} (${index + 1})'),
-                              CommonTextformfield(
-                                controller: controllers.location,
-                                labelText: 'Gujarat, India',
-                                errorText: Strings.locationError,
-                              ),
-                              CommonHeading(
-                                  title:
-                                  '${Strings.degreeTypeLabel} (${index + 1})'),
-                              CommonTextformfield(
-                                controller: controllers.degreeType,
-                                labelText: 'Bachelors/Master',
-                                errorText: Strings.degreeTypeError,
-                              ),
-                              CommonHeading(
-                                  title:
-                                  '${Strings.fieldOfStudyLabel} (${index + 1})'),
-                              CommonTextformfield(
-                                controller: controllers.fieldOfStudy,
-                                labelText: 'Computer Science',
-                                errorText: Strings.fieldOfStudyError,
-                              ),
-                              CommonYearsTextField(
-                                startDateController: controllers.startDate,
-                                endDateController: controllers.endDate,
-                              ),
-                            ],
+                                children: [
+                                  CommonHeading(
+                                      title: '${Strings.institutionLabel} (${index + 1})'),
+                                  CommonTextformfield(
+                                    controller: controllers.institution,
+                                    labelText: 'xyz University',
+                                    errorText: Strings.institutionError,
+                                  ),
+                                  CommonHeading(
+                                      title: '${Strings.locationLabel} (${index + 1})'),
+                                  CommonTextformfield(
+                                    controller: controllers.location,
+                                    labelText: 'Gujarat, India',
+                                    errorText: Strings.locationError,
+                                  ),
+                                  CommonHeading(
+                                      title: '${Strings.degreeTypeLabel} (${index + 1})'),
+                                  CommonTextformfield(
+                                    controller: controllers.degreeType,
+                                    labelText: 'Bachelors/Master',
+                                    errorText: Strings.degreeTypeError,
+                                  ),
+                                  CommonHeading(
+                                      title: '${Strings.fieldOfStudyLabel} (${index + 1})'),
+                                  CommonTextformfield(
+                                    controller: controllers.fieldOfStudy,
+                                    labelText: 'Computer Science',
+                                    errorText: Strings.fieldOfStudyError,
+                                  ),
+                                  CommonYearsTextField(
+                                    startDateController: controllers.startDate,
+                                    endDateController: controllers.endDate,
+                                  ),
+                                ],
+                              );
+                            },
                           );
+                        },
+                        failure: (errorMessage) {
+                          return Center(child: Text('Error: $errorMessage'));
+                        },
+                        orElse: () {
+                          return const SizedBox(); // Default case
                         },
                       ),
                       SizedBox(height: context.height(context) * 0.02),
                       CommonAddFieldButton(
                         onTap: () {
-                          setState(() {
-                            _allControllers.add(
-                              EducationControllers(
-                                  institution: TextEditingController(),
-                                  location: TextEditingController(),
-                                  degreeType: TextEditingController(),
-                                  fieldOfStudy: TextEditingController(),
-                                  startDate: TextEditingController(),
-                                  endDate: TextEditingController()),
-                            );
-                          });
+                          context.read<EducationCubit>().addEducationField();
                         },
                         name: Strings.addEducation,
                       ),
@@ -211,9 +143,14 @@ class _EducationInfoScreenState extends State<EducationInfoScreen> {
                           CommonSaveButton(
                             formKey: formKey,
                             onTap: () {
-                              if (formKey.currentState!.validate()) {
-                                registerEducation(); // Call the registerEducation function
-                              }
+                                if (formKey.currentState!.validate()) {
+                                  final educationList = context.read<EducationCubit>().controllersList.map((controllers) {
+                                    return controllers.toModel(); // clean conversion
+                                  }).toList();
+
+                                  context.read<EducationCubit>().registerEducation(context, educationList);
+                                }
+
                             },
                             name: Strings.saveContinue,
                           ),
@@ -235,5 +172,20 @@ class _EducationInfoScreenState extends State<EducationInfoScreen> {
       ),
     );
   }
-}
 
+  // Function to register education
+  // Future<void> registerEducation() async {
+  //   final educationList = context.read<EducationCubit>().controllersList.map((controllers) {
+  //     return EducationModel(
+  //       institution: controllers['institution']!.text,
+  //       location: controllers['location']!.text,
+  //       degreeType: controllers['degreeType']!.text,
+  //       fieldOfStudy: controllers['fieldOfStudy']!.text,
+  //       startDate: controllers['startDate']!.text,
+  //       endDate: controllers['endDate']!.text,
+  //     );
+  //   }).toList();
+  //
+  //   await context.read<EducationCubit>().registerEducation(context, educationList);
+  // }
+}

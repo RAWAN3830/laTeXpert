@@ -23,8 +23,12 @@ DeclarationMasterModel _$DeclarationMasterModelFromJson(
 mixin _$DeclarationMasterModel {
   List<DeclarationModel> get declarations => throw _privateConstructorUsedError;
 
+  /// Serializes this DeclarationMasterModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeclarationMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeclarationMasterModelCopyWith<DeclarationMasterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$DeclarationMasterModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeclarationMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -85,6 +91,8 @@ class __$$DeclarationMasterModelImplCopyWithImpl<$Res>
       $Res Function(_$DeclarationMasterModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeclarationMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -131,12 +139,14 @@ class _$DeclarationMasterModelImpl implements _DeclarationMasterModel {
                 .equals(other._declarations, _declarations));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_declarations));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeclarationMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeclarationMasterModelImplCopyWith<_$DeclarationMasterModelImpl>
@@ -161,8 +171,11 @@ abstract class _DeclarationMasterModel implements DeclarationMasterModel {
 
   @override
   List<DeclarationModel> get declarations;
+
+  /// Create a copy of DeclarationMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeclarationMasterModelImplCopyWith<_$DeclarationMasterModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -175,8 +188,12 @@ DeclarationModel _$DeclarationModelFromJson(Map<String, dynamic> json) {
 mixin _$DeclarationModel {
   String get honorAwardTitle => throw _privateConstructorUsedError;
 
+  /// Serializes this DeclarationModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeclarationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeclarationModelCopyWith<DeclarationModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -200,6 +217,8 @@ class _$DeclarationModelCopyWithImpl<$Res, $Val extends DeclarationModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeclarationModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -233,6 +252,8 @@ class __$$DeclarationModelImplCopyWithImpl<$Res>
       $Res Function(_$DeclarationModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeclarationModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -272,11 +293,13 @@ class _$DeclarationModelImpl implements _DeclarationModel {
                 other.honorAwardTitle == honorAwardTitle));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, honorAwardTitle);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeclarationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeclarationModelImplCopyWith<_$DeclarationModelImpl> get copyWith =>
@@ -300,8 +323,11 @@ abstract class _DeclarationModel implements DeclarationModel {
 
   @override
   String get honorAwardTitle;
+
+  /// Create a copy of DeclarationModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeclarationModelImplCopyWith<_$DeclarationModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

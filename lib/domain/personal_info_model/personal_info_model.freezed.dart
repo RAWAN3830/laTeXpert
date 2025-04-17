@@ -28,8 +28,12 @@ mixin _$PersonalInfoModel {
   String get address => throw _privateConstructorUsedError;
   List<Links> get links => throw _privateConstructorUsedError;
 
+  /// Serializes this PersonalInfoModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PersonalInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PersonalInfoModelCopyWith<PersonalInfoModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$PersonalInfoModelCopyWithImpl<$Res, $Val extends PersonalInfoModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PersonalInfoModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,6 +136,8 @@ class __$$PersonalInfoModelImplCopyWithImpl<$Res>
       $Res Function(_$PersonalInfoModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PersonalInfoModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -232,12 +240,14 @@ class _$PersonalInfoModelImpl implements _PersonalInfoModel {
             const DeepCollectionEquality().equals(other._links, _links));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, firstname, lastname, email,
       phone, jobTitle, address, const DeepCollectionEquality().hash(_links));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PersonalInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PersonalInfoModelImplCopyWith<_$PersonalInfoModelImpl> get copyWith =>
@@ -279,8 +289,11 @@ abstract class _PersonalInfoModel implements PersonalInfoModel {
   String get address;
   @override
   List<Links> get links;
+
+  /// Create a copy of PersonalInfoModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PersonalInfoModelImplCopyWith<_$PersonalInfoModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -294,8 +307,12 @@ mixin _$Links {
   String get name => throw _privateConstructorUsedError;
   String get link => throw _privateConstructorUsedError;
 
+  /// Serializes this Links to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Links
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LinksCopyWith<Links> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -317,6 +334,8 @@ class _$LinksCopyWithImpl<$Res, $Val extends Links>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Links
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -354,6 +373,8 @@ class __$$LinksImplCopyWithImpl<$Res>
       _$LinksImpl _value, $Res Function(_$LinksImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Links
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -400,11 +421,13 @@ class _$LinksImpl implements _Links {
             (identical(other.link, link) || other.link == link));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, link);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Links
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LinksImplCopyWith<_$LinksImpl> get copyWith =>
@@ -428,8 +451,11 @@ abstract class _Links implements Links {
   String get name;
   @override
   String get link;
+
+  /// Create a copy of Links
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LinksImplCopyWith<_$LinksImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

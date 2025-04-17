@@ -19,50 +19,56 @@ mixin _$PersonalInfoState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() inProgress,
-    required TResult Function(PersonalInfoModel personalInfoModel) success,
-    required TResult Function(String? errorMessage) failure,
+    required TResult Function() loading,
+    required TResult Function(List<LinkController> linkFields) updated,
+    required TResult Function(String message) success,
+    required TResult Function(String error) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? inProgress,
-    TResult? Function(PersonalInfoModel personalInfoModel)? success,
-    TResult? Function(String? errorMessage)? failure,
+    TResult? Function()? loading,
+    TResult? Function(List<LinkController> linkFields)? updated,
+    TResult? Function(String message)? success,
+    TResult? Function(String error)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? inProgress,
-    TResult Function(PersonalInfoModel personalInfoModel)? success,
-    TResult Function(String? errorMessage)? failure,
+    TResult Function()? loading,
+    TResult Function(List<LinkController> linkFields)? updated,
+    TResult Function(String message)? success,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PersonalInfoStateInitial value) initial,
-    required TResult Function(_PersonalInfoStateInProgress value) inProgress,
-    required TResult Function(_PersonalInfoStateSuccess value) success,
-    required TResult Function(_PersonalInfoStateFailure value) failure,
+    required TResult Function(PersonalInfoInitial value) initial,
+    required TResult Function(PersonalInfoLoading value) loading,
+    required TResult Function(PersonalInfoUpdated value) updated,
+    required TResult Function(PersonalInfoSuccess value) success,
+    required TResult Function(PersonalInfoFailure value) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_PersonalInfoStateInitial value)? initial,
-    TResult? Function(_PersonalInfoStateInProgress value)? inProgress,
-    TResult? Function(_PersonalInfoStateSuccess value)? success,
-    TResult? Function(_PersonalInfoStateFailure value)? failure,
+    TResult? Function(PersonalInfoInitial value)? initial,
+    TResult? Function(PersonalInfoLoading value)? loading,
+    TResult? Function(PersonalInfoUpdated value)? updated,
+    TResult? Function(PersonalInfoSuccess value)? success,
+    TResult? Function(PersonalInfoFailure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PersonalInfoStateInitial value)? initial,
-    TResult Function(_PersonalInfoStateInProgress value)? inProgress,
-    TResult Function(_PersonalInfoStateSuccess value)? success,
-    TResult Function(_PersonalInfoStateFailure value)? failure,
+    TResult Function(PersonalInfoInitial value)? initial,
+    TResult Function(PersonalInfoLoading value)? loading,
+    TResult Function(PersonalInfoUpdated value)? updated,
+    TResult Function(PersonalInfoSuccess value)? success,
+    TResult Function(PersonalInfoFailure value)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -84,31 +90,34 @@ class _$PersonalInfoStateCopyWithImpl<$Res, $Val extends PersonalInfoState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$PersonalInfoStateInitialImplCopyWith<$Res> {
-  factory _$$PersonalInfoStateInitialImplCopyWith(
-          _$PersonalInfoStateInitialImpl value,
-          $Res Function(_$PersonalInfoStateInitialImpl) then) =
-      __$$PersonalInfoStateInitialImplCopyWithImpl<$Res>;
+abstract class _$$PersonalInfoInitialImplCopyWith<$Res> {
+  factory _$$PersonalInfoInitialImplCopyWith(_$PersonalInfoInitialImpl value,
+          $Res Function(_$PersonalInfoInitialImpl) then) =
+      __$$PersonalInfoInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PersonalInfoStateInitialImplCopyWithImpl<$Res>
-    extends _$PersonalInfoStateCopyWithImpl<$Res,
-        _$PersonalInfoStateInitialImpl>
-    implements _$$PersonalInfoStateInitialImplCopyWith<$Res> {
-  __$$PersonalInfoStateInitialImplCopyWithImpl(
-      _$PersonalInfoStateInitialImpl _value,
-      $Res Function(_$PersonalInfoStateInitialImpl) _then)
+class __$$PersonalInfoInitialImplCopyWithImpl<$Res>
+    extends _$PersonalInfoStateCopyWithImpl<$Res, _$PersonalInfoInitialImpl>
+    implements _$$PersonalInfoInitialImplCopyWith<$Res> {
+  __$$PersonalInfoInitialImplCopyWithImpl(_$PersonalInfoInitialImpl _value,
+      $Res Function(_$PersonalInfoInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$PersonalInfoStateInitialImpl implements _PersonalInfoStateInitial {
-  const _$PersonalInfoStateInitialImpl();
+class _$PersonalInfoInitialImpl implements PersonalInfoInitial {
+  const _$PersonalInfoInitialImpl();
 
   @override
   String toString() {
@@ -119,7 +128,7 @@ class _$PersonalInfoStateInitialImpl implements _PersonalInfoStateInitial {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PersonalInfoStateInitialImpl);
+            other is _$PersonalInfoInitialImpl);
   }
 
   @override
@@ -129,9 +138,10 @@ class _$PersonalInfoStateInitialImpl implements _PersonalInfoStateInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() inProgress,
-    required TResult Function(PersonalInfoModel personalInfoModel) success,
-    required TResult Function(String? errorMessage) failure,
+    required TResult Function() loading,
+    required TResult Function(List<LinkController> linkFields) updated,
+    required TResult Function(String message) success,
+    required TResult Function(String error) failure,
   }) {
     return initial();
   }
@@ -140,9 +150,10 @@ class _$PersonalInfoStateInitialImpl implements _PersonalInfoStateInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? inProgress,
-    TResult? Function(PersonalInfoModel personalInfoModel)? success,
-    TResult? Function(String? errorMessage)? failure,
+    TResult? Function()? loading,
+    TResult? Function(List<LinkController> linkFields)? updated,
+    TResult? Function(String message)? success,
+    TResult? Function(String error)? failure,
   }) {
     return initial?.call();
   }
@@ -151,9 +162,10 @@ class _$PersonalInfoStateInitialImpl implements _PersonalInfoStateInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? inProgress,
-    TResult Function(PersonalInfoModel personalInfoModel)? success,
-    TResult Function(String? errorMessage)? failure,
+    TResult Function()? loading,
+    TResult Function(List<LinkController> linkFields)? updated,
+    TResult Function(String message)? success,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -165,10 +177,11 @@ class _$PersonalInfoStateInitialImpl implements _PersonalInfoStateInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PersonalInfoStateInitial value) initial,
-    required TResult Function(_PersonalInfoStateInProgress value) inProgress,
-    required TResult Function(_PersonalInfoStateSuccess value) success,
-    required TResult Function(_PersonalInfoStateFailure value) failure,
+    required TResult Function(PersonalInfoInitial value) initial,
+    required TResult Function(PersonalInfoLoading value) loading,
+    required TResult Function(PersonalInfoUpdated value) updated,
+    required TResult Function(PersonalInfoSuccess value) success,
+    required TResult Function(PersonalInfoFailure value) failure,
   }) {
     return initial(this);
   }
@@ -176,10 +189,11 @@ class _$PersonalInfoStateInitialImpl implements _PersonalInfoStateInitial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_PersonalInfoStateInitial value)? initial,
-    TResult? Function(_PersonalInfoStateInProgress value)? inProgress,
-    TResult? Function(_PersonalInfoStateSuccess value)? success,
-    TResult? Function(_PersonalInfoStateFailure value)? failure,
+    TResult? Function(PersonalInfoInitial value)? initial,
+    TResult? Function(PersonalInfoLoading value)? loading,
+    TResult? Function(PersonalInfoUpdated value)? updated,
+    TResult? Function(PersonalInfoSuccess value)? success,
+    TResult? Function(PersonalInfoFailure value)? failure,
   }) {
     return initial?.call(this);
   }
@@ -187,10 +201,11 @@ class _$PersonalInfoStateInitialImpl implements _PersonalInfoStateInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PersonalInfoStateInitial value)? initial,
-    TResult Function(_PersonalInfoStateInProgress value)? inProgress,
-    TResult Function(_PersonalInfoStateSuccess value)? success,
-    TResult Function(_PersonalInfoStateFailure value)? failure,
+    TResult Function(PersonalInfoInitial value)? initial,
+    TResult Function(PersonalInfoLoading value)? loading,
+    TResult Function(PersonalInfoUpdated value)? updated,
+    TResult Function(PersonalInfoSuccess value)? success,
+    TResult Function(PersonalInfoFailure value)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -200,45 +215,44 @@ class _$PersonalInfoStateInitialImpl implements _PersonalInfoStateInitial {
   }
 }
 
-abstract class _PersonalInfoStateInitial implements PersonalInfoState {
-  const factory _PersonalInfoStateInitial() = _$PersonalInfoStateInitialImpl;
+abstract class PersonalInfoInitial implements PersonalInfoState {
+  const factory PersonalInfoInitial() = _$PersonalInfoInitialImpl;
 }
 
 /// @nodoc
-abstract class _$$PersonalInfoStateInProgressImplCopyWith<$Res> {
-  factory _$$PersonalInfoStateInProgressImplCopyWith(
-          _$PersonalInfoStateInProgressImpl value,
-          $Res Function(_$PersonalInfoStateInProgressImpl) then) =
-      __$$PersonalInfoStateInProgressImplCopyWithImpl<$Res>;
+abstract class _$$PersonalInfoLoadingImplCopyWith<$Res> {
+  factory _$$PersonalInfoLoadingImplCopyWith(_$PersonalInfoLoadingImpl value,
+          $Res Function(_$PersonalInfoLoadingImpl) then) =
+      __$$PersonalInfoLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PersonalInfoStateInProgressImplCopyWithImpl<$Res>
-    extends _$PersonalInfoStateCopyWithImpl<$Res,
-        _$PersonalInfoStateInProgressImpl>
-    implements _$$PersonalInfoStateInProgressImplCopyWith<$Res> {
-  __$$PersonalInfoStateInProgressImplCopyWithImpl(
-      _$PersonalInfoStateInProgressImpl _value,
-      $Res Function(_$PersonalInfoStateInProgressImpl) _then)
+class __$$PersonalInfoLoadingImplCopyWithImpl<$Res>
+    extends _$PersonalInfoStateCopyWithImpl<$Res, _$PersonalInfoLoadingImpl>
+    implements _$$PersonalInfoLoadingImplCopyWith<$Res> {
+  __$$PersonalInfoLoadingImplCopyWithImpl(_$PersonalInfoLoadingImpl _value,
+      $Res Function(_$PersonalInfoLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$PersonalInfoStateInProgressImpl
-    implements _PersonalInfoStateInProgress {
-  const _$PersonalInfoStateInProgressImpl();
+class _$PersonalInfoLoadingImpl implements PersonalInfoLoading {
+  const _$PersonalInfoLoadingImpl();
 
   @override
   String toString() {
-    return 'PersonalInfoState.inProgress()';
+    return 'PersonalInfoState.loading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PersonalInfoStateInProgressImpl);
+            other is _$PersonalInfoLoadingImpl);
   }
 
   @override
@@ -248,35 +262,38 @@ class _$PersonalInfoStateInProgressImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() inProgress,
-    required TResult Function(PersonalInfoModel personalInfoModel) success,
-    required TResult Function(String? errorMessage) failure,
+    required TResult Function() loading,
+    required TResult Function(List<LinkController> linkFields) updated,
+    required TResult Function(String message) success,
+    required TResult Function(String error) failure,
   }) {
-    return inProgress();
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? inProgress,
-    TResult? Function(PersonalInfoModel personalInfoModel)? success,
-    TResult? Function(String? errorMessage)? failure,
+    TResult? Function()? loading,
+    TResult? Function(List<LinkController> linkFields)? updated,
+    TResult? Function(String message)? success,
+    TResult? Function(String error)? failure,
   }) {
-    return inProgress?.call();
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? inProgress,
-    TResult Function(PersonalInfoModel personalInfoModel)? success,
-    TResult Function(String? errorMessage)? failure,
+    TResult Function()? loading,
+    TResult Function(List<LinkController> linkFields)? updated,
+    TResult Function(String message)? success,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
-    if (inProgress != null) {
-      return inProgress();
+    if (loading != null) {
+      return loading();
     }
     return orElse();
   }
@@ -284,155 +301,158 @@ class _$PersonalInfoStateInProgressImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PersonalInfoStateInitial value) initial,
-    required TResult Function(_PersonalInfoStateInProgress value) inProgress,
-    required TResult Function(_PersonalInfoStateSuccess value) success,
-    required TResult Function(_PersonalInfoStateFailure value) failure,
+    required TResult Function(PersonalInfoInitial value) initial,
+    required TResult Function(PersonalInfoLoading value) loading,
+    required TResult Function(PersonalInfoUpdated value) updated,
+    required TResult Function(PersonalInfoSuccess value) success,
+    required TResult Function(PersonalInfoFailure value) failure,
   }) {
-    return inProgress(this);
+    return loading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_PersonalInfoStateInitial value)? initial,
-    TResult? Function(_PersonalInfoStateInProgress value)? inProgress,
-    TResult? Function(_PersonalInfoStateSuccess value)? success,
-    TResult? Function(_PersonalInfoStateFailure value)? failure,
+    TResult? Function(PersonalInfoInitial value)? initial,
+    TResult? Function(PersonalInfoLoading value)? loading,
+    TResult? Function(PersonalInfoUpdated value)? updated,
+    TResult? Function(PersonalInfoSuccess value)? success,
+    TResult? Function(PersonalInfoFailure value)? failure,
   }) {
-    return inProgress?.call(this);
+    return loading?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PersonalInfoStateInitial value)? initial,
-    TResult Function(_PersonalInfoStateInProgress value)? inProgress,
-    TResult Function(_PersonalInfoStateSuccess value)? success,
-    TResult Function(_PersonalInfoStateFailure value)? failure,
+    TResult Function(PersonalInfoInitial value)? initial,
+    TResult Function(PersonalInfoLoading value)? loading,
+    TResult Function(PersonalInfoUpdated value)? updated,
+    TResult Function(PersonalInfoSuccess value)? success,
+    TResult Function(PersonalInfoFailure value)? failure,
     required TResult orElse(),
   }) {
-    if (inProgress != null) {
-      return inProgress(this);
+    if (loading != null) {
+      return loading(this);
     }
     return orElse();
   }
 }
 
-abstract class _PersonalInfoStateInProgress implements PersonalInfoState {
-  const factory _PersonalInfoStateInProgress() =
-      _$PersonalInfoStateInProgressImpl;
+abstract class PersonalInfoLoading implements PersonalInfoState {
+  const factory PersonalInfoLoading() = _$PersonalInfoLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$PersonalInfoStateSuccessImplCopyWith<$Res> {
-  factory _$$PersonalInfoStateSuccessImplCopyWith(
-          _$PersonalInfoStateSuccessImpl value,
-          $Res Function(_$PersonalInfoStateSuccessImpl) then) =
-      __$$PersonalInfoStateSuccessImplCopyWithImpl<$Res>;
+abstract class _$$PersonalInfoUpdatedImplCopyWith<$Res> {
+  factory _$$PersonalInfoUpdatedImplCopyWith(_$PersonalInfoUpdatedImpl value,
+          $Res Function(_$PersonalInfoUpdatedImpl) then) =
+      __$$PersonalInfoUpdatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PersonalInfoModel personalInfoModel});
-
-  $PersonalInfoModelCopyWith<$Res> get personalInfoModel;
+  $Res call({List<LinkController> linkFields});
 }
 
 /// @nodoc
-class __$$PersonalInfoStateSuccessImplCopyWithImpl<$Res>
-    extends _$PersonalInfoStateCopyWithImpl<$Res,
-        _$PersonalInfoStateSuccessImpl>
-    implements _$$PersonalInfoStateSuccessImplCopyWith<$Res> {
-  __$$PersonalInfoStateSuccessImplCopyWithImpl(
-      _$PersonalInfoStateSuccessImpl _value,
-      $Res Function(_$PersonalInfoStateSuccessImpl) _then)
+class __$$PersonalInfoUpdatedImplCopyWithImpl<$Res>
+    extends _$PersonalInfoStateCopyWithImpl<$Res, _$PersonalInfoUpdatedImpl>
+    implements _$$PersonalInfoUpdatedImplCopyWith<$Res> {
+  __$$PersonalInfoUpdatedImplCopyWithImpl(_$PersonalInfoUpdatedImpl _value,
+      $Res Function(_$PersonalInfoUpdatedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? personalInfoModel = null,
+    Object? linkFields = null,
   }) {
-    return _then(_$PersonalInfoStateSuccessImpl(
-      personalInfoModel: null == personalInfoModel
-          ? _value.personalInfoModel
-          : personalInfoModel // ignore: cast_nullable_to_non_nullable
-              as PersonalInfoModel,
+    return _then(_$PersonalInfoUpdatedImpl(
+      null == linkFields
+          ? _value._linkFields
+          : linkFields // ignore: cast_nullable_to_non_nullable
+              as List<LinkController>,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PersonalInfoModelCopyWith<$Res> get personalInfoModel {
-    return $PersonalInfoModelCopyWith<$Res>(_value.personalInfoModel, (value) {
-      return _then(_value.copyWith(personalInfoModel: value));
-    });
   }
 }
 
 /// @nodoc
 
-class _$PersonalInfoStateSuccessImpl implements _PersonalInfoStateSuccess {
-  const _$PersonalInfoStateSuccessImpl({required this.personalInfoModel});
+class _$PersonalInfoUpdatedImpl implements PersonalInfoUpdated {
+  const _$PersonalInfoUpdatedImpl(final List<LinkController> linkFields)
+      : _linkFields = linkFields;
 
+  final List<LinkController> _linkFields;
   @override
-  final PersonalInfoModel personalInfoModel;
+  List<LinkController> get linkFields {
+    if (_linkFields is EqualUnmodifiableListView) return _linkFields;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_linkFields);
+  }
 
   @override
   String toString() {
-    return 'PersonalInfoState.success(personalInfoModel: $personalInfoModel)';
+    return 'PersonalInfoState.updated(linkFields: $linkFields)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PersonalInfoStateSuccessImpl &&
-            (identical(other.personalInfoModel, personalInfoModel) ||
-                other.personalInfoModel == personalInfoModel));
+            other is _$PersonalInfoUpdatedImpl &&
+            const DeepCollectionEquality()
+                .equals(other._linkFields, _linkFields));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, personalInfoModel);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_linkFields));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PersonalInfoStateSuccessImplCopyWith<_$PersonalInfoStateSuccessImpl>
-      get copyWith => __$$PersonalInfoStateSuccessImplCopyWithImpl<
-          _$PersonalInfoStateSuccessImpl>(this, _$identity);
+  _$$PersonalInfoUpdatedImplCopyWith<_$PersonalInfoUpdatedImpl> get copyWith =>
+      __$$PersonalInfoUpdatedImplCopyWithImpl<_$PersonalInfoUpdatedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() inProgress,
-    required TResult Function(PersonalInfoModel personalInfoModel) success,
-    required TResult Function(String? errorMessage) failure,
+    required TResult Function() loading,
+    required TResult Function(List<LinkController> linkFields) updated,
+    required TResult Function(String message) success,
+    required TResult Function(String error) failure,
   }) {
-    return success(personalInfoModel);
+    return updated(linkFields);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? inProgress,
-    TResult? Function(PersonalInfoModel personalInfoModel)? success,
-    TResult? Function(String? errorMessage)? failure,
+    TResult? Function()? loading,
+    TResult? Function(List<LinkController> linkFields)? updated,
+    TResult? Function(String message)? success,
+    TResult? Function(String error)? failure,
   }) {
-    return success?.call(personalInfoModel);
+    return updated?.call(linkFields);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? inProgress,
-    TResult Function(PersonalInfoModel personalInfoModel)? success,
-    TResult Function(String? errorMessage)? failure,
+    TResult Function()? loading,
+    TResult Function(List<LinkController> linkFields)? updated,
+    TResult Function(String message)? success,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(personalInfoModel);
+    if (updated != null) {
+      return updated(linkFields);
     }
     return orElse();
   }
@@ -440,10 +460,171 @@ class _$PersonalInfoStateSuccessImpl implements _PersonalInfoStateSuccess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PersonalInfoStateInitial value) initial,
-    required TResult Function(_PersonalInfoStateInProgress value) inProgress,
-    required TResult Function(_PersonalInfoStateSuccess value) success,
-    required TResult Function(_PersonalInfoStateFailure value) failure,
+    required TResult Function(PersonalInfoInitial value) initial,
+    required TResult Function(PersonalInfoLoading value) loading,
+    required TResult Function(PersonalInfoUpdated value) updated,
+    required TResult Function(PersonalInfoSuccess value) success,
+    required TResult Function(PersonalInfoFailure value) failure,
+  }) {
+    return updated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PersonalInfoInitial value)? initial,
+    TResult? Function(PersonalInfoLoading value)? loading,
+    TResult? Function(PersonalInfoUpdated value)? updated,
+    TResult? Function(PersonalInfoSuccess value)? success,
+    TResult? Function(PersonalInfoFailure value)? failure,
+  }) {
+    return updated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PersonalInfoInitial value)? initial,
+    TResult Function(PersonalInfoLoading value)? loading,
+    TResult Function(PersonalInfoUpdated value)? updated,
+    TResult Function(PersonalInfoSuccess value)? success,
+    TResult Function(PersonalInfoFailure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (updated != null) {
+      return updated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PersonalInfoUpdated implements PersonalInfoState {
+  const factory PersonalInfoUpdated(final List<LinkController> linkFields) =
+      _$PersonalInfoUpdatedImpl;
+
+  List<LinkController> get linkFields;
+
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PersonalInfoUpdatedImplCopyWith<_$PersonalInfoUpdatedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PersonalInfoSuccessImplCopyWith<$Res> {
+  factory _$$PersonalInfoSuccessImplCopyWith(_$PersonalInfoSuccessImpl value,
+          $Res Function(_$PersonalInfoSuccessImpl) then) =
+      __$$PersonalInfoSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$PersonalInfoSuccessImplCopyWithImpl<$Res>
+    extends _$PersonalInfoStateCopyWithImpl<$Res, _$PersonalInfoSuccessImpl>
+    implements _$$PersonalInfoSuccessImplCopyWith<$Res> {
+  __$$PersonalInfoSuccessImplCopyWithImpl(_$PersonalInfoSuccessImpl _value,
+      $Res Function(_$PersonalInfoSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$PersonalInfoSuccessImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PersonalInfoSuccessImpl implements PersonalInfoSuccess {
+  const _$PersonalInfoSuccessImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'PersonalInfoState.success(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PersonalInfoSuccessImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PersonalInfoSuccessImplCopyWith<_$PersonalInfoSuccessImpl> get copyWith =>
+      __$$PersonalInfoSuccessImplCopyWithImpl<_$PersonalInfoSuccessImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<LinkController> linkFields) updated,
+    required TResult Function(String message) success,
+    required TResult Function(String error) failure,
+  }) {
+    return success(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<LinkController> linkFields)? updated,
+    TResult? Function(String message)? success,
+    TResult? Function(String error)? failure,
+  }) {
+    return success?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<LinkController> linkFields)? updated,
+    TResult Function(String message)? success,
+    TResult Function(String error)? failure,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PersonalInfoInitial value) initial,
+    required TResult Function(PersonalInfoLoading value) loading,
+    required TResult Function(PersonalInfoUpdated value) updated,
+    required TResult Function(PersonalInfoSuccess value) success,
+    required TResult Function(PersonalInfoFailure value) failure,
   }) {
     return success(this);
   }
@@ -451,10 +632,11 @@ class _$PersonalInfoStateSuccessImpl implements _PersonalInfoStateSuccess {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_PersonalInfoStateInitial value)? initial,
-    TResult? Function(_PersonalInfoStateInProgress value)? inProgress,
-    TResult? Function(_PersonalInfoStateSuccess value)? success,
-    TResult? Function(_PersonalInfoStateFailure value)? failure,
+    TResult? Function(PersonalInfoInitial value)? initial,
+    TResult? Function(PersonalInfoLoading value)? loading,
+    TResult? Function(PersonalInfoUpdated value)? updated,
+    TResult? Function(PersonalInfoSuccess value)? success,
+    TResult? Function(PersonalInfoFailure value)? failure,
   }) {
     return success?.call(this);
   }
@@ -462,10 +644,11 @@ class _$PersonalInfoStateSuccessImpl implements _PersonalInfoStateSuccess {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PersonalInfoStateInitial value)? initial,
-    TResult Function(_PersonalInfoStateInProgress value)? inProgress,
-    TResult Function(_PersonalInfoStateSuccess value)? success,
-    TResult Function(_PersonalInfoStateFailure value)? failure,
+    TResult Function(PersonalInfoInitial value)? initial,
+    TResult Function(PersonalInfoLoading value)? loading,
+    TResult Function(PersonalInfoUpdated value)? updated,
+    TResult Function(PersonalInfoSuccess value)? success,
+    TResult Function(PersonalInfoFailure value)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -475,116 +658,121 @@ class _$PersonalInfoStateSuccessImpl implements _PersonalInfoStateSuccess {
   }
 }
 
-abstract class _PersonalInfoStateSuccess implements PersonalInfoState {
-  const factory _PersonalInfoStateSuccess(
-          {required final PersonalInfoModel personalInfoModel}) =
-      _$PersonalInfoStateSuccessImpl;
+abstract class PersonalInfoSuccess implements PersonalInfoState {
+  const factory PersonalInfoSuccess(final String message) =
+      _$PersonalInfoSuccessImpl;
 
-  PersonalInfoModel get personalInfoModel;
-  @JsonKey(ignore: true)
-  _$$PersonalInfoStateSuccessImplCopyWith<_$PersonalInfoStateSuccessImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  String get message;
+
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PersonalInfoSuccessImplCopyWith<_$PersonalInfoSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$PersonalInfoStateFailureImplCopyWith<$Res> {
-  factory _$$PersonalInfoStateFailureImplCopyWith(
-          _$PersonalInfoStateFailureImpl value,
-          $Res Function(_$PersonalInfoStateFailureImpl) then) =
-      __$$PersonalInfoStateFailureImplCopyWithImpl<$Res>;
+abstract class _$$PersonalInfoFailureImplCopyWith<$Res> {
+  factory _$$PersonalInfoFailureImplCopyWith(_$PersonalInfoFailureImpl value,
+          $Res Function(_$PersonalInfoFailureImpl) then) =
+      __$$PersonalInfoFailureImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? errorMessage});
+  $Res call({String error});
 }
 
 /// @nodoc
-class __$$PersonalInfoStateFailureImplCopyWithImpl<$Res>
-    extends _$PersonalInfoStateCopyWithImpl<$Res,
-        _$PersonalInfoStateFailureImpl>
-    implements _$$PersonalInfoStateFailureImplCopyWith<$Res> {
-  __$$PersonalInfoStateFailureImplCopyWithImpl(
-      _$PersonalInfoStateFailureImpl _value,
-      $Res Function(_$PersonalInfoStateFailureImpl) _then)
+class __$$PersonalInfoFailureImplCopyWithImpl<$Res>
+    extends _$PersonalInfoStateCopyWithImpl<$Res, _$PersonalInfoFailureImpl>
+    implements _$$PersonalInfoFailureImplCopyWith<$Res> {
+  __$$PersonalInfoFailureImplCopyWithImpl(_$PersonalInfoFailureImpl _value,
+      $Res Function(_$PersonalInfoFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? errorMessage = freezed,
+    Object? error = null,
   }) {
-    return _then(_$PersonalInfoStateFailureImpl(
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+    return _then(_$PersonalInfoFailureImpl(
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$PersonalInfoStateFailureImpl implements _PersonalInfoStateFailure {
-  const _$PersonalInfoStateFailureImpl({this.errorMessage});
+class _$PersonalInfoFailureImpl implements PersonalInfoFailure {
+  const _$PersonalInfoFailureImpl(this.error);
 
   @override
-  final String? errorMessage;
+  final String error;
 
   @override
   String toString() {
-    return 'PersonalInfoState.failure(errorMessage: $errorMessage)';
+    return 'PersonalInfoState.failure(error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PersonalInfoStateFailureImpl &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+            other is _$PersonalInfoFailureImpl &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage);
+  int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PersonalInfoStateFailureImplCopyWith<_$PersonalInfoStateFailureImpl>
-      get copyWith => __$$PersonalInfoStateFailureImplCopyWithImpl<
-          _$PersonalInfoStateFailureImpl>(this, _$identity);
+  _$$PersonalInfoFailureImplCopyWith<_$PersonalInfoFailureImpl> get copyWith =>
+      __$$PersonalInfoFailureImplCopyWithImpl<_$PersonalInfoFailureImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() inProgress,
-    required TResult Function(PersonalInfoModel personalInfoModel) success,
-    required TResult Function(String? errorMessage) failure,
+    required TResult Function() loading,
+    required TResult Function(List<LinkController> linkFields) updated,
+    required TResult Function(String message) success,
+    required TResult Function(String error) failure,
   }) {
-    return failure(errorMessage);
+    return failure(error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? inProgress,
-    TResult? Function(PersonalInfoModel personalInfoModel)? success,
-    TResult? Function(String? errorMessage)? failure,
+    TResult? Function()? loading,
+    TResult? Function(List<LinkController> linkFields)? updated,
+    TResult? Function(String message)? success,
+    TResult? Function(String error)? failure,
   }) {
-    return failure?.call(errorMessage);
+    return failure?.call(error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? inProgress,
-    TResult Function(PersonalInfoModel personalInfoModel)? success,
-    TResult Function(String? errorMessage)? failure,
+    TResult Function()? loading,
+    TResult Function(List<LinkController> linkFields)? updated,
+    TResult Function(String message)? success,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure(errorMessage);
+      return failure(error);
     }
     return orElse();
   }
@@ -592,10 +780,11 @@ class _$PersonalInfoStateFailureImpl implements _PersonalInfoStateFailure {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PersonalInfoStateInitial value) initial,
-    required TResult Function(_PersonalInfoStateInProgress value) inProgress,
-    required TResult Function(_PersonalInfoStateSuccess value) success,
-    required TResult Function(_PersonalInfoStateFailure value) failure,
+    required TResult Function(PersonalInfoInitial value) initial,
+    required TResult Function(PersonalInfoLoading value) loading,
+    required TResult Function(PersonalInfoUpdated value) updated,
+    required TResult Function(PersonalInfoSuccess value) success,
+    required TResult Function(PersonalInfoFailure value) failure,
   }) {
     return failure(this);
   }
@@ -603,10 +792,11 @@ class _$PersonalInfoStateFailureImpl implements _PersonalInfoStateFailure {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_PersonalInfoStateInitial value)? initial,
-    TResult? Function(_PersonalInfoStateInProgress value)? inProgress,
-    TResult? Function(_PersonalInfoStateSuccess value)? success,
-    TResult? Function(_PersonalInfoStateFailure value)? failure,
+    TResult? Function(PersonalInfoInitial value)? initial,
+    TResult? Function(PersonalInfoLoading value)? loading,
+    TResult? Function(PersonalInfoUpdated value)? updated,
+    TResult? Function(PersonalInfoSuccess value)? success,
+    TResult? Function(PersonalInfoFailure value)? failure,
   }) {
     return failure?.call(this);
   }
@@ -614,10 +804,11 @@ class _$PersonalInfoStateFailureImpl implements _PersonalInfoStateFailure {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PersonalInfoStateInitial value)? initial,
-    TResult Function(_PersonalInfoStateInProgress value)? inProgress,
-    TResult Function(_PersonalInfoStateSuccess value)? success,
-    TResult Function(_PersonalInfoStateFailure value)? failure,
+    TResult Function(PersonalInfoInitial value)? initial,
+    TResult Function(PersonalInfoLoading value)? loading,
+    TResult Function(PersonalInfoUpdated value)? updated,
+    TResult Function(PersonalInfoSuccess value)? success,
+    TResult Function(PersonalInfoFailure value)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -627,12 +818,15 @@ class _$PersonalInfoStateFailureImpl implements _PersonalInfoStateFailure {
   }
 }
 
-abstract class _PersonalInfoStateFailure implements PersonalInfoState {
-  const factory _PersonalInfoStateFailure({final String? errorMessage}) =
-      _$PersonalInfoStateFailureImpl;
+abstract class PersonalInfoFailure implements PersonalInfoState {
+  const factory PersonalInfoFailure(final String error) =
+      _$PersonalInfoFailureImpl;
 
-  String? get errorMessage;
-  @JsonKey(ignore: true)
-  _$$PersonalInfoStateFailureImplCopyWith<_$PersonalInfoStateFailureImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  String get error;
+
+  /// Create a copy of PersonalInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PersonalInfoFailureImplCopyWith<_$PersonalInfoFailureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

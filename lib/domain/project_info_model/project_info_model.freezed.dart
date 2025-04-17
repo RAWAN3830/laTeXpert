@@ -23,8 +23,12 @@ mixin _$ProjectMasterModel {
   List<ProjectInfoModel> get projectMasterModel =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this ProjectMasterModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProjectMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProjectMasterModelCopyWith<ProjectMasterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$ProjectMasterModelCopyWithImpl<$Res, $Val extends ProjectMasterModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ProjectMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +87,8 @@ class __$$ProjectMasterModelImplCopyWithImpl<$Res>
       $Res Function(_$ProjectMasterModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProjectMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,12 +136,14 @@ class _$ProjectMasterModelImpl implements _ProjectMasterModel {
                 .equals(other._projectMasterModel, _projectMasterModel));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_projectMasterModel));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProjectMasterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProjectMasterModelImplCopyWith<_$ProjectMasterModelImpl> get copyWith =>
@@ -158,8 +168,11 @@ abstract class _ProjectMasterModel implements ProjectMasterModel {
 
   @override
   List<ProjectInfoModel> get projectMasterModel;
+
+  /// Create a copy of ProjectMasterModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProjectMasterModelImplCopyWith<_$ProjectMasterModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -175,8 +188,12 @@ mixin _$ProjectInfoModel {
   String get projectLink => throw _privateConstructorUsedError;
   String get projectDescription => throw _privateConstructorUsedError;
 
+  /// Serializes this ProjectInfoModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProjectInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProjectInfoModelCopyWith<ProjectInfoModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -204,6 +221,8 @@ class _$ProjectInfoModelCopyWithImpl<$Res, $Val extends ProjectInfoModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ProjectInfoModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -256,6 +275,8 @@ class __$$ProjectInfoModelImplCopyWithImpl<$Res>
       $Res Function(_$ProjectInfoModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProjectInfoModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -326,12 +347,14 @@ class _$ProjectInfoModelImpl implements _ProjectInfoModel {
                 other.projectDescription == projectDescription));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, projectTitle, technologiesUsed,
       projectLink, projectDescription);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProjectInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProjectInfoModelImplCopyWith<_$ProjectInfoModelImpl> get copyWith =>
@@ -364,8 +387,11 @@ abstract class _ProjectInfoModel implements ProjectInfoModel {
   String get projectLink;
   @override
   String get projectDescription;
+
+  /// Create a copy of ProjectInfoModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProjectInfoModelImplCopyWith<_$ProjectInfoModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

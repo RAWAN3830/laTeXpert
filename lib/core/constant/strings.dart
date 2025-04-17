@@ -1,6 +1,6 @@
 class Strings {
   //base url
-  static const String baseUrl = 'http://192.168.198.67:8000/api/';
+  static const String baseUrl = 'http://192.168.0.81:8000/api/';
 
   //Fonts
   static const String uberFont = 'UberFont';
