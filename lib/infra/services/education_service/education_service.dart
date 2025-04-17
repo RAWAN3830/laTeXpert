@@ -1,16 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:latexpert/core/constant/strings.dart';
 import 'package:latexpert/domain/education_model/education_controllers.dart';
 import 'package:latexpert/domain/education_model/education_model.dart';
 
 class EducationService {
   final Dio dio = Dio();
-  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   final String baseUrl = "${Strings.baseUrl}education_info";  // Change this URL as needed
 
-  List<EducationModel> _educationList = [];
+  final List<EducationModel> _educationList = [];
 
   // A list of controllers for each education field (used to handle form inputs)
   List<EducationControllers> controllersList = [];
@@ -20,7 +18,7 @@ class EducationService {
 
   // Register education details
   Future<void> registerEducation(List<EducationModel> educationList) async {
-    final token = await secureStorage.read(key: 'jwt_token');
+    final token = await Strings.secureStorage.read(key: 'jwt_token');
     if (token == null) {
       throw Exception('Token not found. Please log in again.');
     }

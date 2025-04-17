@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     state.maybeMap(
-                      orElse: () => SizedBox.shrink(),
+                      orElse: () => const SizedBox.shrink(),
                       loading: (_) => const Center(child: CircularProgressIndicator()),
                       failure: (failure) => Text(
                         "${Strings.errorPrefix} ${failure.error}",

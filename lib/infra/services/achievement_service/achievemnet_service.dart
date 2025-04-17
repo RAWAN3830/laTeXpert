@@ -1,93 +1,107 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
-import '../../../domain/achievement_info_model/achievement_info_model.dart';
+import 'package:latexpert/core/constant/strings.dart';
+import 'package:latexpert/domain/achievement_info_model/achievement_info_model.dart';
+import 'package:latexpert/domain/achievement_info_model/achievement_controller.dart';
 
 class AchievementService {
+  final Dio dio = Dio();
+  final String baseUrl = "${Strings.baseUrl}achievement_info";
 
-  AchievementInitialData initialize() {
-    List<Map<String, TextEditingController>> controllersList = [
-      {
-        'title': TextEditingController(),
-        'link': TextEditingController(),
-        'issuer': TextEditingController(),
-      }
+  final List<AchievementInfoModel> _achievementList = [];
+  List<AchievementControllers> controllersList = [];
+  List<bool> expansionStates = [];
+
+  // Initialize with one field
+  void initialize() {
+    controllersList = [
+      AchievementControllers(
+        title: TextEditingController(),
+        link: TextEditingController(),
+        issuer: TextEditingController(),
+      )
     ];
-    List<bool> expansionStates = [true];
-
-    return AchievementInitialData(controllersList, expansionStates);
+    expansionStates = [true];
   }
 
-
-  // Add a new achievement field
-  List<Map<String, TextEditingController>> addAchievementField(
-      List<Map<String, TextEditingController>> controllersList) {
-    if (controllersList.length < 4) {
-      return List.from(controllersList)
-        ..add({
-          'title': TextEditingController(),
-          'link': TextEditingController(),
-          'issuer': TextEditingController(),
-        });
+  // Register achievement details via API
+  Future<void> registerAchievements(List<AchievementInfoModel> achievementList) async {
+    final token = await Strings.secureStorage.read(key: 'jwt_token');
+    if (token == null) {
+      throw Exception('Token not found. Please log in again.');
     }
-    return controllersList;
+
+    final Map<String, dynamic> achievementData = {
+      "achievementList": achievementList,
+    };
+
+    try {
+      final response = await dio.post(
+        baseUrl,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        }),
+        data: achievementData,
+      );
+
+      if (response.statusCode != 201) {
+        throw Exception('Failed to save achievement details: ${response.data}');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
+  // Add new achievement field
+  void addAchievementField() {
+    if (controllersList.length < 4) {
+      controllersList.add(
+        AchievementControllers(
+          title: TextEditingController(),
+          link: TextEditingController(),
+          issuer: TextEditingController(),
+        ),
+      );
+      expansionStates.add(true);
+    }
   }
 
   // Delete an achievement field
-  List<Map<String, TextEditingController>> deleteAchievementField(
-      List<Map<String, TextEditingController>> controllersList, int index) {
+  void deleteAchievementField(int index) {
     if (index >= 0 && index < controllersList.length) {
-      return List.from(controllersList)..removeAt(index);
+      controllersList[index].dispose();
+      controllersList.removeAt(index);
+      expansionStates.removeAt(index);
+      _achievementList.removeAt(index);
     }
-    return controllersList;
   }
 
-
-
-  // Add a new expansion state
-  List<bool> addExpansionState(List<bool> expansionStates) {
-    return List.from(expansionStates)..add(true);
-  }
-
-  // Delete an expansion state
-  List<bool> deleteExpansionState(List<bool> expansionStates, int index) {
+  // Update expansion state
+  void updateExpansionState(int index, bool isExpanded) {
     if (index >= 0 && index < expansionStates.length) {
-      return List.from(expansionStates)..removeAt(index);
+      expansionStates[index] = isExpanded;
     }
-    return expansionStates;
   }
 
-  // Update an expansion state
-  List<bool> updateExpansionState(List<bool> expansionStates, int index, bool isExpanded) {
-    return List.from(expansionStates)..[index] = isExpanded;
-  }
-
-  // Save achievements locally
-  Future<AchievementMasterModel> saveAchievements(
-      List<Map<String, TextEditingController>> controllersList) async {
-    final achievements = controllersList.map((controllers) {
+  // Convert controller values to model list
+  List<AchievementInfoModel> convertControllersToAchievementModel() {
+    return controllersList.map((controller) {
       return AchievementInfoModel(
-        title: controllers['title']!.text,
-        link: controllers['link']!.text,
-        issuer: controllers['issuer']!.text,
+        title: controller.title.text,
+        link: controller.link.text,
+        issuer: controller.issuer.text,
       );
     }).toList();
-
-    return AchievementMasterModel(achievements: achievements);
   }
 
-  // Dispose controllers
-  void disposeControllers(List<Map<String, TextEditingController>> controllersList) {
-    for (var controllers in controllersList) {
-      for (var controller in controllers.values) {
-        controller.dispose();
-      }
+  // Dispose all controllers
+  void disposeControllers(List<AchievementControllers> controllersList) {
+    for (var controller in controllersList) {
+      controller.dispose();
     }
+    controllersList.clear();
+    expansionStates.clear();
+    _achievementList.clear();
   }
-}
-
-class AchievementInitialData {
-  final List<Map<String, TextEditingController>> controllersList;
-  final List<bool> expansionStates;
-
-  AchievementInitialData(this.controllersList, this.expansionStates);
 }

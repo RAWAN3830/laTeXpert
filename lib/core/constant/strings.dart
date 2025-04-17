@@ -1,4 +1,8 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 class Strings {
+   static FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
   //base url
   static const String baseUrl = 'http://192.168.0.81:8000/api/';
 

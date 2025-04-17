@@ -1,27 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:latexpert/core/constant/strings.dart';
-
 import 'package:latexpert/domain/project_info_model/project_controller.dart';
 import 'package:latexpert/domain/project_info_model/project_info_model.dart';
 
 class ProjectService {
   final Dio dio = Dio();
-  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   final String baseUrl = "${Strings.baseUrl}project_info";  // Change this URL as needed
 
-  List<ProjectInfoModel> _projectList = [];
+  final List<ProjectInfoModel> _projectList = [];
 
-  // A list of controllers for each education field (used to handle form inputs)
+  // A list of controllers for each project field (used to handle form inputs)
   List<ProjectControllers> controllersList = [];
 
-  // A list to manage the expansion state of each education field (for UI purposes)
+  // A list to manage the expansion state of each project field (for UI purposes)
   List<bool> expansionStates = [];
 
-  // Register education details
+  // Register project details
   Future<void> registerProject(List<ProjectInfoModel> projectList) async {
-    final token = await secureStorage.read(key: 'jwt_token');
+    final token = await Strings.secureStorage.read(key: 'jwt_token');
     if (token == null) {
       throw Exception('Token not found. Please log in again.');
     }
@@ -41,14 +38,14 @@ class ProjectService {
       );
 
       if (response.statusCode != 201) {
-        throw Exception('Failed to save education details: ${response.data}');
+        throw Exception('Failed to save project details: ${response.data}');
       }
     } catch (e) {
       throw Exception('Error: $e');
     }
   }
 
-  // Method to add a new education field
+  // Method to add a new project field
   void addProjectField() {
     final controllers = ProjectControllers(
       projectTitle: TextEditingController(),
@@ -58,32 +55,32 @@ class ProjectService {
     );
 
     controllersList.add(controllers);
-    expansionStates.add(false);  // Initially, the education field will not be expanded
+    expansionStates.add(false);  // Initially, the project field will not be expanded
   }
 
-  // Method to delete an existing education field by index
+  // Method to delete an existing project field by index
   void deleteProjectField(int index) {
     if (index >= 0 && index < controllersList.length) {
       controllersList[index].dispose();
       controllersList.removeAt(index);
       expansionStates.removeAt(index);
-      _projectList.removeAt(index); // Also remove from the education list
+      _projectList.removeAt(index); // Also remove from the project list
     }
   }
 
-  // Method to update the expansion state of an education field by index
+  // Method to update the expansion state of an project field by index
   void updateExpansionState(int index, bool isExpanded) {
     if (index >= 0 && index < expansionStates.length) {
       expansionStates[index] = isExpanded;
     }
   }
 
-  // Method to get the current list of education fields
+  // Method to get the current list of project fields
   List<ProjectInfoModel> getProjectList() {
     return _projectList;
   }
 
-  // Helper method to convert controllers to EducationModel (for easy use in UI)
+  // Helper method to convert controllers to projectModel (for easy use in UI)
   List<ProjectInfoModel> convertControllersToProjectInfoModel() {
     return controllersList.map((controllers) {
       return ProjectInfoModel(

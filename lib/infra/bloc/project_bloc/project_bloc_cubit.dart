@@ -9,33 +9,33 @@ class ProjectBlocCubit extends Cubit<ProjectState> {
   final ProjectService _projectService = ProjectService();
 
   ProjectBlocCubit() : super(const ProjectState.initial()) {
-    addProjectField(); // Initialize with a default experience field
+    addProjectField(); // Initialize with a default project field
   }
 
-  // Add a new experience field
+  // Add a new project field
   void addProjectField() {
     _projectService.addProjectField();
     _emitSuccessState();
   }
 
-  // Delete an existing experience field by index
+  // Delete an existing project field by index
   void deleteProjectField(int index) {
     _projectService.deleteProjectField(index);
     _emitSuccessState();
   }
 
-  // Update the expansion state of an experience field by index
+  // Update the expansion state of an project field by index
   void updateExpansionState(int index, bool isExpanded) {
     _projectService.updateExpansionState(index, isExpanded);
     _emitSuccessState();
   }
 
-  // Register experience details with API call
+  // Register project details with API call
   Future<void> registerProject(BuildContext context, List<ProjectInfoModel> projectList) async {
     emit(const ProjectState.loading()); // Emit loading state
 
     try {
-      await _projectService.registerProject(projectList); // Call the service to register experience
+      await _projectService.registerProject(projectList); // Call the service to register project
       emit(ProjectState.success(projectList: projectList)); // Emit success state
     } catch (e) {
       emit(ProjectState.failure(errorMessage: e.toString())); // Emit failure state
@@ -45,9 +45,9 @@ class ProjectBlocCubit extends Cubit<ProjectState> {
     }
   }
 
-  // Helper method to emit success state with updated experience list
+  // Helper method to emit success state with updated project list
   void _emitSuccessState() {
-    // Convert controllers to experienceModel before emitting success state
+    // Convert controllers to projectModel before emitting success state
     final projectList = _projectService.convertControllersToProjectInfoModel();
     emit(ProjectState.success(projectList: projectList));
   }

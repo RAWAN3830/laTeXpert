@@ -1,10 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:latexpert/core/constant/extension.dart';
 import 'package:latexpert/infra/bloc/project_bloc/project_bloc_cubit.dart';
-import 'package:latexpert/infra/services/project_service/project_service.dart';
 import '../../../core/constant/strings.dart';
 import '../../../domain/project_info_model/project_controller.dart';
 import '../../../infra/bloc/project_bloc/project_state.dart';
