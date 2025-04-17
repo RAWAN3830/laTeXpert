@@ -18,8 +18,8 @@ class ExperienceModel with _$ExperienceModel {
     required String employer,
     required String jobTitle,
     required String location,
-    required DateTime startDate,
-    required DateTime endDate,
+    required String startDate,
+    required String endDate,
     required String description,
   }) = _ExperienceModel;
 

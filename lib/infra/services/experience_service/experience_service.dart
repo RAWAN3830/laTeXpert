@@ -1,65 +1,102 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:latexpert/domain/experience_model/experience_model.dart'; // Import your model
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:latexpert/core/constant/strings.dart';
+import 'package:latexpert/domain/education_model/education_controllers.dart';
+import 'package:latexpert/domain/education_model/education_model.dart';
+import 'package:latexpert/domain/experience_model/experience_controller.dart';
+import 'package:latexpert/domain/experience_model/experience_model.dart';
 
 class ExperienceService {
-  List<Map<String, TextEditingController>> addExperienceField(List<Map<String, TextEditingController>> controllersList) {
-    if (controllersList.length < 4) {
-      return List.from(controllersList)
-        ..add({
-          'employer': TextEditingController(),
-          'jobTitle': TextEditingController(),
-          'location': TextEditingController(),
-          'startDate': TextEditingController(),
-          'endDate': TextEditingController(),
-          'description': TextEditingController(),
-        });
+  final Dio dio = Dio();
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+  final String baseUrl = "${Strings.baseUrl}experience_info";  // Change this URL as needed
+
+  List<ExperienceModel> _experienceList = [];
+
+  // A list of controllers for each education field (used to handle form inputs)
+  List<ExperienceController> controllersList = [];
+
+  // A list to manage the expansion state of each education field (for UI purposes)
+  List<bool> expansionStates = [];
+
+  // Register education details
+  Future<void> registerExperience(List<ExperienceModel> experienceList) async {
+    final token = await secureStorage.read(key: 'jwt_token');
+    if (token == null) {
+      throw Exception('Token not found. Please log in again.');
     }
-    return controllersList;
+
+    final Map<String, dynamic> experienceData = {
+      "experienceList": experienceList,
+    };
+
+    try {
+      final response = await dio.post(
+        baseUrl,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        }),
+        data: experienceData,
+      );
+
+      if (response.statusCode != 201) {
+        throw Exception('Failed to save education details: ${response.data}');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
   }
 
-  List<Map<String, TextEditingController>> deleteExperienceField(List<Map<String, TextEditingController>> controllersList, int index) {
+  // Method to add a new education field
+  void addExperienceField() {
+    final controllers = ExperienceController(
+      employer: TextEditingController(),
+      location: TextEditingController(),
+      description: TextEditingController(),
+       jobTitle: TextEditingController(),
+      startDate: TextEditingController(),
+      endDate: TextEditingController(),
+    );
+
+    controllersList.add(controllers);
+    expansionStates.add(false);  // Initially, the education field will not be expanded
+  }
+
+  // Method to delete an existing education field by index
+  void deleteExperienceField(int index) {
     if (index >= 0 && index < controllersList.length) {
-      return List.from(controllersList)..removeAt(index);
+      controllersList[index].dispose();
+      controllersList.removeAt(index);
+      expansionStates.removeAt(index);
+      _experienceList.removeAt(index); // Also remove from the education list
     }
-    return controllersList;
   }
 
-  List<bool> addExpansionState(List<bool> expansionStates) {
-    return List.from(expansionStates)..add(true);
-  }
-
-  List<bool> deleteExpansionState(List<bool> expansionStates, int index) {
+  // Method to update the expansion state of an education field by index
+  void updateExpansionState(int index, bool isExpanded) {
     if (index >= 0 && index < expansionStates.length) {
-      return List.from(expansionStates)..removeAt(index);
+      expansionStates[index] = isExpanded;
     }
-    return expansionStates;
   }
 
-  List<bool> updateExpansionState(List<bool> expansionStates, int index, bool isExpanded) {
-    return List.from(expansionStates)..[index] = isExpanded;
+  // Method to get the current list of education fields
+  List<ExperienceModel> getExperienceList() {
+    return _experienceList;
   }
 
-  // No Firebase interaction here anymore.
-  Future<ExperienceMasterModel> saveExperience(List<Map<String, TextEditingController>> controllersList) async {
-    final experiences = controllersList.map((controllers) {
+  // Helper method to convert controllers to EducationModel (for easy use in UI)
+  List<ExperienceModel> convertControllersToExperienceModel() {
+    return controllersList.map((controllers) {
       return ExperienceModel(
-        employer: controllers['employer']!.text,
-        jobTitle: controllers['jobTitle']!.text,
-        location: controllers['location']!.text,
-        startDate: DateTime.parse(controllers['startDate']!.text), // Parse DateTime
-        endDate: DateTime.parse(controllers['endDate']!.text),     // Parse DateTime
-        description: controllers['description']!.text,
+        employer: controllers.employer.text ?? '',
+        location: controllers.location.text ?? '',
+        jobTitle: controllers.jobTitle.text ?? '',
+        description: controllers.description.text ?? '',
+        startDate: controllers.startDate.text ?? '',
+        endDate: controllers.endDate.text ?? '',
       );
     }).toList();
-
-    return ExperienceMasterModel(experiences: experiences);
-  }
-
-  void disposeControllers(List<Map<String, TextEditingController>> controllersList) {
-    for (var controllers in controllersList) {
-      for (var controller in controllers.values) {
-        controller.dispose();
-      }
-    }
   }
 }

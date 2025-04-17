@@ -172,20 +172,4 @@ class _EducationInfoScreenState extends State<EducationInfoScreen> {
       ),
     );
   }
-
-  // Function to register education
-  // Future<void> registerEducation() async {
-  //   final educationList = context.read<EducationCubit>().controllersList.map((controllers) {
-  //     return EducationModel(
-  //       institution: controllers['institution']!.text,
-  //       location: controllers['location']!.text,
-  //       degreeType: controllers['degreeType']!.text,
-  //       fieldOfStudy: controllers['fieldOfStudy']!.text,
-  //       startDate: controllers['startDate']!.text,
-  //       endDate: controllers['endDate']!.text,
-  //     );
-  //   }).toList();
-  //
-  //   await context.read<EducationCubit>().registerEducation(context, educationList);
-  // }
 }

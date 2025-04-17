@@ -188,8 +188,8 @@ mixin _$ExperienceModel {
   String get employer => throw _privateConstructorUsedError;
   String get jobTitle => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
-  DateTime get startDate => throw _privateConstructorUsedError;
-  DateTime get endDate => throw _privateConstructorUsedError;
+  String get startDate => throw _privateConstructorUsedError;
+  String get endDate => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
   /// Serializes this ExperienceModel to a JSON map.
@@ -212,8 +212,8 @@ abstract class $ExperienceModelCopyWith<$Res> {
       {String employer,
       String jobTitle,
       String location,
-      DateTime startDate,
-      DateTime endDate,
+      String startDate,
+      String endDate,
       String description});
 }
 
@@ -255,11 +255,11 @@ class _$ExperienceModelCopyWithImpl<$Res, $Val extends ExperienceModel>
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       endDate: null == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -280,8 +280,8 @@ abstract class _$$ExperienceModelImplCopyWith<$Res>
       {String employer,
       String jobTitle,
       String location,
-      DateTime startDate,
-      DateTime endDate,
+      String startDate,
+      String endDate,
       String description});
 }
 
@@ -321,11 +321,11 @@ class __$$ExperienceModelImplCopyWithImpl<$Res>
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       endDate: null == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -355,9 +355,9 @@ class _$ExperienceModelImpl implements _ExperienceModel {
   @override
   final String location;
   @override
-  final DateTime startDate;
+  final String startDate;
   @override
-  final DateTime endDate;
+  final String endDate;
   @override
   final String description;
 
@@ -411,8 +411,8 @@ abstract class _ExperienceModel implements ExperienceModel {
       {required final String employer,
       required final String jobTitle,
       required final String location,
-      required final DateTime startDate,
-      required final DateTime endDate,
+      required final String startDate,
+      required final String endDate,
       required final String description}) = _$ExperienceModelImpl;
 
   factory _ExperienceModel.fromJson(Map<String, dynamic> json) =
@@ -425,9 +425,9 @@ abstract class _ExperienceModel implements ExperienceModel {
   @override
   String get location;
   @override
-  DateTime get startDate;
+  String get startDate;
   @override
-  DateTime get endDate;
+  String get endDate;
   @override
   String get description;
 

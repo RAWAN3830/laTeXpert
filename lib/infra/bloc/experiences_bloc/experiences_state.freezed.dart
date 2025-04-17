@@ -19,39 +19,50 @@ mixin _$ExperienceState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(ExperienceMasterModel experienceMasterModel)
-        success,
+    required TResult Function() loading,
+    required TResult Function(List<ExperienceModel> experienceList) success,
+    required TResult Function(String errorMessage) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(ExperienceMasterModel experienceMasterModel)? success,
+    TResult? Function()? loading,
+    TResult? Function(List<ExperienceModel> experienceList)? success,
+    TResult? Function(String errorMessage)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ExperienceMasterModel experienceMasterModel)? success,
+    TResult Function()? loading,
+    TResult Function(List<ExperienceModel> experienceList)? success,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ExperienceStateInitial value) initial,
+    required TResult Function(ExperienceStateLoading value) loading,
     required TResult Function(ExperienceStateSuccess value) success,
+    required TResult Function(ExperienceStateError value) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ExperienceStateInitial value)? initial,
+    TResult? Function(ExperienceStateLoading value)? loading,
     TResult? Function(ExperienceStateSuccess value)? success,
+    TResult? Function(ExperienceStateError value)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ExperienceStateInitial value)? initial,
+    TResult Function(ExperienceStateLoading value)? loading,
     TResult Function(ExperienceStateSuccess value)? success,
+    TResult Function(ExperienceStateError value)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -123,8 +134,9 @@ class _$ExperienceStateInitialImpl implements ExperienceStateInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(ExperienceMasterModel experienceMasterModel)
-        success,
+    required TResult Function() loading,
+    required TResult Function(List<ExperienceModel> experienceList) success,
+    required TResult Function(String errorMessage) failure,
   }) {
     return initial();
   }
@@ -133,7 +145,9 @@ class _$ExperienceStateInitialImpl implements ExperienceStateInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(ExperienceMasterModel experienceMasterModel)? success,
+    TResult? Function()? loading,
+    TResult? Function(List<ExperienceModel> experienceList)? success,
+    TResult? Function(String errorMessage)? failure,
   }) {
     return initial?.call();
   }
@@ -142,7 +156,9 @@ class _$ExperienceStateInitialImpl implements ExperienceStateInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ExperienceMasterModel experienceMasterModel)? success,
+    TResult Function()? loading,
+    TResult Function(List<ExperienceModel> experienceList)? success,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -155,7 +171,9 @@ class _$ExperienceStateInitialImpl implements ExperienceStateInitial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ExperienceStateInitial value) initial,
+    required TResult Function(ExperienceStateLoading value) loading,
     required TResult Function(ExperienceStateSuccess value) success,
+    required TResult Function(ExperienceStateError value) failure,
   }) {
     return initial(this);
   }
@@ -164,7 +182,9 @@ class _$ExperienceStateInitialImpl implements ExperienceStateInitial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ExperienceStateInitial value)? initial,
+    TResult? Function(ExperienceStateLoading value)? loading,
     TResult? Function(ExperienceStateSuccess value)? success,
+    TResult? Function(ExperienceStateError value)? failure,
   }) {
     return initial?.call(this);
   }
@@ -173,7 +193,9 @@ class _$ExperienceStateInitialImpl implements ExperienceStateInitial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ExperienceStateInitial value)? initial,
+    TResult Function(ExperienceStateLoading value)? loading,
     TResult Function(ExperienceStateSuccess value)? success,
+    TResult Function(ExperienceStateError value)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -188,15 +210,133 @@ abstract class ExperienceStateInitial implements ExperienceState {
 }
 
 /// @nodoc
+abstract class _$$ExperienceStateLoadingImplCopyWith<$Res> {
+  factory _$$ExperienceStateLoadingImplCopyWith(
+          _$ExperienceStateLoadingImpl value,
+          $Res Function(_$ExperienceStateLoadingImpl) then) =
+      __$$ExperienceStateLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ExperienceStateLoadingImplCopyWithImpl<$Res>
+    extends _$ExperienceStateCopyWithImpl<$Res, _$ExperienceStateLoadingImpl>
+    implements _$$ExperienceStateLoadingImplCopyWith<$Res> {
+  __$$ExperienceStateLoadingImplCopyWithImpl(
+      _$ExperienceStateLoadingImpl _value,
+      $Res Function(_$ExperienceStateLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ExperienceState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ExperienceStateLoadingImpl implements ExperienceStateLoading {
+  const _$ExperienceStateLoadingImpl();
+
+  @override
+  String toString() {
+    return 'ExperienceState.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ExperienceStateLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ExperienceModel> experienceList) success,
+    required TResult Function(String errorMessage) failure,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ExperienceModel> experienceList)? success,
+    TResult? Function(String errorMessage)? failure,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ExperienceModel> experienceList)? success,
+    TResult Function(String errorMessage)? failure,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ExperienceStateInitial value) initial,
+    required TResult Function(ExperienceStateLoading value) loading,
+    required TResult Function(ExperienceStateSuccess value) success,
+    required TResult Function(ExperienceStateError value) failure,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ExperienceStateInitial value)? initial,
+    TResult? Function(ExperienceStateLoading value)? loading,
+    TResult? Function(ExperienceStateSuccess value)? success,
+    TResult? Function(ExperienceStateError value)? failure,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ExperienceStateInitial value)? initial,
+    TResult Function(ExperienceStateLoading value)? loading,
+    TResult Function(ExperienceStateSuccess value)? success,
+    TResult Function(ExperienceStateError value)? failure,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ExperienceStateLoading implements ExperienceState {
+  const factory ExperienceStateLoading() = _$ExperienceStateLoadingImpl;
+}
+
+/// @nodoc
 abstract class _$$ExperienceStateSuccessImplCopyWith<$Res> {
   factory _$$ExperienceStateSuccessImplCopyWith(
           _$ExperienceStateSuccessImpl value,
           $Res Function(_$ExperienceStateSuccessImpl) then) =
       __$$ExperienceStateSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ExperienceMasterModel experienceMasterModel});
-
-  $ExperienceMasterModelCopyWith<$Res> get experienceMasterModel;
+  $Res call({List<ExperienceModel> experienceList});
 }
 
 /// @nodoc
@@ -213,39 +353,35 @@ class __$$ExperienceStateSuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? experienceMasterModel = null,
+    Object? experienceList = null,
   }) {
     return _then(_$ExperienceStateSuccessImpl(
-      experienceMasterModel: null == experienceMasterModel
-          ? _value.experienceMasterModel
-          : experienceMasterModel // ignore: cast_nullable_to_non_nullable
-              as ExperienceMasterModel,
+      experienceList: null == experienceList
+          ? _value._experienceList
+          : experienceList // ignore: cast_nullable_to_non_nullable
+              as List<ExperienceModel>,
     ));
-  }
-
-  /// Create a copy of ExperienceState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ExperienceMasterModelCopyWith<$Res> get experienceMasterModel {
-    return $ExperienceMasterModelCopyWith<$Res>(_value.experienceMasterModel,
-        (value) {
-      return _then(_value.copyWith(experienceMasterModel: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$ExperienceStateSuccessImpl implements ExperienceStateSuccess {
-  const _$ExperienceStateSuccessImpl({required this.experienceMasterModel});
+  const _$ExperienceStateSuccessImpl(
+      {required final List<ExperienceModel> experienceList})
+      : _experienceList = experienceList;
 
+  final List<ExperienceModel> _experienceList;
   @override
-  final ExperienceMasterModel experienceMasterModel;
+  List<ExperienceModel> get experienceList {
+    if (_experienceList is EqualUnmodifiableListView) return _experienceList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_experienceList);
+  }
 
   @override
   String toString() {
-    return 'ExperienceState.success(experienceMasterModel: $experienceMasterModel)';
+    return 'ExperienceState.success(experienceList: $experienceList)';
   }
 
   @override
@@ -253,12 +389,13 @@ class _$ExperienceStateSuccessImpl implements ExperienceStateSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ExperienceStateSuccessImpl &&
-            (identical(other.experienceMasterModel, experienceMasterModel) ||
-                other.experienceMasterModel == experienceMasterModel));
+            const DeepCollectionEquality()
+                .equals(other._experienceList, _experienceList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, experienceMasterModel);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_experienceList));
 
   /// Create a copy of ExperienceState
   /// with the given fields replaced by the non-null parameter values.
@@ -273,30 +410,35 @@ class _$ExperienceStateSuccessImpl implements ExperienceStateSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(ExperienceMasterModel experienceMasterModel)
-        success,
+    required TResult Function() loading,
+    required TResult Function(List<ExperienceModel> experienceList) success,
+    required TResult Function(String errorMessage) failure,
   }) {
-    return success(experienceMasterModel);
+    return success(experienceList);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(ExperienceMasterModel experienceMasterModel)? success,
+    TResult? Function()? loading,
+    TResult? Function(List<ExperienceModel> experienceList)? success,
+    TResult? Function(String errorMessage)? failure,
   }) {
-    return success?.call(experienceMasterModel);
+    return success?.call(experienceList);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ExperienceMasterModel experienceMasterModel)? success,
+    TResult Function()? loading,
+    TResult Function(List<ExperienceModel> experienceList)? success,
+    TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(experienceMasterModel);
+      return success(experienceList);
     }
     return orElse();
   }
@@ -305,7 +447,9 @@ class _$ExperienceStateSuccessImpl implements ExperienceStateSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ExperienceStateInitial value) initial,
+    required TResult Function(ExperienceStateLoading value) loading,
     required TResult Function(ExperienceStateSuccess value) success,
+    required TResult Function(ExperienceStateError value) failure,
   }) {
     return success(this);
   }
@@ -314,7 +458,9 @@ class _$ExperienceStateSuccessImpl implements ExperienceStateSuccess {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ExperienceStateInitial value)? initial,
+    TResult? Function(ExperienceStateLoading value)? loading,
     TResult? Function(ExperienceStateSuccess value)? success,
+    TResult? Function(ExperienceStateError value)? failure,
   }) {
     return success?.call(this);
   }
@@ -323,7 +469,9 @@ class _$ExperienceStateSuccessImpl implements ExperienceStateSuccess {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ExperienceStateInitial value)? initial,
+    TResult Function(ExperienceStateLoading value)? loading,
     TResult Function(ExperienceStateSuccess value)? success,
+    TResult Function(ExperienceStateError value)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -335,14 +483,170 @@ class _$ExperienceStateSuccessImpl implements ExperienceStateSuccess {
 
 abstract class ExperienceStateSuccess implements ExperienceState {
   const factory ExperienceStateSuccess(
-          {required final ExperienceMasterModel experienceMasterModel}) =
+          {required final List<ExperienceModel> experienceList}) =
       _$ExperienceStateSuccessImpl;
 
-  ExperienceMasterModel get experienceMasterModel;
+  List<ExperienceModel> get experienceList;
 
   /// Create a copy of ExperienceState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ExperienceStateSuccessImplCopyWith<_$ExperienceStateSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ExperienceStateErrorImplCopyWith<$Res> {
+  factory _$$ExperienceStateErrorImplCopyWith(_$ExperienceStateErrorImpl value,
+          $Res Function(_$ExperienceStateErrorImpl) then) =
+      __$$ExperienceStateErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String errorMessage});
+}
+
+/// @nodoc
+class __$$ExperienceStateErrorImplCopyWithImpl<$Res>
+    extends _$ExperienceStateCopyWithImpl<$Res, _$ExperienceStateErrorImpl>
+    implements _$$ExperienceStateErrorImplCopyWith<$Res> {
+  __$$ExperienceStateErrorImplCopyWithImpl(_$ExperienceStateErrorImpl _value,
+      $Res Function(_$ExperienceStateErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ExperienceState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorMessage = null,
+  }) {
+    return _then(_$ExperienceStateErrorImpl(
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ExperienceStateErrorImpl implements ExperienceStateError {
+  const _$ExperienceStateErrorImpl({required this.errorMessage});
+
+  @override
+  final String errorMessage;
+
+  @override
+  String toString() {
+    return 'ExperienceState.failure(errorMessage: $errorMessage)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ExperienceStateErrorImpl &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorMessage);
+
+  /// Create a copy of ExperienceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ExperienceStateErrorImplCopyWith<_$ExperienceStateErrorImpl>
+      get copyWith =>
+          __$$ExperienceStateErrorImplCopyWithImpl<_$ExperienceStateErrorImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ExperienceModel> experienceList) success,
+    required TResult Function(String errorMessage) failure,
+  }) {
+    return failure(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ExperienceModel> experienceList)? success,
+    TResult? Function(String errorMessage)? failure,
+  }) {
+    return failure?.call(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ExperienceModel> experienceList)? success,
+    TResult Function(String errorMessage)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(errorMessage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ExperienceStateInitial value) initial,
+    required TResult Function(ExperienceStateLoading value) loading,
+    required TResult Function(ExperienceStateSuccess value) success,
+    required TResult Function(ExperienceStateError value) failure,
+  }) {
+    return failure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ExperienceStateInitial value)? initial,
+    TResult? Function(ExperienceStateLoading value)? loading,
+    TResult? Function(ExperienceStateSuccess value)? success,
+    TResult? Function(ExperienceStateError value)? failure,
+  }) {
+    return failure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ExperienceStateInitial value)? initial,
+    TResult Function(ExperienceStateLoading value)? loading,
+    TResult Function(ExperienceStateSuccess value)? success,
+    TResult Function(ExperienceStateError value)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ExperienceStateError implements ExperienceState {
+  const factory ExperienceStateError({required final String errorMessage}) =
+      _$ExperienceStateErrorImpl;
+
+  String get errorMessage;
+
+  /// Create a copy of ExperienceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ExperienceStateErrorImplCopyWith<_$ExperienceStateErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

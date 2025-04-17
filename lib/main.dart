@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
           create: (context) => DeclarationCubit(),
         ),
         BlocProvider(
-          create: (context) => ExperienceCubit(),
+          create: (context) => ExperiencesBlocCubit(),
         )
       ],
       child: ResponsiveBreakpoints.builder(
