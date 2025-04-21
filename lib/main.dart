@@ -73,8 +73,8 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
                  theme: AppTheme.getTheme(breakpoint, isDark: isDark),
-                 //home: const LoginScreen(),
-                home: const HomeScreen(),
+                 home: const LoginScreen(),
+               // home: const HomeScreen(),
               // home:  const DynamicResumeForm(),
             );
           },

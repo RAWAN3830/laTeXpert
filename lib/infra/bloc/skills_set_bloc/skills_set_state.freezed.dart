@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SkillsSetState {
   List<SkillCategoryModel> get skillCategories =>
       throw _privateConstructorUsedError;
+  String get selectedCategory => throw _privateConstructorUsedError;
 
   /// Create a copy of SkillsSetState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +33,8 @@ abstract class $SkillsSetStateCopyWith<$Res> {
           SkillsSetState value, $Res Function(SkillsSetState) then) =
       _$SkillsSetStateCopyWithImpl<$Res, SkillsSetState>;
   @useResult
-  $Res call({List<SkillCategoryModel> skillCategories});
+  $Res call(
+      {List<SkillCategoryModel> skillCategories, String selectedCategory});
 }
 
 /// @nodoc
@@ -51,12 +53,17 @@ class _$SkillsSetStateCopyWithImpl<$Res, $Val extends SkillsSetState>
   @override
   $Res call({
     Object? skillCategories = null,
+    Object? selectedCategory = null,
   }) {
     return _then(_value.copyWith(
       skillCategories: null == skillCategories
           ? _value.skillCategories
           : skillCategories // ignore: cast_nullable_to_non_nullable
               as List<SkillCategoryModel>,
+      selectedCategory: null == selectedCategory
+          ? _value.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -69,7 +76,8 @@ abstract class _$$SkillsSetStateImplCopyWith<$Res>
       __$$SkillsSetStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<SkillCategoryModel> skillCategories});
+  $Res call(
+      {List<SkillCategoryModel> skillCategories, String selectedCategory});
 }
 
 /// @nodoc
@@ -86,12 +94,17 @@ class __$$SkillsSetStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? skillCategories = null,
+    Object? selectedCategory = null,
   }) {
     return _then(_$SkillsSetStateImpl(
       skillCategories: null == skillCategories
           ? _value._skillCategories
           : skillCategories // ignore: cast_nullable_to_non_nullable
               as List<SkillCategoryModel>,
+      selectedCategory: null == selectedCategory
+          ? _value.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -100,7 +113,8 @@ class __$$SkillsSetStateImplCopyWithImpl<$Res>
 
 class _$SkillsSetStateImpl implements _SkillsSetState {
   const _$SkillsSetStateImpl(
-      {required final List<SkillCategoryModel> skillCategories})
+      {required final List<SkillCategoryModel> skillCategories,
+      required this.selectedCategory})
       : _skillCategories = skillCategories;
 
   final List<SkillCategoryModel> _skillCategories;
@@ -112,8 +126,11 @@ class _$SkillsSetStateImpl implements _SkillsSetState {
   }
 
   @override
+  final String selectedCategory;
+
+  @override
   String toString() {
-    return 'SkillsSetState(skillCategories: $skillCategories)';
+    return 'SkillsSetState(skillCategories: $skillCategories, selectedCategory: $selectedCategory)';
   }
 
   @override
@@ -122,12 +139,14 @@ class _$SkillsSetStateImpl implements _SkillsSetState {
         (other.runtimeType == runtimeType &&
             other is _$SkillsSetStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._skillCategories, _skillCategories));
+                .equals(other._skillCategories, _skillCategories) &&
+            (identical(other.selectedCategory, selectedCategory) ||
+                other.selectedCategory == selectedCategory));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_skillCategories));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_skillCategories), selectedCategory);
 
   /// Create a copy of SkillsSetState
   /// with the given fields replaced by the non-null parameter values.
@@ -141,11 +160,13 @@ class _$SkillsSetStateImpl implements _SkillsSetState {
 
 abstract class _SkillsSetState implements SkillsSetState {
   const factory _SkillsSetState(
-          {required final List<SkillCategoryModel> skillCategories}) =
-      _$SkillsSetStateImpl;
+      {required final List<SkillCategoryModel> skillCategories,
+      required final String selectedCategory}) = _$SkillsSetStateImpl;
 
   @override
   List<SkillCategoryModel> get skillCategories;
+  @override
+  String get selectedCategory;
 
   /// Create a copy of SkillsSetState
   /// with the given fields replaced by the non-null parameter values.

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latexpert/infra/bloc/skills_set_bloc/skills_set_bloc_cubit.dart';
 import 'package:latexpert/infra/bloc/skills_set_bloc/skills_set_state.dart';
+import 'package:latexpert/infra/services/skillset/skills_repository.dart';
 import 'package:latexpert/presentation/Resume_builder_screen/skill_sets_screen.dart/skills_set_widget/skill_category_tile.dart';
 
 import '../../../core/constant/strings.dart';
@@ -47,7 +50,21 @@ class SkillSetsScreen extends StatelessWidget {
 
             /// Save & Continue Button
             CommonSaveButton(
-                formKey: _formKey, onTap: () {}, name: Strings.saveContinue)
+                formKey: _formKey,
+                onTap: () async {
+                  try {
+                    await context.read<SkillsSetBlocCubit>().saveSkillsToServer();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Skills saved successfully!')),
+                    );
+                    // Navigate to next screen if needed
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Failed to save: $e')),
+                    );
+                  }
+                },
+                name: Strings.saveContinue)
           ],
         ),
       ),
