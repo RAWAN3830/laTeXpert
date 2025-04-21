@@ -140,5 +140,5 @@ This project is **open-source** and available under the [MIT License](LICENSE).
 
 ---
 
-🚀 Made with ❤️ by **Ved Patel** AND **Darshan Savaliya**
+🚀 Made with ❤️ by **Ved Patel** and **Darshan Savaliya**
 
