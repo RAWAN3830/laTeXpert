@@ -13,6 +13,7 @@ import 'package:latexpert/infra/bloc/profile_bloc/profile_state.dart';
 import 'package:latexpert/infra/bloc/skills_set_bloc/skills_set_bloc_cubit.dart';
 import 'package:latexpert/presentation/Resume_builder_screen/education_screen/education_info_screen.dart';
 import 'package:latexpert/presentation/auth_screen/login_screen.dart';
+import 'package:latexpert/presentation/home_screen/home_screen.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'infra/bloc/auth_bloc/email_auth/login_user/login_bloc_cubit.dart';
 import 'infra/bloc/auth_bloc/email_auth/registration_user/registration_bloc_cubit.dart';
@@ -72,8 +73,8 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
                  theme: AppTheme.getTheme(breakpoint, isDark: isDark),
-                 home: const LoginScreen(),
-                //home: const HomeScreen(),
+                 //home: const LoginScreen(),
+                home: const HomeScreen(),
               // home:  const DynamicResumeForm(),
             );
           },

@@ -108,7 +108,7 @@ class DetailsCard extends StatelessWidget {
         context.push(context, target: const ExperienceScreen(showAppBar: true));
         break;
       case 3:
-        context.push(context, target: const SkillsScreen(showAppBar: true));
+        context.push(context, target:  SkillSetsScreen(showAppBar: true));
         break;
       case 4:
         context.push(context, target: const ProjectInfo(showAppBar: true));
