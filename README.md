@@ -1,5 +1,5 @@
 
-# LaTeXpert - Resume Builder 🚀
+💼 LaTeXpert - Resume Builder App 🚀
 <p align="start">
    <img src="screenshot/logo.svg" alt="Description" width="100" height="100" />
   <img src="screenshot/text.svg" alt="Description" width="100" height="100" />
@@ -140,5 +140,7 @@ This project is **open-source** and available under the [MIT License](LICENSE).
 
 ---
 
-🚀 Made with ❤️ by **Ved Patel** && **Darshan Savaliya**
+👨‍💻 Authors
+Made with ❤️ by
+Ved Patel & Darshan Savaliya
 
