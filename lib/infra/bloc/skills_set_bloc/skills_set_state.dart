@@ -1,24 +1,19 @@
-// lib/infra/bloc/skills_set_bloc/skills_set_state.dart
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:latexpert/domain/skill_category_model/skill_category_model.dart';
 
 part 'skills_set_state.freezed.dart';
 
 @freezed
 class SkillsSetState with _$SkillsSetState {
-  // Initial state
-  const factory SkillsSetState.initial() = SkillsSetStateInitial;
+  const factory SkillsSetState({
+    required List<SkillCategoryModel> skillCategories,
+  }) = _SkillsSetState;
 
-  // Loading state
-  const factory SkillsSetState.loading() = SkillsSetStateLoading;
-
-  // Success state
-  const factory SkillsSetState.success({
-    required Map<String, List<String>> categories,
-    required String selectedCategories,
-  }) = SkillsSetStateSuccess;
-
-  // Failure state
-  const factory SkillsSetState.failure({
-    required String errorMessage,
-  }) = SkillsSetStateFailure;
+  factory SkillsSetState.initial() =>const SkillsSetState(
+    skillCategories: [
+      SkillCategoryModel(name: 'Databases', skills: []),
+      SkillCategoryModel(name: 'Frameworks', skills: []),
+      SkillCategoryModel(name: 'Programming Languages', skills: []),
+    ],
+  );
 }
