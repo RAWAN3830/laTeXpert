@@ -1,61 +1,63 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:developer';
+
+import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:latexpert/domain/declaration_model/declaration_controller.dart';
+import 'package:latexpert/domain/declaration_model/declaration_model.dart';
 import 'package:latexpert/infra/bloc/declaration_bloc/declaration_state.dart';
 import 'package:latexpert/infra/services/declaration_service/declaration_service.dart';
 
-class DeclarationCubit extends Cubit<DeclarationState> {
+class DeclarationBloc extends Cubit<DeclarationState> {
   final DeclarationService _declarationService = DeclarationService();
 
-  DeclarationCubit() : super(const DeclarationState.initial());
-
-  void initialize() {
-    emit(_declarationService.initialize());
+  DeclarationBloc() : super(const DeclarationState.initial()) {
+    addDeclarationField();
   }
 
+  // Add new declaration field
   void addDeclarationField() {
-    state.maybeWhen(
-      success: (controllersList) {
-        emit(_declarationService.addDeclarationField(controllersList));
-      },
-      orElse: () {},
-    );
+    _declarationService.addDeclarationField();
+    _emitSuccessState();
   }
 
+  // Delete declaration field
   void deleteDeclarationField(int index) {
-    state.maybeWhen(
-      success: (controllersList) {
-        emit(_declarationService.deleteDeclarationField(index, controllersList));
-      },
-      orElse: () {},
-    );
+    _declarationService.deleteDeclarationField(index);
+    _emitSuccessState();
   }
 
-  Future<void> saveDeclaration() async {
-    state.maybeWhen(
-      success: (controllersList) async {
-        emit(const DeclarationState.loading());
-        emit(await _declarationService.saveDeclaration(controllersList));
-      },
-      orElse: () {},
-    );
+  // Register declarations via API
+  Future<void> registerDeclaration(BuildContext context,List<DeclarationModel> declarationList) async {
+    emit(const DeclarationState.loading());
+    try {
+      await _declarationService.registerDeclaration(declarationList);
+      emit(DeclarationState.success(declarationList: declarationList));
+    } catch (e) {
+      emit(DeclarationState.failure(errorMessage: e.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+      log(e.toString());
+    }
   }
 
-  void resetDeclarationFields() {
-    state.maybeWhen(
-      success: (controllersList) {
-        emit(_declarationService.resetDeclarationFields(controllersList));
-      },
-      orElse: () {},
-    );
-  }
-
+  // Dispose all controllers on close
   @override
   Future<void> close() {
-    state.maybeWhen(
-      success: (controllersList) {
-        _declarationService.disposeControllers(controllersList);
-      },
-      orElse: () {},
-    );
+    _declarationService.disposeControllers(_declarationService.controllersList);
     return super.close();
   }
+
+  void _emitSuccessState() {
+    // Convert controllers to projectModel before emitting success state
+    final declarationList = _declarationService.convertControllersToDeclarationModel();
+    emit(DeclarationState.success(declarationList: declarationList));
+  }
+
+
+  // Getters to access controller & expansion state (if needed in UI)
+  List<DeclarationController> get controllersList =>
+      _declarationService.controllersList;
+
+  List<bool> get expansionStates => _declarationService.expansionStates;
 }
