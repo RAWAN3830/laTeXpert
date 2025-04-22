@@ -12,7 +12,6 @@ class DeclarationMasterModel with _$DeclarationMasterModel {
   factory DeclarationMasterModel.fromJson(Map<String, dynamic> json) => _$DeclarationMasterModelFromJson(json);
 }
 
-
 @freezed
 class DeclarationModel with _$DeclarationModel {
   const factory DeclarationModel({

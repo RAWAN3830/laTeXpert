@@ -20,8 +20,7 @@ mixin _$DeclarationState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TextEditingController> honorAwardControllers)
-        success,
+    required TResult Function(List<DeclarationModel> declarationList) success,
     required TResult Function(String? errorMessage) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,8 +28,7 @@ mixin _$DeclarationState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TextEditingController> honorAwardControllers)?
-        success,
+    TResult? Function(List<DeclarationModel> declarationList)? success,
     TResult? Function(String? errorMessage)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,8 +36,7 @@ mixin _$DeclarationState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TextEditingController> honorAwardControllers)?
-        success,
+    TResult Function(List<DeclarationModel> declarationList)? success,
     TResult Function(String? errorMessage)? failure,
     required TResult orElse(),
   }) =>
@@ -138,8 +135,7 @@ class _$DeclarationStateInitialImpl implements _DeclarationStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TextEditingController> honorAwardControllers)
-        success,
+    required TResult Function(List<DeclarationModel> declarationList) success,
     required TResult Function(String? errorMessage) failure,
   }) {
     return initial();
@@ -150,8 +146,7 @@ class _$DeclarationStateInitialImpl implements _DeclarationStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TextEditingController> honorAwardControllers)?
-        success,
+    TResult? Function(List<DeclarationModel> declarationList)? success,
     TResult? Function(String? errorMessage)? failure,
   }) {
     return initial?.call();
@@ -162,8 +157,7 @@ class _$DeclarationStateInitialImpl implements _DeclarationStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TextEditingController> honorAwardControllers)?
-        success,
+    TResult Function(List<DeclarationModel> declarationList)? success,
     TResult Function(String? errorMessage)? failure,
     required TResult orElse(),
   }) {
@@ -261,8 +255,7 @@ class _$DeclarationStateLoadingImpl implements _DeclarationStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TextEditingController> honorAwardControllers)
-        success,
+    required TResult Function(List<DeclarationModel> declarationList) success,
     required TResult Function(String? errorMessage) failure,
   }) {
     return loading();
@@ -273,8 +266,7 @@ class _$DeclarationStateLoadingImpl implements _DeclarationStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TextEditingController> honorAwardControllers)?
-        success,
+    TResult? Function(List<DeclarationModel> declarationList)? success,
     TResult? Function(String? errorMessage)? failure,
   }) {
     return loading?.call();
@@ -285,8 +277,7 @@ class _$DeclarationStateLoadingImpl implements _DeclarationStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TextEditingController> honorAwardControllers)?
-        success,
+    TResult Function(List<DeclarationModel> declarationList)? success,
     TResult Function(String? errorMessage)? failure,
     required TResult orElse(),
   }) {
@@ -345,7 +336,7 @@ abstract class _$$DeclarationStateSuccessImplCopyWith<$Res> {
           $Res Function(_$DeclarationStateSuccessImpl) then) =
       __$$DeclarationStateSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<TextEditingController> honorAwardControllers});
+  $Res call({List<DeclarationModel> declarationList});
 }
 
 /// @nodoc
@@ -362,13 +353,13 @@ class __$$DeclarationStateSuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? honorAwardControllers = null,
+    Object? declarationList = null,
   }) {
     return _then(_$DeclarationStateSuccessImpl(
-      honorAwardControllers: null == honorAwardControllers
-          ? _value._honorAwardControllers
-          : honorAwardControllers // ignore: cast_nullable_to_non_nullable
-              as List<TextEditingController>,
+      declarationList: null == declarationList
+          ? _value._declarationList
+          : declarationList // ignore: cast_nullable_to_non_nullable
+              as List<DeclarationModel>,
     ));
   }
 }
@@ -377,21 +368,20 @@ class __$$DeclarationStateSuccessImplCopyWithImpl<$Res>
 
 class _$DeclarationStateSuccessImpl implements _DeclarationStateSuccess {
   const _$DeclarationStateSuccessImpl(
-      {required final List<TextEditingController> honorAwardControllers})
-      : _honorAwardControllers = honorAwardControllers;
+      {required final List<DeclarationModel> declarationList})
+      : _declarationList = declarationList;
 
-  final List<TextEditingController> _honorAwardControllers;
+  final List<DeclarationModel> _declarationList;
   @override
-  List<TextEditingController> get honorAwardControllers {
-    if (_honorAwardControllers is EqualUnmodifiableListView)
-      return _honorAwardControllers;
+  List<DeclarationModel> get declarationList {
+    if (_declarationList is EqualUnmodifiableListView) return _declarationList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_honorAwardControllers);
+    return EqualUnmodifiableListView(_declarationList);
   }
 
   @override
   String toString() {
-    return 'DeclarationState.success(honorAwardControllers: $honorAwardControllers)';
+    return 'DeclarationState.success(declarationList: $declarationList)';
   }
 
   @override
@@ -400,12 +390,12 @@ class _$DeclarationStateSuccessImpl implements _DeclarationStateSuccess {
         (other.runtimeType == runtimeType &&
             other is _$DeclarationStateSuccessImpl &&
             const DeepCollectionEquality()
-                .equals(other._honorAwardControllers, _honorAwardControllers));
+                .equals(other._declarationList, _declarationList));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_honorAwardControllers));
+      runtimeType, const DeepCollectionEquality().hash(_declarationList));
 
   /// Create a copy of DeclarationState
   /// with the given fields replaced by the non-null parameter values.
@@ -421,11 +411,10 @@ class _$DeclarationStateSuccessImpl implements _DeclarationStateSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TextEditingController> honorAwardControllers)
-        success,
+    required TResult Function(List<DeclarationModel> declarationList) success,
     required TResult Function(String? errorMessage) failure,
   }) {
-    return success(honorAwardControllers);
+    return success(declarationList);
   }
 
   @override
@@ -433,11 +422,10 @@ class _$DeclarationStateSuccessImpl implements _DeclarationStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TextEditingController> honorAwardControllers)?
-        success,
+    TResult? Function(List<DeclarationModel> declarationList)? success,
     TResult? Function(String? errorMessage)? failure,
   }) {
-    return success?.call(honorAwardControllers);
+    return success?.call(declarationList);
   }
 
   @override
@@ -445,13 +433,12 @@ class _$DeclarationStateSuccessImpl implements _DeclarationStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TextEditingController> honorAwardControllers)?
-        success,
+    TResult Function(List<DeclarationModel> declarationList)? success,
     TResult Function(String? errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(honorAwardControllers);
+      return success(declarationList);
     }
     return orElse();
   }
@@ -496,10 +483,10 @@ class _$DeclarationStateSuccessImpl implements _DeclarationStateSuccess {
 
 abstract class _DeclarationStateSuccess implements DeclarationState {
   const factory _DeclarationStateSuccess(
-          {required final List<TextEditingController> honorAwardControllers}) =
+          {required final List<DeclarationModel> declarationList}) =
       _$DeclarationStateSuccessImpl;
 
-  List<TextEditingController> get honorAwardControllers;
+  List<DeclarationModel> get declarationList;
 
   /// Create a copy of DeclarationState
   /// with the given fields replaced by the non-null parameter values.
@@ -582,8 +569,7 @@ class _$DeclarationStateFailureImpl implements _DeclarationStateFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TextEditingController> honorAwardControllers)
-        success,
+    required TResult Function(List<DeclarationModel> declarationList) success,
     required TResult Function(String? errorMessage) failure,
   }) {
     return failure(errorMessage);
@@ -594,8 +580,7 @@ class _$DeclarationStateFailureImpl implements _DeclarationStateFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TextEditingController> honorAwardControllers)?
-        success,
+    TResult? Function(List<DeclarationModel> declarationList)? success,
     TResult? Function(String? errorMessage)? failure,
   }) {
     return failure?.call(errorMessage);
@@ -606,8 +591,7 @@ class _$DeclarationStateFailureImpl implements _DeclarationStateFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TextEditingController> honorAwardControllers)?
-        success,
+    TResult Function(List<DeclarationModel> declarationList)? success,
     TResult Function(String? errorMessage)? failure,
     required TResult orElse(),
   }) {

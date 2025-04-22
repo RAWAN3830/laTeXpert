@@ -107,6 +107,7 @@ flutter:
     - assets/icons/
     - assets/illustrator/
     - assets/fonts/
+    - assets/template/
     - assets/icon.png
     #- images/pngwing.png
 

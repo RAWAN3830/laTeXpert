@@ -1,145 +1,107 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:latexpert/core/constant/extension.dart';
-import 'package:latexpert/core/constant/strings.dart';
+import 'package:latexpert/domain/declaration_model/declaration_controller.dart';
 import 'package:latexpert/infra/bloc/declaration_bloc/declaration_bloc.dart';
-import 'package:latexpert/infra/bloc/declaration_bloc/declaration_state.dart';
-import 'package:latexpert/presentation/common_widgets/common_buttons/common_reset_button.dart';
-import 'package:latexpert/presentation/common_widgets/common_popup/common_delete_popup.dart';
-import 'package:latexpert/presentation/common_widgets/common_text/common_heading.dart';
-import '../../common_widgets/common_appbar/custome_appbar.dart';
-import '../../common_widgets/common_buttons/common_add_field_button.dart';
-import '../../common_widgets/common_buttons/common_save_button.dart';
-import '../../common_widgets/common_textfields/comman_textformfield.dart';
+import 'package:latexpert/presentation/common_widgets/common_appbar/custome_appbar.dart';
+import 'package:latexpert/presentation/common_widgets/common_buttons/common_add_field_button.dart';
+import 'package:latexpert/presentation/common_widgets/common_buttons/common_save_button.dart';
+import 'package:latexpert/presentation/common_widgets/common_textfields/comman_textformfield.dart';
+import 'package:latexpert/core/constant/strings.dart';
+
+import '../../../infra/bloc/declaration_bloc/declaration_state.dart';
+import '../../common_widgets/common_text/common_heading.dart';
 
 class DeclarationScreen extends StatefulWidget {
   final bool showAppBar;
-  final VoidCallback? onNext;  // Callback function to move to next step
+  final VoidCallback? onNext;
 
-  const DeclarationScreen({super.key, this.showAppBar = true, this.onNext});
+  const DeclarationScreen({Key? key, this.showAppBar = true, this.onNext})
+      : super(key: key);
 
   @override
   State<DeclarationScreen> createState() => _DeclarationScreenState();
 }
 
 class _DeclarationScreenState extends State<DeclarationScreen> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late DeclarationCubit _declarationCubit;
-
-  @override
-  void initState() {
-    super.initState();
-    _declarationCubit = DeclarationCubit();
-    _declarationCubit.initialize();
-  }
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => _declarationCubit,
+      create: (_) => DeclarationBloc(),
       child: Scaffold(
-        appBar: widget.showAppBar ? const CustomAppBar(title: Strings.honorAwardTitle) : null,
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  BlocBuilder<DeclarationCubit, DeclarationState>(
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                        success: (controllersList) {
+        appBar: widget.showAppBar
+            ? const CustomAppBar(title: Strings.declaration)
+            : null,
+        body: BlocBuilder<DeclarationBloc, DeclarationState>(
+          builder: (context, state) {
+            final cubit = context.read<DeclarationBloc>();
+            final controllers = cubit.controllersList;
+
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controllers.length,
+                        itemBuilder: (context, index) {
                           return Column(
-                            children: List.generate(controllersList.length, (index) {
-                              return Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        CommonHeading(title: '${Strings.honorAward} ${index + 1}'),
-                                        CommonTextformfield(
-                                          controller: controllersList[index],
-                                          labelText: 'Won X Hackathon at X Institute',
-                                          errorText: Strings.validTitleError,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  if (controllersList.length > 1)
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 8.0, left: 10),
-                                      child: IconButton(
-                                        onPressed: () => CommonDeletePopup().showDeleteConfirmationDialog(
-                                          context,
-                                          index,
-                                              () => context.read<DeclarationCubit>().deleteDeclarationField(index),
-                                        ),
-                                        icon: const Icon(CupertinoIcons.delete),
-                                      ),
-                                    ),
-                                ],
-                              );
-                            }),
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CommonHeading(title: '${Strings.honorAward} ${index + 1}'),
+                              CommonTextformfield(
+                                controller: controllers[index].declaration,
+                                labelText: 'Won X Hackathon at X Institute',
+                                errorText: Strings.validTitleError,
+                              ),
+                            ],
                           );
                         },
-                        orElse: () => const CircularProgressIndicator(),
-                      );
-                    },
-                  ),
-                  BlocBuilder<DeclarationCubit, DeclarationState>(
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                        success: (controllersList) {
-                          return controllersList.length < 4
-                              ? CommonAddFieldButton(
-                            onTap: () => context.read<DeclarationCubit>().addDeclarationField(),
-                            name: Strings.addHonorAward,
-                          )
-                              : Container();
-                        },
-                        orElse: () => Container(),
-                      );
-                    },
-                  ),
-                  SizedBox(height: context.height(context) * 0.02),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CommonSaveButton(
-                        formKey: formKey,
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            context.read<DeclarationCubit>().saveDeclaration();
-                            // widget.onNext?.call(); // Move to next step
-                          }
-                        },
-                        name: Strings.saveContinue,
                       ),
-                      CommonResetButton(
-                        formKey: formKey,
-                        onTap: () {
-                          context.read<DeclarationCubit>().resetDeclarationFields();
-                        },
+                      if (controllers.length < 4)
+                        CommonAddFieldButton(
+                          onTap: () => context
+                              .read<DeclarationBloc>()
+                              .addDeclarationField(),
+                          name: Strings.declaration,
+                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          CommonSaveButton(
+                            formKey: _formKey,
+                            onTap: () {
+                              if (_formKey.currentState!.validate()) {
+                                final declarationList = context
+                                    .read<DeclarationBloc>()
+                                    .controllersList
+                                    .map((controllers) {
+                                  return controllers.toModel(); // clean conversion
+                                }).toList();
+
+                                context
+                                    .read<DeclarationBloc>()
+                                    .registerDeclaration(
+                                    context, declarationList);
+                              }
+                            },
+                            name: Strings.saveContinue,
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _declarationCubit.close();
-    super.dispose();
   }
 }
